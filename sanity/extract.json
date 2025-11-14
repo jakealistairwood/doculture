@@ -1264,6 +1264,146 @@
     }
   },
   {
+    "name": "sectionOptions",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "sectionOptions"
+          }
+        },
+        "bgColor": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "black"
+              },
+              {
+                "type": "string",
+                "value": "white"
+              }
+            ]
+          },
+          "optional": true
+        },
+        "removeContainer": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
+        },
+        "paddingTop": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "none"
+              },
+              {
+                "type": "string",
+                "value": "sm"
+              },
+              {
+                "type": "string",
+                "value": "md"
+              },
+              {
+                "type": "string",
+                "value": "lg"
+              }
+            ]
+          },
+          "optional": true
+        },
+        "paddingBottom": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "none"
+              },
+              {
+                "type": "string",
+                "value": "sm"
+              },
+              {
+                "type": "string",
+                "value": "md"
+              },
+              {
+                "type": "string",
+                "value": "lg"
+              }
+            ]
+          },
+          "optional": true
+        },
+        "marginTop": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "none"
+              },
+              {
+                "type": "string",
+                "value": "sm"
+              },
+              {
+                "type": "string",
+                "value": "md"
+              },
+              {
+                "type": "string",
+                "value": "lg"
+              }
+            ]
+          },
+          "optional": true
+        },
+        "marginBottom": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "none"
+              },
+              {
+                "type": "string",
+                "value": "sm"
+              },
+              {
+                "type": "string",
+                "value": "md"
+              },
+              {
+                "type": "string",
+                "value": "lg"
+              }
+            ]
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  {
     "name": "section",
     "type": "type",
     "value": {
@@ -1322,6 +1462,14 @@
                 }
               ]
             }
+          },
+          "optional": true
+        },
+        "sectionOptions": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "sectionOptions"
           },
           "optional": true
         }

@@ -219,6 +219,16 @@ export type Category = {
   description?: string;
 };
 
+export type SectionOptions = {
+  _type: "sectionOptions";
+  bgColor?: "black" | "white";
+  removeContainer?: boolean;
+  paddingTop?: "none" | "sm" | "md" | "lg";
+  paddingBottom?: "none" | "sm" | "md" | "lg";
+  marginTop?: "none" | "sm" | "md" | "lg";
+  marginBottom?: "none" | "sm" | "md" | "lg";
+};
+
 export type Section = {
   _type: "section";
   title?: string;
@@ -227,6 +237,7 @@ export type Section = {
   } & HomeMasthead | {
     _key: string;
   } & TextCard>;
+  sectionOptions?: SectionOptions;
 };
 
 export type Page = {
@@ -338,5 +349,5 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = LogoMarquee | TextCard | HomeMasthead | ReusableBlock | SanityImageCrop | SanityImageHotspot | Post | BlockContent | Author | Slug | Category | Section | Page | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = LogoMarquee | TextCard | HomeMasthead | ReusableBlock | SanityImageCrop | SanityImageHotspot | Post | BlockContent | Author | Slug | Category | SectionOptions | Section | Page | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 export declare const internalGroqTypeReferenceTo: unique symbol;

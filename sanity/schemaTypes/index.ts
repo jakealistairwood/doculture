@@ -6,11 +6,12 @@ import {postType} from './postType'
 import {authorType} from './authorType'
 import {pageType} from './page'
 import {section} from './section'
+import {sectionOptions} from './sectionOptions'
 import {homeMasthead} from './homeMasthead'
 import {textCard} from './textCard'
 import {reusableBlock} from './reusableBlock'
 import {logoMarquee} from './reusableBlocks/logoMarquee'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [pageType, section, blockContentType, categoryType, postType, authorType, homeMasthead, textCard, reusableBlock, logoMarquee],
+  types: [pageType, section, sectionOptions, blockContentType, categoryType, postType, authorType, homeMasthead, textCard, reusableBlock, logoMarquee],
 }

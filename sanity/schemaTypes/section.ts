@@ -17,6 +17,10 @@ export const section = defineType({
                 { type: 'homeMasthead' },
                 { type: 'textCard' }
             ]
+        }),
+        defineField({
+            name: 'sectionOptions',
+            type: 'sectionOptions'
         })
     ]
 });
