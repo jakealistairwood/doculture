@@ -11,12 +11,13 @@ export const sectionOptions = defineType({
             type: 'string',
             options: {
                 list: [
+                    { value: 'none', title: 'None' },
                     { value: 'black', title: 'Black' },
                     { value: 'white', title: 'White' },
                 ],
                 layout: 'radio'
             },
-            initialValue: 'black'
+            initialValue: 'none'
         }),
         defineField({
             name: 'removeContainer',

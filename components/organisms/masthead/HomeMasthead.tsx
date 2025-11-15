@@ -2,8 +2,9 @@
 
 import React from "react";
 import { HomeMasthead as HomeMastheadType } from "@/sanity/types";
-import Image from "next/image";
 import { SplitTextComponent } from "@/components/atoms/SplitText";
+import SanityImage from "@/components/atoms/SanityImage";
+import LinksWrapper from "@/components/molecules/LinksWrapper";
 
 interface HomeMastheadProps {
     data: HomeMastheadType;
@@ -12,10 +13,10 @@ interface HomeMastheadProps {
 export function HomeMasthead({ data }: HomeMastheadProps) {
     return (
         <div data-component="home-masthead" className="min-h-screen pt-40">
-            <div className="flex items-center gap-x-24">
+            <div className="flex flex-col md:flex-row items-center gap-y-16 gap-x-24">
                 <div className="flex flex-col gap-y-8">
                     {data.heading && (
-                        <h1 className="text-[9rem] leading-[1] -tracking-[0.01em] uppercase font-black subt_1">
+                        <h1 className="text-[8.5rem] leading-[1] uppercase font-black subt_1">
                             <SplitTextComponent
                                 options={{
                                     type: "lines,words",
@@ -44,10 +45,17 @@ export function HomeMasthead({ data }: HomeMastheadProps) {
                             dangerouslySetInnerHTML={{ __html: data?.content }}
                         />
                     )}
+                    {data.links && data.links.length > 0 && (
+                        <LinksWrapper links={data.links} />
+                    )}
                 </div>
                 {data.image && (
-                    <div className="relative aspect-[632/424] max-w-[632px] w-full overflow-hidden border-2 border-white rotate-2">
-                        {/* Image will be rendered here */}
+                    <div className="relative aspect-[632/424] max-w-[632px] w-full overflow-hidden border-[7px] border-white rotate-2">
+                        <SanityImage
+                            image={data.image}
+                            priority
+                            className="object-cover h-full w-full"
+                        />
                     </div>
                 )}
             </div>

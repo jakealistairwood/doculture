@@ -24,13 +24,8 @@ export const pageQuery = groq`
         _type == "homeMasthead" => {
           heading,
           content,
-          image{
-            asset->{
-              _id,
-              url
-            },
-            altText
-          },
+          image,
+          links,
           addLogoMarquee,
           logoMarquee->{
             _id,

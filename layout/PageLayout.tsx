@@ -16,7 +16,7 @@ export function PageLayout({ page }: PageLayoutProps) {
     }
 
     return (
-        <main>
+        <main className="bg-black text-white">
             <div className="fixed w-full h-full z-[1] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
                 <Image
                     src="/images/bg.svg"

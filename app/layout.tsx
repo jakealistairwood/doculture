@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Anton } from "next/font/google";
+import Header from "@/components/globals/Header";
 import "./globals.css";
 
 const anton = Anton({
@@ -31,8 +32,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${anton.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${anton.variable} antialiased bg-black`}
       >
+        <Header />
         {children}
       </body>
     </html>

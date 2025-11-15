@@ -1,49 +1,56 @@
 import React from "react";
 import { Section as SectionType } from "@/sanity/types";
 import { ComponentRenderer } from "./ComponentRenderer";
+import clsx from "clsx";
 
 interface SectionProps {
   section: SectionType;
 }
 
-const marginTopMap = {
-  none: "mt-0",
-  sm: "mt-10",
-  md: "mt-20",
-  lg: "mt-36"
-}
+const spacingMap = {
+  marginTop: {
+    none: "mt-0",
+    sm: "mt-10",
+    md: "mt-20",
+    lg: "mt-36",
+  },
+  marginBottom: {
+    none: "mb-0",
+    sm: "mb-10",
+    md: "mb-20",
+    lg: "mb-36",
+  },
+  paddingTop: {
+    none: "pt-0",
+    sm: "pt-10",
+    md: "pt-20",
+    lg: "pt-36",
+  },
+  paddingBottom: {
+    none: "pb-0",
+    sm: "pb-10",
+    md: "pb-20",
+    lg: "pb-36",
+  }
+} as const;
 
-const marginBottomMap = {
-  none: "mb-0",
-  sm: "mb-10",
-  md: "mb-20",
-  lg: "mb-36"
-}
-
-const paddingTopMap = {
-  none: "pt-0",
-  sm: "pt-10",
-  md: "pt-20",
-  lg: "pt-36"
-}
-
-const paddingBottomMap = {
-  none: "pb-0",
-  sm: "pb-10",
-  md: "pb-20",
-  lg: "pb-36"
-}
+const bgColorMap = {
+  none: 'bg-transparent',
+  black: "bg-black text-white",
+  white: "bg-white text-black"
+} as const;
 
 export function Section({ section }: SectionProps) {
   const options = section.sectionOptions;
   console.log(options);
 
-  const paddingTopClass = paddingTopMap[options?.paddingTop] || "";
-  const paddingBottomClass = paddingBottomMap[options?.paddingBottom] || "";
-  const marginTopClass = marginTopMap[options?.marginTop] || "";
-  const marginBottomClass = marginBottomMap[options?.marginBottom] || "";
-
-  const sectionClasses = `${paddingTopClass} ${paddingBottomClass} ${marginTopClass} ${marginBottomClass}`;
+  const sectionClasses = clsx(
+    bgColorMap[options?.bgColor],
+    spacingMap.paddingTop[options?.paddingTop],
+    spacingMap.paddingBottom[options?.paddingBottom],
+    spacingMap.marginTop[options?.marginTop],
+    spacingMap.marginBottom[options?.marginBottom]
+  );
   
   const content = (
     <>

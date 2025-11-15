@@ -23,6 +23,10 @@ export const pageType = defineType({
             title: 'Page Builder',
             type: 'array',
             of: [{ type: 'section' }]
+        }),
+        defineField({
+            name: 'seo',
+            type: 'seo'
         })
     ],
     preview: {

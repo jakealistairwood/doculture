@@ -33,17 +33,44 @@ export type LogoMarquee = {
   }>;
 };
 
+export type Link = {
+  _type: "link";
+  type?: "button" | "textLink";
+  buttonSize?: "default" | "sm" | "lg";
+  buttonStyle?: "primary" | "outline";
+  url?: string;
+  label?: string;
+};
+
+export type LinksWrapper = Array<{
+  _key: string;
+} & Link>;
+
+export type TextCardOptions = {
+  _type: "textCardOptions";
+  centerAlign?: boolean;
+  centerAlignOnMobile?: boolean;
+  subheadingTag?: "h1" | "h2" | "h3" | "h4" | "h5";
+  headingTag?: "h1" | "h2" | "h3" | "h4" | "h5";
+  headingFontSize?: "24px" | "40px";
+  headingMaxWidth?: number;
+  contentFontSize?: "16px" | "18px" | "20px" | "24px";
+  contentMaxWidth?: number;
+};
+
 export type TextCard = {
   _type: "textCard";
   subheading?: string;
   heading?: string;
   content?: string;
+  textCardOptions?: TextCardOptions;
 };
 
 export type HomeMasthead = {
   _type: "homeMasthead";
   heading?: string;
   content?: string;
+  links?: LinksWrapper;
   image?: {
     asset?: {
       _ref: string;
@@ -221,7 +248,7 @@ export type Category = {
 
 export type SectionOptions = {
   _type: "sectionOptions";
-  bgColor?: "black" | "white";
+  bgColor?: "none" | "black" | "white";
   removeContainer?: boolean;
   paddingTop?: "none" | "sm" | "md" | "lg";
   paddingBottom?: "none" | "sm" | "md" | "lg";
@@ -240,6 +267,24 @@ export type Section = {
   sectionOptions?: SectionOptions;
 };
 
+export type Seo = {
+  _type: "seo";
+  title?: string;
+  description?: string;
+  ogImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+};
+
 export type Page = {
   _id: string;
   _type: "page";
@@ -251,6 +296,7 @@ export type Page = {
   pageBuilder?: Array<{
     _key: string;
   } & Section>;
+  seo?: Seo;
 };
 
 export type SanityImagePaletteSwatch = {
@@ -349,5 +395,5 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = LogoMarquee | TextCard | HomeMasthead | ReusableBlock | SanityImageCrop | SanityImageHotspot | Post | BlockContent | Author | Slug | Category | SectionOptions | Section | Page | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = LogoMarquee | Link | LinksWrapper | TextCardOptions | TextCard | HomeMasthead | ReusableBlock | SanityImageCrop | SanityImageHotspot | Post | BlockContent | Author | Slug | Category | SectionOptions | Section | Seo | Page | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 export declare const internalGroqTypeReferenceTo: unique symbol;

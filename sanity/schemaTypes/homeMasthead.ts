@@ -16,6 +16,10 @@ export const homeMasthead = defineType({
             type: 'text'
         }),
         defineField({
+            name: 'links',
+            type: 'linksWrapper'
+        }),
+        defineField({
             name: 'image',
             title: 'Image',
             type: 'image',
