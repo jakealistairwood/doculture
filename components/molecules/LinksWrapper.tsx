@@ -11,7 +11,7 @@ const LinksWrapper = ({ links = [] }: LinksWrapperProps) => {
     }
 
     return (
-        <div className="flex items-center flex-wrap gap-4">
+        <div className="flex items-center flex-wrap gap-x-8 gap-y-4">
             {links.map((link) => {
                 if (!link.url || !link.label) {
                     return null;

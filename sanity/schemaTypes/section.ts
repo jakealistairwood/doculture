@@ -15,7 +15,8 @@ export const section = defineType({
             type: 'array',
             of: [
                 { type: 'homeMasthead' },
-                { type: 'textCard' }
+                { type: 'textCard' },
+                { type: 'fullWidthAsset' }
             ]
         }),
         defineField({

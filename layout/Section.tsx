@@ -72,6 +72,17 @@ export function Section({ section }: SectionProps) {
           {content}
         </div>
       )}
+      {options?.addBottomDivider && (
+        <>
+          {options?.removeContainer ? (
+            <div className="h-[1px] w-full bg-white/10" />
+          ) : (
+            <div className="container">
+              <div className="h-[1px] w-full bg-white/10" />
+            </div>
+          )}
+        </>
+      )}
     </section>
   );
 }

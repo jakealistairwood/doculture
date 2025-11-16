@@ -17,6 +17,13 @@
   --font-mono: var(--font-geist-mono);
 }
 
+@layer utilities {
+  .text-136px {
+    font-size: clamp(4rem, 2.7857rem + 6.0714vw, 8.25rem);
+    line-height: 1.1;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -32,6 +39,16 @@ body {
 
 h1 {
   font-family: var(--font-anton);
+}
+
+/* .text-136px {
+  font-size: clamp(2.5rem, 1.964vw + 0.607rem, 8.5rem);
+  line-height: 1.1;
+} */
+
+.text-40px {
+  font-size: clamp(1.5rem, 1.964vw + 0.607rem, 2.375rem);
+  line-height: 1.1;
 }
 
 .lines-js {

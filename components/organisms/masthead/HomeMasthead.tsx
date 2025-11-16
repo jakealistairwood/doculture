@@ -12,11 +12,11 @@ interface HomeMastheadProps {
 
 export function HomeMasthead({ data }: HomeMastheadProps) {
     return (
-        <div data-component="home-masthead" className="min-h-screen pt-40">
+        <div data-component="home-masthead" className="min-h-screen pt-49">
             <div className="flex flex-col md:flex-row items-center gap-y-16 gap-x-24">
                 <div className="flex flex-col gap-y-8">
                     {data.heading && (
-                        <h1 className="text-[8.5rem] leading-[1] uppercase font-black subt_1">
+                        <h1 className="text-136px leading-none uppercase font-black subt_1">
                             <SplitTextComponent
                                 options={{
                                     type: "lines,words",
@@ -50,7 +50,7 @@ export function HomeMasthead({ data }: HomeMastheadProps) {
                     )}
                 </div>
                 {data.image && (
-                    <div className="relative aspect-[632/424] max-w-[632px] w-full overflow-hidden border-[7px] border-white rotate-2">
+                    <div className="relative aspect-632/424 max-w-[632px] w-full overflow-hidden border-[7px] border-white rotate-2">
                         <SanityImage
                             image={data.image}
                             priority

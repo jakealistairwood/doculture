@@ -85,5 +85,28 @@ export const sectionOptions = defineType({
             },
             initialValue: 'none'
         }),
+        defineField({
+            name: 'componentSpacing',
+            title: 'Component Spacing',
+            type: 'string',
+            options: {
+                list: [
+                    { value: 'default', title: 'Default' },
+                    { value: 'sm', title: 'Small' },
+                    { value: 'md', title: 'Medium' },
+                    { value: 'lg', title: 'Large' }
+                ],
+                layout: 'radio'
+            },
+            initialValue: 'default',
+            description: 'Controls the space between each component in a section'
+        }),
+        defineField({
+            name: 'addBottomDivider',
+            title: 'Add Bottom Divider',
+            type: 'boolean',
+            initialValue: false,
+            description: "Adds a thin border to the bottom of the section"
+        })
     ]
 })

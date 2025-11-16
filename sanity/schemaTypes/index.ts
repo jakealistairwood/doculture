@@ -15,7 +15,8 @@ import {linksWrapper} from './linksWrapper'
 import {link} from './link'
 import {reusableBlock} from './reusableBlock'
 import {logoMarquee} from './reusableBlocks/logoMarquee'
+import {fullWidthAsset} from './fullWidthAsset'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [pageType, seo, section, sectionOptions, blockContentType, categoryType, postType, authorType, homeMasthead, textCard, textCardOptions, linksWrapper, link, reusableBlock, logoMarquee],
+  types: [pageType, seo, section, sectionOptions, blockContentType, categoryType, postType, authorType, homeMasthead, textCard, textCardOptions, linksWrapper, link, reusableBlock, logoMarquee, fullWidthAsset],
 }

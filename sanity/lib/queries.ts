@@ -16,7 +16,8 @@ export const pageQuery = groq`
         paddingTop,
         paddingBottom,
         marginTop,
-        marginBottom
+        marginBottom,
+        addBottomDivider
       },
       components[]{
         _key,
@@ -45,9 +46,22 @@ export const pageQuery = groq`
           }
         },
         _type == "textCard" => {
-          subheading,
-          heading,
-          content
+            _key,
+            _type,
+            subheading,
+            heading,
+            content,
+            textCardOptions
+        },
+        _type == "fullWidthAsset" => {
+            _key,
+            _type,
+            id,
+            type,
+            image,
+            video,
+            videoPoster,
+            videoOptions
         }
       }
     }
