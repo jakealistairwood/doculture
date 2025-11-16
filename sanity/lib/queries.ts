@@ -17,7 +17,8 @@ export const pageQuery = groq`
         paddingBottom,
         marginTop,
         marginBottom,
-        addBottomDivider
+        componentSpacing,
+        addBottomDivider,
       },
       components[]{
         _key,

@@ -31,6 +31,10 @@ const spacingMap = {
     sm: "pb-10",
     md: "pb-20",
     lg: "pb-36",
+  },
+  componentSpacing: {
+    default: 'gap-y-20',
+    sm: 'gap-y-12',
   }
 } as const;
 
@@ -49,7 +53,7 @@ export function Section({ section }: SectionProps) {
     spacingMap.paddingTop[options?.paddingTop],
     spacingMap.paddingBottom[options?.paddingBottom],
     spacingMap.marginTop[options?.marginTop],
-    spacingMap.marginBottom[options?.marginBottom]
+    spacingMap.marginBottom[options?.marginBottom],
   );
   
   const content = (
@@ -69,7 +73,9 @@ export function Section({ section }: SectionProps) {
         content
       ) : (
         <div className="container">
-          {content}
+          <div className={`flex flex-col ${spacingMap.componentSpacing[options?.componentSpacing] || ""}`}>
+            {content}
+          </div>
         </div>
       )}
       {options?.addBottomDivider && (

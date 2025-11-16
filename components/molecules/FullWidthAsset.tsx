@@ -14,11 +14,11 @@ const FullWidthAsset = ({ data }: FullWidthAssetProps) => {
         return null;
     }
 
-    const { type, image, video, videoPoster, videoOptions } = data;
+    const { type, image, video, videoPoster, videoOptions, id } = data;
 
     if (type === "image" && image) {
         return (
-            <div className="w-full">
+            <div className="w-full" id={id}>
                 <SanityImage
                     image={image}
                     className="w-full h-auto object-cover"
@@ -29,7 +29,7 @@ const FullWidthAsset = ({ data }: FullWidthAssetProps) => {
 
     if (type === "video" && video) {
         return (
-            <div className="w-full">
+            <div className="w-full" id={id}>
                 <VideoPlayer
                     video={video}
                     poster={videoPoster}
