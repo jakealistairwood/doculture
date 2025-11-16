@@ -71,7 +71,12 @@ const VideoPlayer = (props: VideoPlayerProps) => {
                     </svg>
                 </button>
                 {props.video && (
-                    <ReactPlayer src={props.video} playing width="100%" height="100%" />
+                    <ReactPlayer
+                        src={props.video}
+                        playing
+                        width="100%"
+                        height="100%"
+                    />
                 )}
             </div>
         </div>
@@ -88,7 +93,7 @@ const VideoPlayer = (props: VideoPlayerProps) => {
                 >
                     <SanityImage
                         image={props?.poster}
-                        className="w-full h-full object-cover relative z-[2] scale-100 group-hover:scale-105 duration-300 ease transition-transform will-change-transform"
+                        className="w-full h-full object-cover relative z-[2] scale-100 group-hover:scale-[1.02] duration-400 ease transition-transform will-change-transform"
                     />
                     <div
                         className="w-[90px] aspect-square rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[2] flex items-center justify-center flex-none bg-black/5 backdrop-blur-md"

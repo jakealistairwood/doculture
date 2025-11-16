@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { HomeMasthead as HomeMastheadType } from "@/sanity/types";
 import { SplitTextComponent } from "@/components/atoms/SplitText";
 import SanityImage from "@/components/atoms/SanityImage";
@@ -12,7 +11,7 @@ interface HomeMastheadProps {
 
 export function HomeMasthead({ data }: HomeMastheadProps) {
     return (
-        <div data-component="home-masthead" className="min-h-screen pt-49">
+        <div data-component="home-masthead" className="md:min-h-screen pt-[8rem] md:pt-49">
             <div className="flex flex-col md:flex-row items-center gap-y-16 gap-x-24">
                 <div className="flex flex-col gap-y-8">
                     {data.heading && (
