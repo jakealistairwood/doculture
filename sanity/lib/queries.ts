@@ -63,6 +63,34 @@ export const pageQuery = groq`
             video,
             videoPoster,
             videoOptions
+        },
+        _type == "logos" => {
+            _key,
+            _type,
+            type,
+            label,
+            labelPlacement,
+            logoMarqueeBlock->{
+                _id,
+                title,
+                logoMarquee{
+                    title,
+                    speed,
+                    logos[]{
+                        _key,
+                        alt,
+                        link,
+                        asset
+                        // asset->{
+                        //     _id,
+                        //     url,
+                        //     metadata{
+                        //         lqip
+                        //     }
+                        // }
+                    }
+                }
+            }
         }
       }
     }

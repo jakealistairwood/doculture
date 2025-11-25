@@ -14,6 +14,7 @@ export const sectionOptions = defineType({
                     { value: 'none', title: 'None' },
                     { value: 'black', title: 'Black' },
                     { value: 'white', title: 'White' },
+                    { value: 'lightGrey', title: 'Light Grey' }
                 ],
                 layout: 'radio'
             },
@@ -100,6 +101,19 @@ export const sectionOptions = defineType({
             },
             initialValue: 'default',
             description: 'Controls the space between each component in a section'
+        }),
+        defineField({
+            name: 'overflow',
+            title: 'Overflow',
+            type: 'string',
+            options: {
+                list: [
+                    { value: 'hidden', title: 'Hidden' },
+                    { value: 'visible', title: 'Visible' }
+                ],
+                layout: 'radio'
+            },
+            initialValue: 'hidden'
         }),
         defineField({
             name: 'addBottomDivider',

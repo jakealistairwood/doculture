@@ -40,8 +40,9 @@ const spacingMap = {
 
 const bgColorMap = {
   none: 'bg-transparent',
-  black: "bg-black text-white",
-  white: "bg-white text-black"
+  black: 'bg-black text-white',
+  white: 'bg-white text-black',
+  lightGrey: 'bg-light-grey text-black',
 } as const;
 
 export function Section({ section }: SectionProps) {
@@ -59,7 +60,7 @@ export function Section({ section }: SectionProps) {
   const content = (
     <>
       {section.components?.map((component) => (
-        <ComponentRenderer key={component._key} component={component} />
+        <ComponentRenderer key={component._key} component={component} bgColor={options?.bgColor} />
       ))}
     </>
   );

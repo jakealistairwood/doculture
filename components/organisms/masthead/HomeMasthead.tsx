@@ -11,45 +11,47 @@ interface HomeMastheadProps {
 
 export function HomeMasthead({ data }: HomeMastheadProps) {
     return (
-        <div data-component="home-masthead" className="md:min-h-screen pt-[8rem] md:pt-49">
-            <div className="flex flex-col md:flex-row items-center gap-y-16 gap-x-24">
-                <div className="flex flex-col gap-y-8">
-                    {data.heading && (
-                        <h1 className="text-136px leading-none uppercase subt_1">
-                            <SplitTextComponent
-                                options={{
-                                    type: "lines,words",
-                                    linesClass: "lines-js",
-                                    wordsClass: "word-js",
-                                }}
-                                animationOptions={{
-                                    scrollTrigger: {
-                                        start: "top 50%",
-                                        trigger: ".subt_1",
-                                    },
-                                    duration: 1.8,
-                                    yPercent: 100,
-                                    ease: "expo.out",
-                                    stagger: 0.06,
-                                }}
-                            >
-                                {data.heading}
-                            </SplitTextComponent>
-                            <span className="sr-only">{data?.heading}</span>
-                        </h1>
-                    )}
-                    {data.content && (
-                        <p
-                            className="text-xl text-[#F2F3FF]/70 font-medium"
-                            dangerouslySetInnerHTML={{ __html: data?.content }}
-                        />
-                    )}
-                    {data.links && data.links.length > 0 && (
-                        <LinksWrapper links={data.links} />
-                    )}
+        <div data-component="home-masthead" className="h-screen p-4">
+            <div className="bg-black text-white h-full rounded-[10px] relative overflow-hidden flex flex-col p-10">
+                <div className="flex flex-col md:flex-row mt-auto gap-y-16 gap-x-24 relative z-[2]">
+                    <div className="flex flex-col gap-y-8">
+                        {data.heading && (
+                            <h1 className="text-120px leading-none uppercase subt_1 max-w-[700px]">
+                                {/* <SplitTextComponent
+                                    options={{
+                                        type: "lines,words",
+                                        linesClass: "lines-js",
+                                        wordsClass: "word-js",
+                                    }}
+                                    animationOptions={{
+                                        scrollTrigger: {
+                                            start: "top 50%",
+                                            trigger: ".subt_1",
+                                        },
+                                        duration: 1.8,
+                                        yPercent: 100,
+                                        ease: "expo.out",
+                                        stagger: 0.06,
+                                    }}
+                                >
+                                    {data.heading}
+                                </SplitTextComponent> */}
+                                <span className="">{data?.heading}</span>
+                            </h1>
+                        )}
+                        {data.content && (
+                            <p
+                                className="font-serif font-light text-4xl"
+                                dangerouslySetInnerHTML={{ __html: data?.content }}
+                            />
+                        )}
+                        {data.links && data.links.length > 0 && (
+                            <LinksWrapper links={data.links} />
+                        )}
+                    </div>
                 </div>
                 {data.image && (
-                    <div className="relative aspect-632/424 max-w-[632px] w-full overflow-hidden border-[7px] border-white rotate-2">
+                    <div className="absolute inset-0 h-full w-full overflow-hidden">
                         <SanityImage
                             image={data.image}
                             priority

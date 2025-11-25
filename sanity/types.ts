@@ -13,6 +13,19 @@
  */
 
 // Source: schema.json
+export type Logos = {
+  _type: "logos";
+  type?: "marquee" | "grid";
+  label?: string;
+  labelPlacement?: "stacked" | "side";
+  logoMarqueeBlock?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "reusableBlock";
+  };
+};
+
 export type FullWidthAsset = {
   _type: "fullWidthAsset";
   id?: string;
@@ -282,9 +295,20 @@ export type Category = {
   description?: string;
 };
 
+export type Project = {
+  _id: string;
+  _type: "project";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  excerpt?: string;
+  date?: string;
+};
+
 export type SectionOptions = {
   _type: "sectionOptions";
-  bgColor?: "none" | "black" | "white";
+  bgColor?: "none" | "black" | "white" | "lightGrey";
   removeContainer?: boolean;
   paddingTop?: "none" | "sm" | "md" | "lg";
   paddingBottom?: "none" | "sm" | "md" | "lg";
@@ -303,7 +327,9 @@ export type Section = {
     _key: string;
   } & TextCard | {
     _key: string;
-  } & FullWidthAsset>;
+  } & FullWidthAsset | {
+    _key: string;
+  } & Logos>;
   sectionOptions?: SectionOptions;
 };
 
@@ -435,5 +461,5 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = FullWidthAsset | LogoMarquee | Link | LinksWrapper | TextCardOptions | TextCard | HomeMasthead | ReusableBlock | SanityImageCrop | SanityImageHotspot | Post | BlockContent | Author | Slug | Category | SectionOptions | Section | Seo | Page | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = Logos | FullWidthAsset | LogoMarquee | Link | LinksWrapper | TextCardOptions | TextCard | HomeMasthead | ReusableBlock | SanityImageCrop | SanityImageHotspot | Post | BlockContent | Author | Slug | Category | Project | SectionOptions | Section | Seo | Page | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 export declare const internalGroqTypeReferenceTo: unique symbol;

@@ -88,7 +88,7 @@ const VideoPlayer = (props: VideoPlayerProps) => {
                 <button
                     type="button"
                     onClick={() => setPlayVideo(true)}
-                    className="relative flex items-center justify-center rounded-[10px] overflow-hidden max-w-[1180px] w-full mx-auto aspect-[16/9] cursor-pointer group"
+                    className="relative flex items-center justify-center md:rounded-[10px] overflow-hidden max-w-[1180px] w-full mx-auto aspect-[16/9] cursor-pointer group"
                     aria-label="Play Video"
                 >
                     <SanityImage
@@ -96,7 +96,7 @@ const VideoPlayer = (props: VideoPlayerProps) => {
                         className="w-full h-full object-cover relative z-[2] scale-100 group-hover:scale-[1.02] duration-400 ease transition-transform will-change-transform"
                     />
                     <div
-                        className="w-[90px] aspect-square rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[2] flex items-center justify-center flex-none bg-black/5 backdrop-blur-md"
+                        className="w-[45px] md:w-[75px] aspect-square rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[2] flex items-center justify-center flex-none bg-black/25 backdrop-blur-md"
                         aria-hidden
                     >
                         <div className="relative aspect-[31/37] w-1/3">
