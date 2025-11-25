@@ -15,7 +15,7 @@ export function HomeMasthead({ data }: HomeMastheadProps) {
             <div className="flex flex-col md:flex-row items-center gap-y-16 gap-x-24">
                 <div className="flex flex-col gap-y-8">
                     {data.heading && (
-                        <h1 className="text-136px leading-none uppercase font-black subt_1">
+                        <h1 className="text-136px leading-none uppercase subt_1">
                             <SplitTextComponent
                                 options={{
                                     type: "lines,words",
