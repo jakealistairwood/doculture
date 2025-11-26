@@ -46,6 +46,30 @@ export const pageQuery = groq`
             }
           }
         },
+        _type == "masthead" => {
+          type,
+          heading,
+          content,
+          image,
+          links,
+          addLogoMarquee,
+          logoMarquee->{
+            _id,
+            title,
+            logoMarquee{
+              title,
+              speed,
+              logos[]{
+                alt,
+                link,
+                asset->{
+                  _id,
+                  url
+                }
+              }
+            }
+          }
+        },
         _type == "textCard" => {
             _key,
             _type,

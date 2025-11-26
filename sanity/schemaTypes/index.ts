@@ -9,6 +9,7 @@ import {seo} from './seo'
 import {section} from './section'
 import {sectionOptions} from './sectionOptions'
 import {project} from './project'
+import {masthead} from './masthead'
 import {homeMasthead} from './homeMasthead'
 import {textCard} from './textCard'
 import {textCardOptions} from './textCardOptions'
@@ -20,5 +21,5 @@ import {logos} from './logos'
 import {fullWidthAsset} from './fullWidthAsset'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [pageType, seo, section, sectionOptions, project, blockContentType, categoryType, postType, authorType, homeMasthead, textCard, textCardOptions, linksWrapper, link, reusableBlock, logoMarquee, fullWidthAsset, logos],
+  types: [pageType, seo, section, sectionOptions, project, blockContentType, categoryType, postType, authorType, masthead, homeMasthead, textCard, textCardOptions, linksWrapper, link, reusableBlock, logoMarquee, fullWidthAsset, logos],
 }

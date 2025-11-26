@@ -168,6 +168,27 @@ export type SanityImageHotspot = {
   width?: number;
 };
 
+export type Masthead = {
+  _type: "masthead";
+  type?: "home" | "services" | "about";
+  heading?: string;
+  content?: string;
+  links?: LinksWrapper;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    altText?: string;
+    _type: "image";
+  };
+};
+
 export type Post = {
   _id: string;
   _type: "post";
@@ -302,8 +323,62 @@ export type Project = {
   _updatedAt: string;
   _rev: string;
   title?: string;
+  slug?: Slug;
   excerpt?: string;
+  categories?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "category";
+  }>;
   date?: string;
+  coverImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  content?: Array<{
+    _key: string;
+  } & FullWidthAsset | {
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
+    listItem?: "bullet";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  } | {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+    _key: string;
+  }>;
 };
 
 export type SectionOptions = {
@@ -315,6 +390,7 @@ export type SectionOptions = {
   marginTop?: "none" | "sm" | "md" | "lg";
   marginBottom?: "none" | "sm" | "md" | "lg";
   componentSpacing?: "default" | "sm" | "md" | "lg";
+  overflow?: "hidden" | "visible";
   addBottomDivider?: boolean;
 };
 
@@ -322,6 +398,8 @@ export type Section = {
   _type: "section";
   title?: string;
   components?: Array<{
+    _key: string;
+  } & Masthead | {
     _key: string;
   } & HomeMasthead | {
     _key: string;
@@ -461,5 +539,5 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = Logos | FullWidthAsset | LogoMarquee | Link | LinksWrapper | TextCardOptions | TextCard | HomeMasthead | ReusableBlock | SanityImageCrop | SanityImageHotspot | Post | BlockContent | Author | Slug | Category | Project | SectionOptions | Section | Seo | Page | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = Logos | FullWidthAsset | LogoMarquee | Link | LinksWrapper | TextCardOptions | TextCard | HomeMasthead | ReusableBlock | SanityImageCrop | SanityImageHotspot | Masthead | Post | BlockContent | Author | Slug | Category | Project | SectionOptions | Section | Seo | Page | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 export declare const internalGroqTypeReferenceTo: unique symbol;

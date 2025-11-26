@@ -47,7 +47,6 @@ const bgColorMap = {
 
 export function Section({ section }: SectionProps) {
   const options = section.sectionOptions;
-  console.log(options);
 
   const sectionClasses = clsx(
     bgColorMap[options?.bgColor],

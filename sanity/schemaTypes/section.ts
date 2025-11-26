@@ -14,6 +14,7 @@ export const section = defineType({
             title: 'Components',
             type: 'array',
             of: [
+                { type: 'masthead' },
                 { type: 'homeMasthead' },
                 { type: 'textCard' },
                 { type: 'fullWidthAsset' },
