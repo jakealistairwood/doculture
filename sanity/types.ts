@@ -13,6 +13,85 @@
  */
 
 // Source: schema.json
+export type StudioCarousel = {
+  _type: "studioCarousel";
+  studios?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "studio";
+  }>;
+};
+
+export type Studio = {
+  _id: string;
+  _type: "studio";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  description?: string;
+  coverImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  features?: Array<string>;
+};
+
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
+};
+
+export type FeatureCards = {
+  _type: "featureCards";
+  layout?: "twoCols" | "threeCols" | "fourCols";
+  type?: "numbered";
+  features?: Array<{
+    icon?: "none";
+    title?: string;
+    description?: string;
+    _type: "feature";
+    _key: string;
+  }>;
+};
+
+export type SelectedWorks = {
+  _type: "selectedWorks";
+  caseStudies?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "project";
+  }>;
+};
+
+export type HeaderMarquee = {
+  _type: "headerMarquee";
+  items?: Array<string>;
+};
+
 export type LinkCards = {
   _type: "linkCards";
   layout?: "twoCols" | "threeCols" | "fourCols";
@@ -174,22 +253,6 @@ export type ReusableBlock = {
   _rev: string;
   title?: string;
   logoMarquee?: LogoMarquee;
-};
-
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
-};
-
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
 };
 
 export type Masthead = {
@@ -434,7 +497,15 @@ export type Section = {
     _key: string;
   } & Logos | {
     _key: string;
-  } & LinkCards>;
+  } & LinkCards | {
+    _key: string;
+  } & HeaderMarquee | {
+    _key: string;
+  } & SelectedWorks | {
+    _key: string;
+  } & FeatureCards | {
+    _key: string;
+  } & StudioCarousel>;
   sectionOptions?: SectionOptions;
 };
 
@@ -566,5 +637,5 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = LinkCards | Logos | FullWidthAsset | LogoMarquee | Link | LinksWrapper | TextCardOptions | TextCard | HomeMasthead | ReusableBlock | SanityImageCrop | SanityImageHotspot | Masthead | Post | BlockContent | Author | Slug | Category | Project | SectionOptions | Section | Seo | Page | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = StudioCarousel | Studio | SanityImageCrop | SanityImageHotspot | FeatureCards | SelectedWorks | HeaderMarquee | LinkCards | Logos | FullWidthAsset | LogoMarquee | Link | LinksWrapper | TextCardOptions | TextCard | HomeMasthead | ReusableBlock | Masthead | Post | BlockContent | Author | Slug | Category | Project | SectionOptions | Section | Seo | Page | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 export declare const internalGroqTypeReferenceTo: unique symbol;

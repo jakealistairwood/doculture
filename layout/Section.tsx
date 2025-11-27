@@ -35,6 +35,7 @@ const spacingMap = {
   componentSpacing: {
     default: 'gap-y-12 md:gap-y-20',
     sm: 'gap-y-12',
+    md: 'gap-y-12 md:gap-y-20'
   }
 } as const;
 

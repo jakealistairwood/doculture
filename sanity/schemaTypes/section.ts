@@ -21,7 +21,9 @@ export const section = defineType({
                 { type: 'logos' },
                 { type: 'linkCards' },
                 { type: 'headerMarquee' },
-                { type: 'selectedWorks' }
+                { type: 'selectedWorks' },
+                { type: 'featureCards' },
+                { type: 'studioCarousel' }
             ]
         }),
         defineField({

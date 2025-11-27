@@ -27,7 +27,7 @@ const HeaderMarquee = ({ data, bgColor }: HeaderMarqueeProps) => {
     // Create the marquee content with dashes between each heading
     // Format: "Item1 — Item2 — Item3 — Item4 —" (dash after each item for seamless looping)
     const marqueeItems = items.flatMap((item, index) => [
-        <span key={`item-${index}`} className="whitespace-nowrap text-120px">{item}</span>,
+        <span key={`item-${index}`} className="whitespace-nowrap text-120px uppercase font-black font-heading">{item}</span>,
         <span key={`dash-${index}`} className="mx-8 inline-flex items-center" aria-hidden="true">
             <span className="inline-block w-[100px] border-t-[3px] border-current"></span>
         </span>

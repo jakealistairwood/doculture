@@ -140,6 +140,25 @@ export const pageQuery = groq`
                 project->
             }
         },
+        _type == "featureCards" => {
+            _key,
+            _type,
+            layout,
+            type,
+            features[]{
+                _key,
+                icon,
+                title,
+                description
+            }
+        },
+        _type == "studioCarousel" => {
+            _key,
+            _type,
+            studios[]->{
+                ...,
+            }
+        },
       }
     }
   }

@@ -29,6 +29,7 @@ const TextCard = ({ data, bgColor }: TextCardProps) => {
         subheadingTag = "h2",
         headingTag = "h3",
         headingMaxWidth,
+        contentMaxWidth
     } = textCardOptions || {};
 
     const SubheadingTag = subheadingTag || "h2";
@@ -49,7 +50,7 @@ const TextCard = ({ data, bgColor }: TextCardProps) => {
     );
   
     return (
-        <div className={`flex flex-col ${alignmentClasses}`}>
+        <div className={`flex flex-col gap-y-6 ${alignmentClasses}`}>
           <div className="flex flex-col gap-y-6">
             {data.subheading && (
                 <SubheadingTag className={`text-card__subheading w-fit ${subheadingAlignmentClasses} text-xs font-semibold uppercase py-2 px-[0.625rem] rounded-[3px] tracking-widest ${subheadingBgColor}`}>{data.subheading}</SubheadingTag>
@@ -65,7 +66,9 @@ const TextCard = ({ data, bgColor }: TextCardProps) => {
             )}
           </div>
             {data.content && (
-                <p className="text-card__content">{data.content}</p>
+                <p className="text-card__content opacity-80" style={{
+                  maxWidth: `${contentMaxWidth}px`
+                }}>{data.content}</p>
             )}
         </div>
     );
