@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { LinksWrapper as LinksWrapperType } from "@/sanity/types";
+import Button from "@/components/atoms/Button";
 
 interface LinksWrapperProps {
     links: LinksWrapperType;
@@ -10,6 +13,17 @@ const LinksWrapper = ({ links = [] }: LinksWrapperProps) => {
         return null;
     }
 
+    const isHashLink = (url: string) => url?.startsWith('#');
+
+    const handleHashClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+        e.preventDefault();
+        const targetId = href.substring(1);
+        const element = document.getElementById(targetId);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    };
+
     return (
         <div className="flex items-center flex-wrap gap-x-8 gap-y-4">
             {links.map((link) => {
@@ -17,41 +31,42 @@ const LinksWrapper = ({ links = [] }: LinksWrapperProps) => {
                     return null;
                 }
 
+                const url = link.url;
                 const isButton = link.type === "button";
                 const buttonSize = link.buttonSize || "default";
                 const buttonStyle = link.buttonStyle || "primary";
 
-                // Button styles
-                const buttonBaseStyles = "inline-flex items-center justify-center font-medium transition-colors rounded-[3px]";
-                const buttonSizeStyles = {
-                    sm: "px-4 py-2 text-sm",
-                    default: "px-6 py-3 text-base",
-                    lg: "px-8 py-4 text-lg",
-                };
-                const buttonStyleStyles = {
-                    primary: "bg-white text-black hover:bg-white/90",
-                    outline: "border-2 border-white text-white hover:bg-white hover:text-black",
-                };
-
-                // Text link styles
                 const textLinkStyles = "text-white hover:text-white/80 underline underline-offset-4 transition-colors";
 
                 if (isButton) {
                     return (
-                        <Link
+                        <Button
                             key={link._key}
-                            href={link.url}
-                            className={`${buttonBaseStyles} ${buttonSizeStyles[buttonSize]} ${buttonStyleStyles[buttonStyle]}`}
+                            href={url}
+                            label={link.label}
+                            size={buttonSize}
+                            style={buttonStyle}
+                        />
+                    );
+                }
+
+                if (isHashLink(url)) {
+                    return (
+                        <a
+                            key={link._key}
+                            href={url}
+                            onClick={(e) => handleHashClick(e, url)}
+                            className={textLinkStyles}
                         >
                             {link.label}
-                        </Link>
+                        </a>
                     );
                 }
 
                 return (
                     <Link
                         key={link._key}
-                        href={link.url}
+                        href={url}
                         className={textLinkStyles}
                     >
                         {link.label}

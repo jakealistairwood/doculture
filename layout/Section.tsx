@@ -68,6 +68,7 @@ export function Section({ section }: SectionProps) {
     <section 
       className={sectionClasses} 
       data-section-title={section.title}
+      id={options?.id}
     >
       {options?.removeContainer ? (
         content

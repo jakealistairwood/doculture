@@ -47,7 +47,7 @@ const Header = () => {
                             <Link href="/services">Services</Link>
                         </li>
                         <li>
-                            <Link href="/portfolio">Portfolio</Link>
+                            <Link href="/portfolio">Work</Link>
                         </li>
                     </ul>
                     <ul className="hidden lg:flex items-center gap-x-12">

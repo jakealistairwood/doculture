@@ -1,42 +1,92 @@
 "use client";
 
 import { HomeMasthead as HomeMastheadType } from "@/sanity/types";
-import { SplitTextComponent } from "@/components/atoms/SplitText";
 import SanityImage from "@/components/atoms/SanityImage";
 import LinksWrapper from "@/components/molecules/LinksWrapper";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { useRef } from "react";
+import { SplitTextInstance } from "@/components/atoms/SplitText";
+
+gsap.registerPlugin(useGSAP);
+
+// Try to import official GSAP SplitText plugin (premium)
+let SplitText: any = null;
+if (typeof window !== 'undefined') {
+    try {
+        SplitText = require('gsap/SplitText').SplitText;
+        if (SplitText) {
+            gsap.registerPlugin(SplitText);
+        }
+    } catch (e) {
+        // Official plugin not available, will use custom SplitTextInstance
+    }
+}
 
 interface HomeMastheadProps {
     data: HomeMastheadType;
 }
 
 export function HomeMasthead({ data }: HomeMastheadProps) {
+    const headingRef = useRef<HTMLHeadingElement>(null);
+    const splitInstanceRef = useRef<any>(null);
+
+    useGSAP(() => {
+        if (!headingRef.current || !data.heading) return;
+
+        // Use official GSAP SplitText if available, otherwise use custom implementation
+        if (SplitText) {
+            // Official GSAP SplitText plugin
+            splitInstanceRef.current = SplitText.create(headingRef.current, {
+                type: "lines",
+                linesClass: "lines-js"
+            });
+
+            // Animate lines sliding up
+            gsap.from(splitInstanceRef.current.lines, {
+                duration: 0.8,
+                opacity: 0,
+                yPercent: 200,
+                stagger: 0.1,
+                ease: "expo.out",
+            });
+        } else {
+            // Fallback: Use custom SplitTextInstance for line splitting
+            splitInstanceRef.current = SplitTextInstance.create(headingRef.current, {
+                type: "lines",
+                linesClass: "lines-js"
+            });
+
+            // Animate lines sliding up
+            gsap.from(splitInstanceRef.current.lines, {
+                duration: 0.8,
+                yPercent: 110,
+                stagger: 0.1,
+                ease: "expo.out",
+            });
+        }
+
+        // Cleanup function
+        return () => {
+            if (splitInstanceRef.current && splitInstanceRef.current.revert) {
+                splitInstanceRef.current.revert();
+                splitInstanceRef.current = null;
+            }
+        };
+    }, { dependencies: [data.heading], scope: headingRef });
+
     return (
         <div data-component="home-masthead" className="h-screen p-4">
             <div className="bg-black text-white h-full rounded-[10px] relative overflow-hidden flex flex-col p-10">
                 <div className="flex flex-col md:flex-row mt-auto gap-y-16 gap-x-24 relative z-[2]">
                     <div className="flex flex-col gap-y-8">
                         {data.heading && (
-                            <h1 className="text-120px leading-none uppercase subt_1 max-w-[700px]">
-                                {/* <SplitTextComponent
-                                    options={{
-                                        type: "lines,words",
-                                        linesClass: "lines-js",
-                                        wordsClass: "word-js",
-                                    }}
-                                    animationOptions={{
-                                        scrollTrigger: {
-                                            start: "top 50%",
-                                            trigger: ".subt_1",
-                                        },
-                                        duration: 1.8,
-                                        yPercent: 100,
-                                        ease: "expo.out",
-                                        stagger: 0.06,
-                                    }}
-                                >
-                                    {data.heading}
-                                </SplitTextComponent> */}
-                                <span className="">{data?.heading}</span>
+                            <h1 
+                                ref={headingRef}
+                                data-split="heading"
+                                className="text-120px leading-none uppercase max-w-[700px] overflow-hidden"
+                            >
+                                {data.heading}
                             </h1>
                         )}
                         {data.content && (

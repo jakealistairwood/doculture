@@ -26,7 +26,7 @@ interface SplitTextResult {
   chars: HTMLElement[];
 }
 
-class SplitTextInstance {
+export class SplitTextInstance {
   private element: HTMLElement;
   private options: SplitTextOptions;
   public words: HTMLElement[] = [];
@@ -116,18 +116,31 @@ class SplitTextInstance {
       lineContainer.className = this.options.linesClass || 'lines-js';
       lineContainer.style.overflow = 'hidden';
       lineContainer.style.display = 'block';
+      lineContainer.style.position = 'relative';
+
+      // Create inner wrapper that will be animated
+      const lineInner = document.createElement('div');
+      lineInner.style.display = 'block';
+      lineInner.style.position = 'relative';
 
       lineWords.forEach((word, wordIndex) => {
-        lineContainer.appendChild(word);
+        // Ensure words are positioned relative for transform to work
+        if (!word.style.position) {
+          word.style.position = 'relative';
+          word.style.display = 'inline-block';
+        }
+        lineInner.appendChild(word);
         
         // Add space after word if not last word in line
         if (wordIndex < lineWords.length - 1) {
-          lineContainer.appendChild(document.createTextNode(' '));
+          lineInner.appendChild(document.createTextNode(' '));
         }
       });
 
+      lineContainer.appendChild(lineInner);
       this.element.appendChild(lineContainer);
-      this.lines.push(lineContainer);
+      // Store the inner element for animation (not the container)
+      this.lines.push(lineInner);
     });
   }
 
@@ -138,6 +151,26 @@ class SplitTextInstance {
     this.words = [];
     this.lines = [];
     this.chars = [];
+  }
+
+  // Static method to create SplitText instance with animation callback
+  static create(
+    element: HTMLElement | string,
+    options: SplitTextOptions & {
+      mask?: string;
+      autoSplit?: boolean;
+      onSplit?: (instance: SplitTextInstance) => gsap.core.Tween | void;
+    } = {}
+  ): SplitTextInstance {
+    const { mask, autoSplit, onSplit, ...splitOptions } = options;
+    const instance = new SplitTextInstance(element, splitOptions);
+    
+    // Call onSplit callback if provided (gsap.from will handle initial state)
+    if (onSplit && instance.lines.length > 0) {
+      onSplit(instance);
+    }
+    
+    return instance;
   }
 }
 

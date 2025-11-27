@@ -20,7 +20,7 @@ const subheadingBgColorMap = {
 }
 
 const TextCard = ({ data, bgColor }: TextCardProps) => {
-    const { subheading, heading, content, textCardOptions } = data || {};
+    const { textCardOptions } = data || {};
     const {
         centerAlign = false,
         centerAlignOnMobile = false,
@@ -40,13 +40,19 @@ const TextCard = ({ data, bgColor }: TextCardProps) => {
       centerAlign && !centerAlignOnMobile ? "items-center text-center" : "",
       centerAlign && centerAlignOnMobile ? "items-center text-center" : "",
       !centerAlign && centerAlignOnMobile ? "items-center text-center md:items-start md:text-left" : "",
-    )
+    );
+
+    const subheadingAlignmentClasses = clsx(
+      centerAlign && "mx-auto",
+      !centerAlign && centerAlignOnMobile && "mx-auto md:mx-0",
+      !centerAlign && !centerAlignOnMobile && "mx-0",
+    );
   
     return (
         <div className={`flex flex-col ${alignmentClasses}`}>
           <div className="flex flex-col gap-y-6">
             {data.subheading && (
-                <SubheadingTag className={`text-card__subheading w-fit mx-auto text-xs font-semibold uppercase py-2 px-[0.625rem] rounded-[3px] tracking-widest ${subheadingBgColor}`}>{data.subheading}</SubheadingTag>
+                <SubheadingTag className={`text-card__subheading w-fit ${subheadingAlignmentClasses} text-xs font-semibold uppercase py-2 px-[0.625rem] rounded-[3px] tracking-widest ${subheadingBgColor}`}>{data.subheading}</SubheadingTag>
             )}
             {data.heading && (
                 <HeadingTag 

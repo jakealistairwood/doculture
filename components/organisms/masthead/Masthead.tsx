@@ -12,8 +12,8 @@ interface MastheadProps {
 export function Masthead({ data }: MastheadProps) {
     return (
         <div data-component="masthead" className="h-screen p-4">
-            <div className="bg-black text-white h-full rounded-[10px] relative overflow-hidden flex flex-col p-10">
-                <div className="flex flex-col md:flex-row mt-auto gap-y-16 gap-x-24 relative z-[2]">
+            <div className="bg-black text-white h-full rounded-[10px] relative overflow-hidden flex flex-col items-center justify-center p-10">
+                <div className="flex flex-col md:flex-row gap-y-16 gap-x-24 relative z-[2]">
                     <div className="flex flex-col gap-y-8">
                         {data.heading && (
                             <h1 className="text-120px leading-none uppercase subt_1 max-w-[700px]">

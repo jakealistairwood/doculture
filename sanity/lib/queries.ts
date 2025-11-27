@@ -11,6 +11,7 @@ export const pageQuery = groq`
       _type,
       title,
       sectionOptions{
+        id,
         bgColor,
         removeContainer,
         paddingTop,
@@ -115,7 +116,30 @@ export const pageQuery = groq`
                     }
                 }
             }
-        }
+        },
+        _type == "linkCards" => {
+            _key,
+            _type,
+            layout,
+            links[]{
+                _key,
+                title,
+                url,
+                image
+            }
+        },
+        _type == "headerMarquee" => {
+            _key,
+            _type,
+            items
+        },
+        _type == "selectedWorks" => {
+            _key,
+            _type,
+            caseStudies[]{
+                project->
+            }
+        },
       }
     }
   }

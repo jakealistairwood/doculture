@@ -6,6 +6,11 @@ export const sectionOptions = defineType({
     type: 'object',
     fields: [
         defineField({
+            name: 'id',
+            title: 'ID',
+            type: 'string'
+        }),
+        defineField({
             name: 'bgColor',
             title: 'Background Color',
             type: 'string',

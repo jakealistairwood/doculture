@@ -18,7 +18,10 @@ export const section = defineType({
                 { type: 'homeMasthead' },
                 { type: 'textCard' },
                 { type: 'fullWidthAsset' },
-                { type: 'logos' }
+                { type: 'logos' },
+                { type: 'linkCards' },
+                { type: 'headerMarquee' },
+                { type: 'selectedWorks' }
             ]
         }),
         defineField({
