@@ -19,12 +19,13 @@ interface CaseStudyImageProps {
 }
 
 export default function CaseStudyImage({ image }: CaseStudyImageProps) {
-    if (!image?.asset?._ref) {
+    // Handle both referenced and dereferenced assets
+    if (!image?.asset?._ref && !image?.asset?._id) {
         return null;
     }
 
     return (
-        <div className="my-8 md:my-12">
+        <div className="">
             <SanityImage
                 image={image}
                 className="w-full h-auto rounded-lg"

@@ -12,7 +12,9 @@ interface SanityImageProps {
 
 const SanityImage = (props: SanityImageProps) => {
     const { image: source, priority, className, style } = props || {};
-    const image = source?.asset?._ref ? (
+    // Handle both referenced and dereferenced assets
+    const hasAsset = source?.asset?._ref || source?.asset?._id;
+    const image = hasAsset ? (
         <Image 
             style={style}
             className={className}

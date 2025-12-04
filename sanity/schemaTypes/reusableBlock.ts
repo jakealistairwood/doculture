@@ -15,20 +15,38 @@ export const reusableBlock = defineType({
             validation: Rule => Rule.required()
         }),
         defineField({
+            name: 'type',
+            title: 'Type',
+            type: 'string',
+            options: {
+                list: [
+                    { value: 'logoMarquee', title: 'Logo Marquee' },
+                    { value: 'globalCTA', title: 'Global CTA' }
+                ],
+                layout: 'radio'
+            },
+            initialValue: 'logoMarquee'
+        }),
+        defineField({
             name: 'logoMarquee',
             title: 'Logo Marquee',
             type: 'logoMarquee',
+            hidden: ({parent}) => parent?.type !== 'logoMarquee'
+        }),
+        defineField({
+            name: 'globalCTA',
+            title: 'Global CTA',
+            type: 'globalCTA',
+            hidden: ({parent}) => parent?.type !== 'globalCTA'
         })
     ],
     preview: {
         select: {
             title: 'title',
-            logoCount: 'logoMarquee.logos'
         },
-        prepare({ title, logoCount }) {
+        prepare({ title }) {
             return {
                 title: title,
-                subtitle: `Logo Marquee (${logoCount?.length || 0} logos)`
             }
         }
     }

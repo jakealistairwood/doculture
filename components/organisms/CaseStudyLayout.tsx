@@ -70,7 +70,7 @@ export default function CaseStudyLayout({ project }: CaseStudyLayoutProps) {
                     <div className="flex flex-col gap-y-12 items-center text-center">
                         <div className="flex flex-col gap-y-8 items-center text-center max-w-[856px] w-full mx-auto">
                             {project?.title && (
-                                <h1 className="text-[6.25rem] uppercase leading-[0.94]" dangerouslySetInnerHTML={{ __html: project?.title }} />
+                                <h1 className="text-100px uppercase leading-[0.94]" dangerouslySetInnerHTML={{ __html: project?.title }} />
                             )}
                             {hasCategories && (
                                 <div className="flex items-center flex-wrap gap-3">
@@ -94,7 +94,7 @@ export default function CaseStudyLayout({ project }: CaseStudyLayoutProps) {
             </section>
             <section className="py-36">
                 <div className="container">
-                    <div className="grid grid-cols-[210px_auto] gap-40 relative">
+                    <div className="grid grid-cols-1 md:grid-cols-[210px_auto] gap-16 md:gap-20 lg:gap-40 relative">
                         <aside className="relative">
                             {headings.length > 0 && (
                                 <div className="sticky top-20">

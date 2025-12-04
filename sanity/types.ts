@@ -13,6 +13,61 @@
  */
 
 // Source: schema.json
+export type GlobalCTA = {
+  _type: "globalCTA";
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    altText?: string;
+    _type: "image";
+  };
+  heading?: string;
+  description?: string;
+  link?: {
+    url?: string;
+    title?: string;
+  };
+};
+
+export type CaseStudyImage = {
+  _type: "caseStudyImage";
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+};
+
+export type CaseStudyRichText = {
+  _type: "caseStudyRichText";
+  content?: BlockContent;
+};
+
+export type CaseStudyBuilder = {
+  _type: "caseStudyBuilder";
+  title?: string;
+  components?: Array<{
+    _key: string;
+  } & CaseStudyRichText | {
+    _key: string;
+  } & CaseStudyImage>;
+};
+
 export type StudioCarousel = {
   _type: "studioCarousel";
   studios?: Array<{
@@ -252,7 +307,9 @@ export type ReusableBlock = {
   _updatedAt: string;
   _rev: string;
   title?: string;
+  type?: "logoMarquee" | "globalCTA";
   logoMarquee?: LogoMarquee;
+  globalCTA?: GlobalCTA;
 };
 
 export type Masthead = {
@@ -435,37 +492,7 @@ export type Project = {
   };
   content?: Array<{
     _key: string;
-  } & FullWidthAsset | {
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
-    listItem?: "bullet";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  } | {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-    _key: string;
-  }>;
+  } & CaseStudyBuilder>;
 };
 
 export type SectionOptions = {
@@ -637,5 +664,5 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = StudioCarousel | Studio | SanityImageCrop | SanityImageHotspot | FeatureCards | SelectedWorks | HeaderMarquee | LinkCards | Logos | FullWidthAsset | LogoMarquee | Link | LinksWrapper | TextCardOptions | TextCard | HomeMasthead | ReusableBlock | Masthead | Post | BlockContent | Author | Slug | Category | Project | SectionOptions | Section | Seo | Page | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = GlobalCTA | CaseStudyImage | CaseStudyRichText | CaseStudyBuilder | StudioCarousel | Studio | SanityImageCrop | SanityImageHotspot | FeatureCards | SelectedWorks | HeaderMarquee | LinkCards | Logos | FullWidthAsset | LogoMarquee | Link | LinksWrapper | TextCardOptions | TextCard | HomeMasthead | ReusableBlock | Masthead | Post | BlockContent | Author | Slug | Category | Project | SectionOptions | Section | Seo | Page | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 export declare const internalGroqTypeReferenceTo: unique symbol;

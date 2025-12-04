@@ -12,12 +12,14 @@ export const urlFor = (source: SanityImageSource) => {
 }
 
 export const urlForImage = (source: any) => {
-  if (!source?.asset?._ref) {
+  // Handle both referenced and dereferenced assets
+  const assetRef = source?.asset?._ref || source?.asset?._id;
+  if (!assetRef) {
     return undefined;
   }
 
-  const imageRef = source?.asset?._ref;
   const { crop } = source;
+  const imageRef = source?.asset?._ref || source?.asset?._id;
 
   const { width, height } = getImageDimensions(imageRef);
 

@@ -28,7 +28,8 @@ import {studioCarousel} from './studioCarousel'
 import {caseStudyBuilder} from './caseStudyBuilder'
 import {caseStudyRichText} from './caseStudyRichText'
 import {caseStudyImage} from './caseStudyImage'
+import {globalCTA} from './reusableBlocks/globalCTA'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [pageType, seo, section, sectionOptions, project, blockContentType, categoryType, postType, authorType, masthead, homeMasthead, textCard, textCardOptions, linksWrapper, link, reusableBlock, logoMarquee, fullWidthAsset, logos, linkCards, headerMarquee, selectedWorks, featureCards, studio, studioCarousel, caseStudyBuilder, caseStudyRichText, caseStudyImage],
+  types: [pageType, seo, section, sectionOptions, project, blockContentType, categoryType, postType, authorType, masthead, homeMasthead, textCard, textCardOptions, linksWrapper, link, reusableBlock, logoMarquee, fullWidthAsset, logos, linkCards, headerMarquee, selectedWorks, featureCards, studio, studioCarousel, caseStudyBuilder, caseStudyRichText, caseStudyImage, globalCTA],
 }

@@ -210,9 +210,47 @@ export const projectQuery = groq`
         _type == "caseStudyImage" => {
           image{
             ...,
-            asset->
+            asset
           }
         }
+      }
+    }
+  }
+`;
+
+export const allProjectsQuery = groq`
+  *[_type == "project"] | order(date desc, _createdAt desc){
+    _id,
+    _type,
+    title,
+    slug,
+    excerpt,
+    date,
+    categories[]->{
+      _id,
+      title,
+      slug
+    },
+    coverImage
+  }
+`;
+
+export const globalCTAQuery = groq`
+  *[_type == "reusableBlock" && type == "globalCTA"][0]{
+    _id,
+    _type,
+    title,
+    type,
+    globalCTA{
+      image{
+        ...,
+        asset
+      },
+      heading,
+      description,
+      link{
+        url,
+        title
       }
     }
   }

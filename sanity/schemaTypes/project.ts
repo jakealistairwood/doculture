@@ -18,6 +18,11 @@ export const project = defineType({
             },
         }),
         defineField({
+            name: 'logo',
+            type: 'image',
+            title: 'Logo'
+        }),
+        defineField({
             name: 'excerpt',
             title: 'Excerpt',
             type: 'text',

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const Header = () => {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -52,9 +53,16 @@ const Header = () => {
                     <div className="flex items-center gap-x-20">
                         <Link
                             href="/"
-                            className="text-3xl font-heading uppercase font-black"
+                            className="relative block aspect-[117/23] w-[117px] h-[23px]"
+                            aria-label="Go to homepage"
                         >
-                            Doculture
+                            <Image 
+                                src="/images/logo.svg" 
+                                alt="Logo" 
+                                fill 
+                                className={`object-contain ${isScrolled ? "invert" : ""}`}
+                                priority 
+                            />
                         </Link>
                         <ul className="hidden lg:flex items-center gap-x-8 font-medium opacity-80">
                             <li>
@@ -67,7 +75,7 @@ const Header = () => {
                                 <Link href="/services">Services</Link>
                             </li>
                             <li>
-                                <Link href="/portfolio">Work</Link>
+                                <Link href="/our-work">Work</Link>
                             </li>
                         </ul>
                     </div>
@@ -75,7 +83,7 @@ const Header = () => {
                         <li className="">
                             <Link
                                 href="/"
-                                className="inline-flex items-center justify-center font-medium transition-colors rounded-[3px] text-sm uppercase border border-white/25 px-6 py-3"
+                                className="inline-flex items-center justify-center font-medium rounded-[3px] text-sm uppercase border border-white/25 px-6 py-3"
                             >
                                 Get in touch
                             </Link>
@@ -86,8 +94,8 @@ const Header = () => {
                         className="flex lg:hidden flex-col items-center justify-center p-4 border border-white/10 rounded-[3px]"
                         aria-label="Mobile navigation toggle"
                     >
+                        <span aria-hidden>Menu</span>
                         <div className="flex flex-col gap-y-2" aria-hidden>
-                            <div className="h-[1px] w-[25px] bg-white" />
                             <div className="h-[1px] w-[25px] bg-white" />
                             <div className="h-[1px] w-[25px] bg-white" />
                         </div>

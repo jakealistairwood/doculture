@@ -10,6 +10,10 @@
 
 @utility container {
   margin-inline: auto;
+
+  @media screen and (max-width: 640px) {
+    padding-inline: 1rem;
+  }
 }
 
 @theme inline {
@@ -56,6 +60,15 @@ h1 {
   font-size: clamp(2.5rem, 1.964vw + 0.607rem, 8.5rem);
   line-height: 1.1;
 } */
+
+.text-120px {
+  font-size: clamp(3rem, 1.7143rem + 6.4286vw, 7.5rem);
+}
+
+.text-100px {
+  font-size: clamp(3rem, 2.0714rem + 4.6429vw, 6.25rem);
+  line-height: 0.94;
+}
 
 .text-40px {
   font-size: clamp(1.5rem, 1.964vw + 0.607rem, 2.375rem);
