@@ -48,7 +48,7 @@ const Header = () => {
                 transform: isVisible ? 'translateY(0)' : 'translateY(-100%)',
             }}
         >
-            <div className="max-w-[1400px] w-full mx-auto">
+            <div className="max-w-[1440px] px-4 w-full mx-auto">
                 <nav className="flex items-center justify-between">
                     <div className="flex items-center gap-x-20">
                         <Link
@@ -91,13 +91,13 @@ const Header = () => {
                     </ul>
                     <button
                         type="button"
-                        className="flex lg:hidden flex-col items-center justify-center p-4 border border-white/10 rounded-[3px]"
+                        className="flex lg:hidden items-center justify-center gap-x-3"
                         aria-label="Mobile navigation toggle"
                     >
                         <span aria-hidden>Menu</span>
-                        <div className="flex flex-col gap-y-2" aria-hidden>
-                            <div className="h-[1px] w-[25px] bg-white" />
-                            <div className="h-[1px] w-[25px] bg-white" />
+                        <div className="flex flex-col gap-y-1" aria-hidden>
+                            <div className={`h-[1.5px] w-[20px] ${isScrolled ? "bg-off-black" : "bg-white"}`} />
+                            <div className={`h-[1.5px] w-[20px] ${isScrolled ? "bg-off-black" : "bg-white"}`} />
                         </div>
                     </button>
                 </nav>

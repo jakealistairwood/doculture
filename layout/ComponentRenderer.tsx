@@ -4,21 +4,21 @@ import { HomeMasthead } from '@/components/organisms/masthead/HomeMasthead';
 import { Masthead } from '@/components/organisms/masthead/Masthead';
 
 const TextCard = dynamic(() => import('@/components/organisms/TextCard'));
-const FullWidthAsset = dynamic(() => import('@/components/molecules/FullWidthAsset'));
+const Asset = dynamic(() => import('@/components/molecules/Asset'));
 const LogoMarquee = dynamic(() => import('@/components/molecules/LogoMarquee'));
 const LinkCards = dynamic(() => import('@/components/molecules/LinkCards'));
 const HeaderMarquee = dynamic(() => import('@/components/molecules/HeaderMarquee'));
 const FeatureCards = dynamic(() => import('@/components/molecules/FeatureCards'));
 const StudioCarousel = dynamic(() => import('@/components/organisms/StudioCarousel'));
 
-import { Masthead as MastheadType, HomeMasthead as HomeMastheadType, TextCard as TextCardType, FullWidthAsset as FullWidthAssetType, Logos as LogosType, LinkCards as LinkCardsType, FeatureCards as FeatureCardsType, StudioCarousel as StudioCarouselType } from '@/sanity/types';
+import { Masthead as MastheadType, HomeMasthead as HomeMastheadType, TextCard as TextCardType, Asset as AssetType, Logos as LogosType, LinkCards as LinkCardsType, FeatureCards as FeatureCardsType, StudioCarousel as StudioCarouselType } from '@/sanity/types';
 
 type HeaderMarqueeType = {
     _type: 'headerMarquee';
     items?: string[];
 };
 
-type Component = MastheadType | HomeMastheadType | TextCardType | FullWidthAssetType | LogosType | LinkCardsType | HeaderMarqueeType | FeatureCardsType | StudioCarouselType;
+type Component = MastheadType | HomeMastheadType | TextCardType | AssetType | LogosType | LinkCardsType | HeaderMarqueeType | FeatureCardsType | StudioCarouselType;
 
 interface ComponentRendererProps {
   component: Component;
@@ -33,8 +33,8 @@ export function ComponentRenderer({ component, bgColor }: ComponentRendererProps
       return <HomeMasthead data={component} />;
     case 'textCard':
       return <TextCard data={component} bgColor={bgColor} />;
-    case 'fullWidthAsset':
-      return <FullWidthAsset data={component} />;
+    case 'asset':
+      return <Asset data={component} />;
     case 'logos':
         return <LogoMarquee data={component} bgColor={bgColor} />
     case 'linkCards':

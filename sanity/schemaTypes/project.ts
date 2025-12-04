@@ -57,7 +57,14 @@ export const project = defineType({
                     type: 'string',
                     title: 'Alternative text',
                 }
-            ]
+            ],
+            description: 'This image will be used as the video poster if a video is provided'
+        }),
+        defineField({
+            name: 'video',
+            title: 'Hero Video',
+            type: 'string',
+            description: 'Video URL to display in the hero section (replaces cover image when provided). The cover image will be used as the video poster.'
         }),
         defineField({
             name: 'content',

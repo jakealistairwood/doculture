@@ -1,16 +1,16 @@
 "use client";
 
 import { useRef } from "react";
-import { FullWidthAsset as FullWidthAssetType } from "@/sanity/types";
+import { Asset as AssetType } from "@/sanity/types";
 import SanityImage from "@/components/atoms/SanityImage";
 import VideoPlayer from "@/components/atoms/VideoPlayer";
 import { useInView, motion } from "framer-motion";
 
-interface FullWidthAssetProps {
-    data: FullWidthAssetType;
+interface AssetProps {
+    data: AssetType;
 }
 
-const FullWidthAsset = ({ data }: FullWidthAssetProps) => {
+const Asset = ({ data }: AssetProps) => {
     const ref = useRef(null);
 
     const isInView = useInView(ref, {
@@ -79,4 +79,5 @@ const FullWidthAsset = ({ data }: FullWidthAssetProps) => {
     return null;
 };
 
-export default FullWidthAsset;
+export default Asset;
+

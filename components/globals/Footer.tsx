@@ -8,7 +8,7 @@ const Footer = () => {
     return (
         <footer className="bg-off-black text-white py-20">
             <div className="max-w-[1440px] w-full mx-auto px-4">
-                <div className="flex justify-between">
+                <div className="flex flex-col flex-wrap sm:flex-row sm:justify-between gap-20">
                     <div className="flex flex-col">
                         <div className="flex flex-col gap-y-10">
                             <Link
@@ -31,12 +31,12 @@ const Footer = () => {
                                 <span className="mt-8">SW1 3GE</span>
                             </address>
                         </div>
-                        <div className="flex items-center gap-x-2 mt-auto">
+                        <div className="flex items-center gap-x-2 mt-auto pt-16">
                             <SocialIcon type="instagram" url="/" />
                             <SocialIcon type="linkedin" url="/" />
                         </div>
                     </div>
-                    <div className="grid grid-cols-2 gap-x-20 pr-20">
+                    <div className="flex flex-wrap gap-y-10 gap-x-20 xl:gap-x-40 pr-10 xl:pr-20">
                         <nav className="flex flex-col gap-y-8">
                             <p className="font-semibold">Site</p>
                             <ul className="flex flex-col gap-y-6">

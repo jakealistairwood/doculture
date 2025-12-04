@@ -18,7 +18,7 @@ import {link} from './link'
 import {reusableBlock} from './reusableBlock'
 import {logoMarquee} from './reusableBlocks/logoMarquee'
 import {logos} from './logos'
-import {fullWidthAsset} from './fullWidthAsset'
+import {asset} from './asset'
 import {linkCards} from './linkCards'
 import {headerMarquee} from './headerMarquee'
 import {selectedWorks} from './selectedWorks'
@@ -31,5 +31,5 @@ import {caseStudyImage} from './caseStudyImage'
 import {globalCTA} from './reusableBlocks/globalCTA'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [pageType, seo, section, sectionOptions, project, blockContentType, categoryType, postType, authorType, masthead, homeMasthead, textCard, textCardOptions, linksWrapper, link, reusableBlock, logoMarquee, fullWidthAsset, logos, linkCards, headerMarquee, selectedWorks, featureCards, studio, studioCarousel, caseStudyBuilder, caseStudyRichText, caseStudyImage, globalCTA],
+  types: [pageType, seo, section, sectionOptions, project, blockContentType, categoryType, postType, authorType, masthead, homeMasthead, textCard, textCardOptions, linksWrapper, link, reusableBlock, logoMarquee, asset, logos, linkCards, headerMarquee, selectedWorks, featureCards, studio, studioCarousel, caseStudyBuilder, caseStudyRichText, caseStudyImage, globalCTA],
 }

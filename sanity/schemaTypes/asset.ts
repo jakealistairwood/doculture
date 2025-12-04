@@ -1,8 +1,8 @@
 import { defineField, defineType } from 'sanity'
 
-export const fullWidthAsset = defineType({
-    name: 'fullWidthAsset',
-    title: 'Full Width Asset',
+export const asset = defineType({
+    name: 'asset',
+    title: 'Asset',
     type: 'object',
     fields: [
         defineField({
@@ -78,3 +78,4 @@ export const fullWidthAsset = defineType({
         })
     ]
 })
+

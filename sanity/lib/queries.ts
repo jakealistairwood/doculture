@@ -80,7 +80,7 @@ export const pageQuery = groq`
             content,
             textCardOptions
         },
-        _type == "fullWidthAsset" => {
+        _type == "asset" => {
             _key,
             _type,
             id,
@@ -179,6 +179,7 @@ export const projectQuery = groq`
       slug
     },
     coverImage,
+    video,
     content[]{
       _key,
       _type,
@@ -208,10 +209,17 @@ export const projectQuery = groq`
           }
         },
         _type == "caseStudyImage" => {
+          type,
           image{
             ...,
             asset
-          }
+          },
+          video,
+          videoPoster{
+            ...,
+            asset
+          },
+          videoOptions
         }
       }
     }

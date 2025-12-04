@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import CaseStudyRichText from "@/components/molecules/CaseStudyRichText";
 import CaseStudyImage from "@/components/molecules/CaseStudyImage";
 import SanityImage from "@/components/atoms/SanityImage";
+import VideoPlayer from "@/components/atoms/VideoPlayer";
 import TableOfContents from "@/components/molecules/TableOfContents";
 
 interface CaseStudyLayoutProps {
@@ -80,7 +81,15 @@ export default function CaseStudyLayout({ project }: CaseStudyLayoutProps) {
                                 </div>
                             )}
                         </div>
-                        {project?.coverImage && (
+                        {project?.video ? (
+                            <div className="w-full aspect-video relative overflow-hidden rounded-lg">
+                                <VideoPlayer
+                                    video={project.video}
+                                    poster={project.coverImage}
+                                    buttonClassName="relative flex items-center justify-center rounded-lg overflow-hidden w-full h-full cursor-pointer group"
+                                />
+                            </div>
+                        ) : project?.coverImage && (
                             <div className="w-full aspect-video relative overflow-hidden rounded-lg">
                                 <SanityImage
                                     image={project.coverImage}
@@ -132,7 +141,11 @@ export default function CaseStudyLayout({ project }: CaseStudyLayoutProps) {
                                                             return (
                                                                 <CaseStudyImage
                                                                     key={component._key}
+                                                                    type={component.type}
                                                                     image={component.image}
+                                                                    video={component.video}
+                                                                    videoPoster={component.videoPoster}
+                                                                    videoOptions={component.videoOptions}
                                                                 />
                                                             );
                                                         }

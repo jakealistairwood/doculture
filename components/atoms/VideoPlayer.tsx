@@ -11,6 +11,7 @@ interface VideoPlayerProps {
     options?: {
         title?: string;
     };
+    buttonClassName?: string;
 }
 
 const VideoPlayer = (props: VideoPlayerProps) => {
@@ -88,7 +89,7 @@ const VideoPlayer = (props: VideoPlayerProps) => {
                 <button
                     type="button"
                     onClick={() => setPlayVideo(true)}
-                    className="relative flex items-center justify-center md:rounded-[10px] overflow-hidden max-w-[1180px] w-full mx-auto aspect-[16/9] cursor-pointer group"
+                    className={props.buttonClassName || "relative flex items-center justify-center md:rounded-[10px] overflow-hidden max-w-[1180px] w-full mx-auto aspect-[16/9] cursor-pointer group"}
                     aria-label="Play Video"
                 >
                     <SanityImage

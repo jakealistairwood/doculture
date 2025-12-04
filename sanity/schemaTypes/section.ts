@@ -17,7 +17,7 @@ export const section = defineType({
                 { type: 'masthead' },
                 { type: 'homeMasthead' },
                 { type: 'textCard' },
-                { type: 'fullWidthAsset' },
+                { type: 'asset' },
                 { type: 'logos' },
                 { type: 'linkCards' },
                 { type: 'headerMarquee' },

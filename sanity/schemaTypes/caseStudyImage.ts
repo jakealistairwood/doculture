@@ -3,10 +3,23 @@ import { ImageIcon } from '@sanity/icons'
 
 export const caseStudyImage = defineType({
     name: 'caseStudyImage',
-    title: 'Image',
+    title: 'Asset',
     type: 'object',
     icon: ImageIcon,
     fields: [
+        defineField({
+            name: 'type',
+            title: 'Type',
+            type: 'string',
+            options: {
+                list: [
+                    { value: 'image', title: 'Image' },
+                    { value: 'video', title: 'Video' }
+                ],
+                layout: 'radio'
+            },
+            initialValue: 'image'
+        }),
         defineField({
             name: 'image',
             type: 'image',
@@ -20,15 +33,61 @@ export const caseStudyImage = defineType({
                     type: 'string',
                     title: 'Alternative Text',
                 }
-            ]
+            ],
+            hidden: ({parent}) => parent?.type !== "image"
+        }),
+        defineField({
+            name: 'video',
+            title: 'Video',
+            type: 'string',
+            description: 'Please enter the URL of the video you want to display',
+            hidden: ({parent}) => parent?.type !== "video"
+        }),
+        defineField({
+            name: 'videoPoster',
+            title: 'Video Poster',
+            type: 'image',
+            description: 'Allows you to add a poster/placeholder image for the video',
+            options: {
+                hotspot: true
+            },
+            fields: [
+                {
+                    name: 'alt',
+                    type: 'string',
+                    title: 'Alternative Text',
+                }
+            ],
+            hidden: ({parent}) => parent?.type !== "video"
+        }),
+        defineField({
+            name: 'videoOptions',
+            title: 'Video Options',
+            type: 'object',
+            fields: [
+                defineField({
+                    name: 'title',
+                    title: 'Title',
+                    type: 'string'
+                }),
+            ],
+            hidden: ({parent}) => parent?.type !== 'video'
         })
     ],
     preview: {
         select: {
+            type: 'type',
             image: 'image',
-            alt: 'image.alt'
+            alt: 'image.alt',
+            video: 'video'
         },
-        prepare({ image, alt }) {
+        prepare({ type, image, alt, video }) {
+            if (type === 'video') {
+                return {
+                    title: video || 'Video',
+                    media: image || null
+                }
+            }
             return {
                 title: alt || 'Image',
                 media: image
