@@ -107,7 +107,7 @@ const LogoMarquee = ({ data, speed, bgColor }: LogoMarqueeProps) => {
             <div
                 data-component="logo-marquee"
                 ref={containerRef}
-                className="flex flex-col gap-y-6 gap-x-20 py-8 md:flex-row md:items-center md:justify-between pt-4 min-h-[51px]"
+                className="flex flex-col gap-y-6 gap-x-20 py-8 md:flex-row md:items-center md:justify-between py-4 min-h-[51px]"
             >
                 {labelContent}
                 <div className="flex-1 max-w-[1000px] w-full">{marqueeContent}</div>

@@ -46,6 +46,11 @@ const bgColorMap = {
   lightGrey: 'bg-light-grey text-black',
 } as const;
 
+const overflowMap = {
+  hidden: 'overflow-hidden',
+  visible: 'overflow-visible'
+};
+
 export function Section({ section }: SectionProps) {
   const options = section.sectionOptions;
 
@@ -55,6 +60,7 @@ export function Section({ section }: SectionProps) {
     spacingMap.paddingBottom[options?.paddingBottom],
     spacingMap.marginTop[options?.marginTop],
     spacingMap.marginBottom[options?.marginBottom],
+    overflowMap[options?.overflow]
   );
   
   const content = (

@@ -29,3 +29,4 @@ const SanityImage = (props: SanityImageProps) => {
 }
 
 export default SanityImage;
+

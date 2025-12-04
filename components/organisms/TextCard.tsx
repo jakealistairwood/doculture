@@ -57,7 +57,7 @@ const TextCard = ({ data, bgColor }: TextCardProps) => {
             )}
             {data.heading && (
                 <HeadingTag 
-                  className="font-heading uppercase text-40px" 
+                  className="font-medium uppercase -tracking-[0.01em] text-40px" 
                   dangerouslySetInnerHTML={{ __html: data.heading }}
                   style={{
                     maxWidth: `${headingMaxWidth}px`

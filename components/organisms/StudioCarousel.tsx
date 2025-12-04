@@ -44,10 +44,10 @@ const StudioCarousel = ({ data }: StudioCarouselProps) => {
             <Swiper
                 modules={[Navigation, Pagination]}
                 spaceBetween={30}
-                slidesPerView={1.2}
+                slidesPerView={1.001}
                 centeredSlides={true}
-                loop={studios.length > 1}
-                loopAdditionalSlides={2}
+                loop
+                // loopAdditionalSlides={2}
                 navigation={{
                     prevEl: ".swiper-button-prev-custom",
                     nextEl: ".swiper-button-next-custom",
@@ -68,12 +68,12 @@ const StudioCarousel = ({ data }: StudioCarouselProps) => {
                     640: {
                         slidesPerView: 1.3,
                         spaceBetween: 40,
-                        loopAdditionalSlides: 2,
+                        // loopAdditionalSlides: 2,
                     },
                     1024: {
-                        slidesPerView: 1.5,
+                        slidesPerView: 1.15,
                         spaceBetween: 50,
-                        loopAdditionalSlides: 2,
+                        // loopAdditionalSlides: 2,
                     },
                 }}
             >
@@ -93,17 +93,17 @@ const StudioCarousel = ({ data }: StudioCarouselProps) => {
                                     background: "linear-gradient(0deg,rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%)"
                                 }} />
                                 {studio.title && (
-                                    <h2 className="text-4xl md:text-5xl font-heading uppercase mb-4 relative z-[3]">
+                                    <h2 className="studio-slide-text text-4xl md:text-5xl font-heading uppercase mb-4 relative z-[3]">
                                         {studio.title}
                                     </h2>
                                 )}
                                 {studio.description && (
-                                    <p className="text-lg md:text-xl mb-6 max-w-2xl relative z-[3]">
+                                    <p className="studio-slide-text text-lg md:text-xl mb-6 max-w-2xl relative z-[3]">
                                         {studio.description}
                                     </p>
                                 )}
                                 {studio.features && studio.features.length > 0 && (
-                                    <ul className="flex flex-wrap gap-4 relative z-[3]">
+                                    <ul className="studio-slide-text flex flex-wrap gap-4 relative z-[3]">
                                         {studio.features.map((feature, featureIndex) => (
                                             <li
                                                 key={featureIndex}
@@ -201,6 +201,32 @@ const StudioCarousel = ({ data }: StudioCarouselProps) => {
                 
                 .studio-carousel .swiper-slide-active {
                     opacity: 1;
+                }
+                
+                /* Hide text elements by default */
+                .studio-carousel .studio-slide-text {
+                    opacity: 0;
+                    transform: translateY(20px);
+                    transition: opacity 0.4s ease-out, transform 0.6s ease-out;
+                }
+                
+                /* Show text elements when slide is active */
+                .studio-carousel .swiper-slide-active .studio-slide-text {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+                
+                /* Stagger animation for multiple text elements */
+                .studio-carousel .swiper-slide-active .studio-slide-text:nth-child(1) {
+                    transition-delay: 0.1s;
+                }
+                
+                .studio-carousel .swiper-slide-active .studio-slide-text:nth-child(2) {
+                    transition-delay: 0.2s;
+                }
+                
+                .studio-carousel .swiper-slide-active .studio-slide-text:nth-child(3) {
+                    transition-delay: 0.3s;
                 }
             `}</style>
         </div>

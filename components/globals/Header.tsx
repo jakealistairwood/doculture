@@ -1,19 +1,35 @@
 "use client"
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
 const Header = () => {
     const [isScrolled, setIsScrolled] = useState(false);
+    const [isVisible, setIsVisible] = useState(true);
+    const lastScrollY = useRef(0);
 
     useEffect(() => {
         const handleScroll = () => {
             const scrollThreshold = 100;
-            setIsScrolled(window.scrollY > scrollThreshold);
+            const currentScrollY = window.scrollY;
+            
+            setIsScrolled(currentScrollY > scrollThreshold);
+
+            // Determine scroll direction
+            if (currentScrollY > lastScrollY.current && currentScrollY > scrollThreshold) {
+                // Scrolling down - hide header
+                setIsVisible(false);
+            } else if (currentScrollY < lastScrollY.current) {
+                // Scrolling up - show header
+                setIsVisible(true);
+            }
+
+            lastScrollY.current = currentScrollY;
         };
+
         handleScroll();
 
-        window.addEventListener("scroll", handleScroll);
+        window.addEventListener("scroll", handleScroll, { passive: true });
 
         return () => {
             window.removeEventListener("scroll", handleScroll);
@@ -27,29 +43,34 @@ const Header = () => {
                     ? "bg-white/95 backdrop-blur-sm text-black border-b border-black/10" 
                     : "text-white border-b border-transparent"
             }`}
+            style={{
+                transform: isVisible ? 'translateY(0)' : 'translateY(-100%)',
+            }}
         >
             <div className="max-w-[1400px] w-full mx-auto">
                 <nav className="flex items-center justify-between">
-                    <Link
-                        href="/"
-                        className="text-3xl font-heading uppercase font-black"
-                    >
-                        Doculture
-                    </Link>
-                    <ul className="hidden lg:flex items-center gap-x-12 uppercase text-sm font-medium opacity-80">
-                        <li>
-                            <Link href="/">Home</Link>
-                        </li>
-                        <li>
-                            <Link href="/about">About</Link>
-                        </li>
-                        <li>
-                            <Link href="/services">Services</Link>
-                        </li>
-                        <li>
-                            <Link href="/portfolio">Work</Link>
-                        </li>
-                    </ul>
+                    <div className="flex items-center gap-x-20">
+                        <Link
+                            href="/"
+                            className="text-3xl font-heading uppercase font-black"
+                        >
+                            Doculture
+                        </Link>
+                        <ul className="hidden lg:flex items-center gap-x-8 font-medium opacity-80">
+                            <li>
+                                <Link href="/">Home</Link>
+                            </li>
+                            <li>
+                                <Link href="/about">About</Link>
+                            </li>
+                            <li>
+                                <Link href="/services">Services</Link>
+                            </li>
+                            <li>
+                                <Link href="/portfolio">Work</Link>
+                            </li>
+                        </ul>
+                    </div>
                     <ul className="hidden lg:flex items-center gap-x-12">
                         <li className="">
                             <Link

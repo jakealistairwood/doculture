@@ -5,6 +5,7 @@
   --foreground: #171717;
   --light-grey: #F6F4F3;
   --accent-orange: oklch(0.772 0.1735 64.44);
+  --off-black: oklch(0.1788 0.0016 17.31);
 }
 
 @utility container {
@@ -20,6 +21,7 @@
   --font-mono: var(--font-geist-mono);
   --color-light-grey: var(--light-grey);
   --color-accent-orange: var(--accent-orange);
+  --color-off-black: var(--off-black);
 }
 
 @layer utilities {
@@ -144,4 +146,24 @@ h1 {
 
 .btn-animate-chars:hover .btn-animate-chars__bg--outline {
   background-color: rgba(255, 255, 255, 0.1);
+}
+
+.prose h2 {
+  background-color: #272222;
+  padding-inline: 1rem;
+  padding-block: 0.75rem;
+  border-radius: 0.25rem;
+}
+
+.prose p,
+.prose li {
+  opacity: 0.85;
+}
+
+.prose h3,
+.prose h4,
+.prose p,
+.prose ul,
+.prose ol {
+  padding-inline: 1rem;
 }

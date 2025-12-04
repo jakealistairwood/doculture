@@ -76,10 +76,14 @@ export function HomeMasthead({ data }: HomeMastheadProps) {
     }, { dependencies: [data.heading], scope: headingRef });
 
     return (
-        <div data-component="home-masthead" className="h-screen p-4">
-            <div className="bg-black text-white h-full rounded-[10px] relative overflow-hidden flex flex-col p-10">
-                <div className="flex flex-col md:flex-row mt-auto gap-y-16 gap-x-24 relative z-[2]">
-                    <div className="flex flex-col gap-y-8">
+        <div data-component="home-masthead" className="h-screen">
+            <div className="bg-black text-white h-full relative overflow-hidden flex flex-col items-center justify-center p-10">
+                <div className="flex flex-col gap-y-16 gap-x-24 relative z-[2] p-16">
+                    <FrameCorner className="absolute top-0 left-0" />
+                    <FrameCorner className="absolute top-0 right-0 rotate-90" />
+                    <FrameCorner className="absolute bottom-0 right-0 rotate-180" />
+                    <FrameCorner className="absolute bottom-0 left-0 rotate-270" />
+                    <div className="flex flex-col items-center text-center gap-y-8">
                         {data.heading && (
                             <h1 
                                 ref={headingRef}
@@ -112,4 +116,13 @@ export function HomeMasthead({ data }: HomeMastheadProps) {
             </div>
         </div>
     );
+}
+
+const FrameCorner = ({ className }) => {
+    return (
+        <svg className={className} width="84" height="85" viewBox="0 0 84 85" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="0.5" y1="1" x2="0.499996" y2="85" stroke="white"/>
+            <line y1="0.5" x2="84" y2="0.5" stroke="white"/>
+        </svg>
+    )
 }

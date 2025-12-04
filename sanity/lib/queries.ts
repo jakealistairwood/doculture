@@ -20,6 +20,7 @@ export const pageQuery = groq`
         marginBottom,
         componentSpacing,
         addBottomDivider,
+        overflow
       },
       components[]{
         _key,
@@ -159,6 +160,59 @@ export const pageQuery = groq`
                 ...,
             }
         },
+      }
+    }
+  }
+`;
+
+export const projectQuery = groq`
+  *[_type == "project" && slug.current == $slug][0]{
+    _id,
+    _type,
+    title,
+    slug,
+    excerpt,
+    date,
+    categories[]->{
+      _id,
+      title,
+      slug
+    },
+    coverImage,
+    content[]{
+      _key,
+      _type,
+      title,
+      sectionOptions{
+        id,
+        bgColor,
+        removeContainer,
+        paddingTop,
+        paddingBottom,
+        marginTop,
+        marginBottom,
+        componentSpacing,
+        addBottomDivider,
+        overflow
+      },
+      components[]{
+        _key,
+        _type,
+        _type == "caseStudyRichText" => {
+          content[]{
+            ...,
+            _type == "image" => {
+              ...,
+              asset->
+            }
+          }
+        },
+        _type == "caseStudyImage" => {
+          image{
+            ...,
+            asset->
+          }
+        }
       }
     }
   }

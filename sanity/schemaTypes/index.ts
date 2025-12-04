@@ -25,7 +25,10 @@ import {selectedWorks} from './selectedWorks'
 import {featureCards} from './featureCards'
 import {studio} from './studio'
 import {studioCarousel} from './studioCarousel'
+import {caseStudyBuilder} from './caseStudyBuilder'
+import {caseStudyRichText} from './caseStudyRichText'
+import {caseStudyImage} from './caseStudyImage'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [pageType, seo, section, sectionOptions, project, blockContentType, categoryType, postType, authorType, masthead, homeMasthead, textCard, textCardOptions, linksWrapper, link, reusableBlock, logoMarquee, fullWidthAsset, logos, linkCards, headerMarquee, selectedWorks, featureCards, studio, studioCarousel],
+  types: [pageType, seo, section, sectionOptions, project, blockContentType, categoryType, postType, authorType, masthead, homeMasthead, textCard, textCardOptions, linksWrapper, link, reusableBlock, logoMarquee, fullWidthAsset, logos, linkCards, headerMarquee, selectedWorks, featureCards, studio, studioCarousel, caseStudyBuilder, caseStudyRichText, caseStudyImage],
 }
