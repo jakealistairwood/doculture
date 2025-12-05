@@ -3,7 +3,7 @@ import { Geist, Geist_Mono, Anton } from "next/font/google";
 import localFont from "next/font/local";
 import AppWrapper from "@/components/globals/AppWrapper";
 import { client } from "@/sanity/lib/client";
-import { globalCTAQuery } from "@/sanity/lib/queries";
+import { globalCTAQuery, landingPageSlugsQuery } from "@/sanity/lib/queries";
 import "./globals.css";
 
 const anton = Anton({
@@ -49,14 +49,19 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const globalCTA = await client.fetch(globalCTAQuery);
+  const [globalCTA, landingPages] = await Promise.all([
+    client.fetch(globalCTAQuery),
+    client.fetch(landingPageSlugsQuery),
+  ]);
+
+  const landingPageSlugs = (landingPages || []).map((lp: { slug?: string }) => lp.slug).filter(Boolean);
 
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${anton.variable} ${ppEditorialOld.variable} antialiased bg-black`}
       >
-        <AppWrapper globalCTA={globalCTA}>
+        <AppWrapper globalCTA={globalCTA} landingPageSlugs={landingPageSlugs}>
           {children}
         </AppWrapper>
       </body>

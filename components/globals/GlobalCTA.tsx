@@ -129,7 +129,7 @@ const ArrowIcon = () => {
             <path
                 d="M17.3686 9.9248H1.6543"
                 stroke="currentColor"
-                stroke-width="1.32331"
+                strokeWidth="1.32331"
                 strokeMiterlimit="10"
             />
         </svg>

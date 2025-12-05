@@ -18,13 +18,20 @@ interface AppWrapperProps {
       };
     };
   } | null;
+  landingPageSlugs?: string[];
 }
 
-export default function AppWrapper({ children, globalCTA }: AppWrapperProps) {
+export default function AppWrapper({ children, globalCTA, landingPageSlugs = [] }: AppWrapperProps) {
   const pathname = usePathname();
   const isStudioRoute = pathname?.startsWith("/studio");
+  
+  // Check if current path is a landing page
+  const isLandingPage = pathname && landingPageSlugs.some(slug => {
+    const slugPath = slug.startsWith("/") ? slug : `/${slug}`;
+    return pathname === slugPath || pathname === slug;
+  });
 
-  if (isStudioRoute) {
+  if (isStudioRoute || isLandingPage) {
     return <>{children}</>;
   }
 

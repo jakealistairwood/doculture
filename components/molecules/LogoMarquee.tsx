@@ -11,6 +11,7 @@ interface LogoMarqueeProps {
     data?: Logos;
     speed?: number;
     bgColor?: string;
+    disableInvertedLogoBg?: boolean;
 }
 
 type LogoItem =
@@ -18,7 +19,7 @@ type LogoItem =
         ? Item
         : never;
 
-const LogoMarquee = ({ data, speed, bgColor }: LogoMarqueeProps) => {
+const LogoMarquee = ({ data, speed, bgColor, disableInvertedLogoBg = false }: LogoMarqueeProps) => {
     const containerRef = useRef<HTMLDivElement | null>(null);
     const isInView = useInView(containerRef, { amount: 0.2, once: false });
 
@@ -48,7 +49,7 @@ const LogoMarquee = ({ data, speed, bgColor }: LogoMarqueeProps) => {
                     href={logo.link}
                     target="_blank"
                     rel="noreferrer"
-                    className={`${wrapperClass} items-center`}
+                    className={`${wrapperClass} items-center ${disableInvertedLogoBg ? "" : "invert"}`}
                     aria-label={logo.alt || "External link"}
                 >
                     {image}
@@ -72,7 +73,7 @@ const LogoMarquee = ({ data, speed, bgColor }: LogoMarqueeProps) => {
             gradientColor={gradientColor}
             speed={50}
         >
-            {logos.map((logo) => renderLogo(logo, "mx-12 flex invert"))}
+            {logos.map((logo) => renderLogo(logo, `mx-12 flex ${disableInvertedLogoBg ? "" : "invert"}`))}
         </Marquee>
     );
 

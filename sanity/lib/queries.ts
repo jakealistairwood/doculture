@@ -263,3 +263,74 @@ export const globalCTAQuery = groq`
     }
   }
 `;
+
+export const landingPageQuery = groq`
+  *[_type == "landingPage" && slug.current == $slug][0]{
+    _id,
+    _type,
+    title,
+    slug,
+    template,
+    contactLandingPage{
+      heading,
+      description,
+      whyUs[]{
+        ...,
+        _type == "image" => {
+          ...,
+          asset
+        }
+      },
+      image{
+        ...,
+        asset
+      },
+      logoMarqueeBlock->{
+                _id,
+                title,
+                logoMarquee{
+                    title,
+                    speed,
+                    logos[]{
+                        _key,
+                        alt,
+                        link,
+                        asset
+                        // asset->{
+                        //     _id,
+                        //     url,
+                        //     metadata{
+                        //         lqip
+                        //     }
+                        // }
+                    }
+                }
+            }
+    },
+    seo
+  }
+`;
+
+export const landingPageSlugsQuery = groq`
+  *[_type == "landingPage"]{
+    "slug": slug.current
+  }
+`;
+
+export const logoMarqueeQuery = groq`
+  *[_type == "reusableBlock" && type == "logoMarquee"][0]{
+    _id,
+    _type,
+    title,
+    type,
+    logoMarquee{
+      title,
+      logos[]{
+        _key,
+        alt,
+        link,
+        asset
+      }
+    }
+  }
+`;
