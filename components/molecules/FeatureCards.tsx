@@ -4,6 +4,7 @@ import { useInView, motion } from "motion/react";
 import { useRef } from "react";
 import getHexColor from "@/utils/getHexColor";
 import { FeatureCards as FeatureCardsType } from "@/sanity/types";
+import FrameCorner from "../atoms/FrameCorner";
 
 interface FeatureCardsProps {
     data?: FeatureCardsType;
@@ -57,7 +58,7 @@ const FeatureCards = ({ data, bgColor }: FeatureCardsProps) => {
             {features?.map((feature, i) => (
                 <motion.div 
                     key={`feature-card-${feature?._key}`} 
-                    className="flex flex-col gap-y-16 bg-white text-black p-10 min-h-[342px]"
+                    className="flex flex-col gap-y-16 bg-white text-black px-10 py-14 relative"
                     variants={cardAnimationVariant}
                     initial="initial"
                     animate={isInView ? "animate" : "initial"}
@@ -67,20 +68,11 @@ const FeatureCards = ({ data, bgColor }: FeatureCardsProps) => {
                         ease: [0.25, 0.1, 0.25, 1]
                     }}
                 >
-                    <motion.span 
-                        className="text-accent-orange font-semibold text-xl"
-                        variants={textAnimationVariant}
-                        initial="initial"
-                        animate={isInView ? "animate" : "initial"}
-                        transition={{
-                            duration: 0.5,
-                            delay: i * 0.1 + 0.2,
-                            ease: [0.25, 0.1, 0.25, 1]
-                        }}
-                    >
-                        {`[${i + 1}]`}
-                    </motion.span>
-                    <div className="mt-auto">
+                    <FrameCorner className="absolute top-0 left-0 text-accent-orange aspect-square w-[40px]" />
+                    <FrameCorner className="absolute top-0 right-0 rotate-90 text-accent-orange aspect-square w-[40px]" />
+                    <FrameCorner className="absolute bottom-0 right-0 rotate-180 text-accent-orange aspect-square w-[40px]" />
+                    <FrameCorner className="absolute bottom-0 left-0 rotate-270 text-accent-orange aspect-square w-[40px]" />
+                    <div>
                         <div className="flex flex-col gap-y-5">
                             <motion.h3 
                                 className="font-heading uppercase text-2xl"

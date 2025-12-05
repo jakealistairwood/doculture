@@ -13,6 +13,117 @@
  */
 
 // Source: schema.json
+export type ContactLandingPage = {
+  _type: "contactLandingPage";
+  heading?: string;
+  description?: string;
+  whyUs?: BlockContent;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  logoMarqueeBlock?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "reusableBlock";
+  };
+};
+
+export type LandingPage = {
+  _id: string;
+  _type: "landingPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  template?: "contact";
+  contactLandingPage?: ContactLandingPage;
+  seo?: Seo;
+};
+
+export type Seo = {
+  _type: "seo";
+  title?: string;
+  description?: string;
+  ogImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+};
+
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
+};
+
+export type BlockContent = Array<{
+  children?: Array<{
+    marks?: Array<string>;
+    text?: string;
+    _type: "span";
+    _key: string;
+  }>;
+  style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
+  listItem?: "bullet";
+  markDefs?: Array<{
+    href?: string;
+    _type: "link";
+    _key: string;
+  }>;
+  level?: number;
+  _type: "block";
+  _key: string;
+} | {
+  asset?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+  };
+  media?: unknown;
+  hotspot?: SanityImageHotspot;
+  crop?: SanityImageCrop;
+  alt?: string;
+  _type: "image";
+  _key: string;
+}>;
+
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
+};
+
 export type GlobalCTA = {
   _type: "globalCTA";
   image?: {
@@ -38,6 +149,7 @@ export type GlobalCTA = {
 
 export type CaseStudyImage = {
   _type: "caseStudyImage";
+  type?: "image" | "video";
   image?: {
     asset?: {
       _ref: string;
@@ -50,6 +162,23 @@ export type CaseStudyImage = {
     crop?: SanityImageCrop;
     alt?: string;
     _type: "image";
+  };
+  video?: string;
+  videoPoster?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  videoOptions?: {
+    title?: string;
   };
 };
 
@@ -100,22 +229,6 @@ export type Studio = {
     _type: "image";
   };
   features?: Array<string>;
-};
-
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
-};
-
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
 };
 
 export type FeatureCards = {
@@ -184,8 +297,8 @@ export type Logos = {
   };
 };
 
-export type FullWidthAsset = {
-  _type: "fullWidthAsset";
+export type Asset = {
+  _type: "asset";
   id?: string;
   type?: "image" | "video";
   image?: {
@@ -259,7 +372,7 @@ export type TextCardOptions = {
   centerAlignOnMobile?: boolean;
   subheadingTag?: "h1" | "h2" | "h3" | "h4" | "h5";
   headingTag?: "h1" | "h2" | "h3" | "h4" | "h5";
-  headingFontSize?: "24px" | "40px";
+  headingFontSize?: "24px" | "40px" | "80px" | "100px" | "120px";
   headingMaxWidth?: number;
   contentFontSize?: "16px" | "18px" | "20px" | "24px";
   contentMaxWidth?: number;
@@ -371,38 +484,6 @@ export type Post = {
   body?: BlockContent;
 };
 
-export type BlockContent = Array<{
-  children?: Array<{
-    marks?: Array<string>;
-    text?: string;
-    _type: "span";
-    _key: string;
-  }>;
-  style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
-  listItem?: "bullet";
-  markDefs?: Array<{
-    href?: string;
-    _type: "link";
-    _key: string;
-  }>;
-  level?: number;
-  _type: "block";
-  _key: string;
-} | {
-  asset?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-  };
-  media?: unknown;
-  hotspot?: SanityImageHotspot;
-  crop?: SanityImageCrop;
-  alt?: string;
-  _type: "image";
-  _key: string;
-}>;
-
 export type Author = {
   _id: string;
   _type: "author";
@@ -443,12 +524,6 @@ export type Author = {
   }>;
 };
 
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
-};
-
 export type Category = {
   _id: string;
   _type: "category";
@@ -468,6 +543,18 @@ export type Project = {
   _rev: string;
   title?: string;
   slug?: Slug;
+  logo?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
   excerpt?: string;
   categories?: Array<{
     _ref: string;
@@ -490,6 +577,7 @@ export type Project = {
     alt?: string;
     _type: "image";
   };
+  video?: string;
   content?: Array<{
     _key: string;
   } & CaseStudyBuilder>;
@@ -498,8 +586,10 @@ export type Project = {
 export type SectionOptions = {
   _type: "sectionOptions";
   id?: string;
-  bgColor?: "none" | "black" | "white" | "lightGrey";
+  bgColor?: "none" | "black" | "white" | "lightGrey" | "offBlack";
   removeContainer?: boolean;
+  isContainedSection?: boolean;
+  containedBgColor?: "none" | "black" | "white" | "lightGrey" | "offBlack";
   paddingTop?: "none" | "sm" | "md" | "lg";
   paddingBottom?: "none" | "sm" | "md" | "lg";
   marginTop?: "none" | "sm" | "md" | "lg";
@@ -520,7 +610,7 @@ export type Section = {
     _key: string;
   } & TextCard | {
     _key: string;
-  } & FullWidthAsset | {
+  } & Asset | {
     _key: string;
   } & Logos | {
     _key: string;
@@ -534,24 +624,6 @@ export type Section = {
     _key: string;
   } & StudioCarousel>;
   sectionOptions?: SectionOptions;
-};
-
-export type Seo = {
-  _type: "seo";
-  title?: string;
-  description?: string;
-  ogImage?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
 };
 
 export type Page = {
@@ -664,5 +736,5 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = GlobalCTA | CaseStudyImage | CaseStudyRichText | CaseStudyBuilder | StudioCarousel | Studio | SanityImageCrop | SanityImageHotspot | FeatureCards | SelectedWorks | HeaderMarquee | LinkCards | Logos | FullWidthAsset | LogoMarquee | Link | LinksWrapper | TextCardOptions | TextCard | HomeMasthead | ReusableBlock | Masthead | Post | BlockContent | Author | Slug | Category | Project | SectionOptions | Section | Seo | Page | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = ContactLandingPage | LandingPage | Seo | SanityImageCrop | SanityImageHotspot | BlockContent | Slug | GlobalCTA | CaseStudyImage | CaseStudyRichText | CaseStudyBuilder | StudioCarousel | Studio | FeatureCards | SelectedWorks | HeaderMarquee | LinkCards | Logos | Asset | LogoMarquee | Link | LinksWrapper | TextCardOptions | TextCard | HomeMasthead | ReusableBlock | Masthead | Post | Author | Category | Project | SectionOptions | Section | Page | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 export declare const internalGroqTypeReferenceTo: unique symbol;

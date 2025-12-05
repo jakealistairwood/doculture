@@ -58,7 +58,10 @@ export const textCardOptions = defineType({
             options: {
                 list: [
                     { value: '24px', title: '24px' },
-                    { value: '40px', title: '40px' }
+                    { value: '40px', title: '40px' },
+                    { value: '80px', title: '80px' },
+                    { value: '100px', title: '100px' },
+                    { value: '120px', title: '120px' }
                 ],
                 layout: 'radio'
             },

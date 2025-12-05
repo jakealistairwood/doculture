@@ -44,6 +44,8 @@ const bgColorMap = {
   black: 'bg-black text-white',
   white: 'bg-white text-black',
   lightGrey: 'bg-light-grey text-black',
+  darkGrey: 'bg-dark-grey text-white',
+  offBlack: 'bg-off-black text-white'
 } as const;
 
 const overflowMap = {
@@ -53,6 +55,12 @@ const overflowMap = {
 
 export function Section({ section }: SectionProps) {
   const options = section.sectionOptions;
+
+  const isContainedSection = options?.isContainedSection;
+  const containedSectionBgColor = options?.containedBgColor;
+
+  const containedSectionBgClass = isContainedSection ? bgColorMap[containedSectionBgColor] : "";
+  const containedSectionClasses = isContainedSection ? "rounded-[10px] p-20" : "";
 
   const sectionClasses = clsx(
     bgColorMap[options?.bgColor],
@@ -66,7 +74,7 @@ export function Section({ section }: SectionProps) {
   const content = (
     <>
       {section.components?.map((component) => (
-        <ComponentRenderer key={component._key} component={component} bgColor={options?.bgColor} />
+        <ComponentRenderer key={component._key} component={component} bgColor={options?.bgColor} isContainedSection={isContainedSection} containedBgColor={containedSectionBgColor} />
       ))}
     </>
   );
@@ -81,7 +89,7 @@ export function Section({ section }: SectionProps) {
         content
       ) : (
         <div className="container">
-          <div className={`flex flex-col ${spacingMap.componentSpacing[options?.componentSpacing] || ""}`}>
+          <div className={`flex flex-col ${spacingMap.componentSpacing[options?.componentSpacing] || ""} ${containedSectionBgClass} ${containedSectionClasses}`}>
             {content}
           </div>
         </div>

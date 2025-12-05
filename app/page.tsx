@@ -2,7 +2,22 @@ import { client } from "@/sanity/lib/client";
 import { pageQuery } from "@/sanity/lib/queries";
 import { Page } from "@/sanity/types";
 import { PageLayout } from "@/layout/PageLayout";
-import Image from "next/image";
+import { generateMetadataFromSEO } from "@/lib/metadata";
+import type { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+    const page = await client.fetch<Page>(pageQuery, { slug: "/" });
+    
+    if (!page) {
+        return generateMetadataFromSEO();
+    }
+
+    return generateMetadataFromSEO(
+        page.seo,
+        page.title || "Home",
+        "Welcome to Doculture"
+    );
+}
 
 export default async function Home() {
     const page = await client.fetch<Page>(pageQuery, { slug: "/" });

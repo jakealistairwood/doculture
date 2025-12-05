@@ -14,6 +14,8 @@ export const pageQuery = groq`
         id,
         bgColor,
         removeContainer,
+        isContainedSection,
+        containedBgColor,
         paddingTop,
         paddingBottom,
         marginTop,
@@ -160,6 +162,34 @@ export const pageQuery = groq`
                 ...,
             }
         },
+        _type == "timedAccordionSlider" => {
+            _key,
+            _type,
+            items[]{
+                _key,
+                heading,
+                content[]{
+                    ...,
+                    _type == "image" => {
+                        ...,
+                        asset
+                    }
+                },
+                image{
+                    ...,
+                    asset,
+                    altText
+                }
+            }
+        },
+      }
+    },
+    seo{
+      title,
+      description,
+      ogImage{
+        ...,
+        asset
       }
     }
   }
@@ -308,7 +338,14 @@ export const landingPageQuery = groq`
                 }
             }
     },
-    seo
+    seo{
+      title,
+      description,
+      ogImage{
+        ...,
+        asset
+      }
+    }
   }
 `;
 

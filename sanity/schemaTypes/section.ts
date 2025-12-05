@@ -23,7 +23,8 @@ export const section = defineType({
                 { type: 'headerMarquee' },
                 { type: 'selectedWorks' },
                 { type: 'featureCards' },
-                { type: 'studioCarousel' }
+                { type: 'studioCarousel' },
+                { type: 'timedAccordionSlider' }
             ]
         }),
         defineField({

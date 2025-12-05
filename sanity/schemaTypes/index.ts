@@ -31,6 +31,7 @@ import { caseStudyImage } from "./caseStudyImage";
 import { globalCTA } from "./reusableBlocks/globalCTA";
 import { landingPage } from "./landingPage";
 import { contactLandingPage } from "./landingPages/contactLandingPage";
+import { timedAccordionSlider } from "./timedAccordionSlider";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
     types: [
@@ -65,5 +66,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
         globalCTA,
         landingPage,
         contactLandingPage,
+        timedAccordionSlider
     ],
 };

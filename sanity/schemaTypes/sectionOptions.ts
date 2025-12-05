@@ -19,7 +19,9 @@ export const sectionOptions = defineType({
                     { value: 'none', title: 'None' },
                     { value: 'black', title: 'Black' },
                     { value: 'white', title: 'White' },
-                    { value: 'lightGrey', title: 'Light Grey' }
+                    { value: 'lightGrey', title: 'Light Grey' },
+                    { value: 'darkGrey', title: 'Dark Grey' },
+                    { value: 'offBlack', title: 'Off Black' },
                 ],
                 layout: 'radio'
             },
@@ -30,6 +32,30 @@ export const sectionOptions = defineType({
             title: 'Remove Container',
             type: 'boolean',
             initialValue: false
+        }),
+        defineField({
+            name: 'isContainedSection',
+            title: 'Is Contained Section',
+            type: 'boolean',
+            initialValue: false,
+        }),
+        defineField({
+            name: 'containedBgColor',
+            title: 'Contained Section Bg Color',
+            type: 'string',
+            options: {
+                list: [
+                    { value: 'none', title: 'None' },
+                    { value: 'black', title: 'Black' },
+                    { value: 'white', title: 'White' },
+                    { value: 'lightGrey', title: 'Light Grey' },
+                    { value: 'darkGrey', title: 'Dark Grey' },
+                    { value: 'offBlack', title: 'Off Black' }
+                ],
+                layout: 'radio'
+            },
+            initialValue: 'none',
+            hidden: ({parent}) => parent?.isContainedSection !== true
         }),
         defineField({
             name: 'paddingTop',

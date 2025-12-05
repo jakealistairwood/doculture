@@ -41,8 +41,8 @@ const HeaderMarquee = ({ data, bgColor }: HeaderMarqueeProps) => {
         >
             <Marquee
                 play={isInView}
-                gradient
-                gradientColor={gradientColor}
+                // gradient
+                // gradientColor={gradientColor}
                 speed={50}
             >
                 {marqueeItems}

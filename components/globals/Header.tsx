@@ -83,7 +83,7 @@ const Header = () => {
                     <ul className="hidden lg:flex items-center gap-x-12">
                         <li className="">
                             <Link
-                                href="/"
+                                href="/contact"
                                 className={clsx(
                                     "inline-flex items-center justify-center font-medium rounded-[3px] text-sm uppercase px-6 py-3",
                                     !isScrolled ? "border border-white/25 hover:bg-accent-orange hover:text-off-black hover:border-accent-orange/100" : "",
