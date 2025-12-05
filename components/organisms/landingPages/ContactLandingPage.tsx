@@ -51,8 +51,6 @@ export default function ContactLandingPage({ data, logoMarquee }: ContactLanding
 
     const { heading, description, whyUs, image, logoMarqueeBlock } = data;
 
-    // Structure logo marquee data for LogoMarquee component
-    // Use logoMarqueeBlock from data first, fallback to logoMarquee prop
     const logoMarqueeData = logoMarqueeBlock ? {
         logoMarqueeBlock: logoMarqueeBlock
     } : logoMarquee ? {
@@ -60,11 +58,11 @@ export default function ContactLandingPage({ data, logoMarquee }: ContactLanding
     } : null;
 
     return (
-        <main id="contact-landing-page" className="bg-off-black text-white min-h-screen py-20">
+        <main id="contact-landing-page" className="bg-off-black text-white min-h-screen py-20 flex items-center justify-center">
             <section className="">
                 <div className="container">
-                    <div className="grid grid-cols-2 gap-40">
-                        <div className="flex flex-col gap-y-20">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-40">
+                        <div className="flex flex-col gap-y-12 md:gap-y-20">
                             <div className="flex flex-col gap-y-14">
                                 <div className="flex flex-col gap-y-16">
                                     <Link
@@ -89,6 +87,12 @@ export default function ContactLandingPage({ data, logoMarquee }: ContactLanding
                                         )}
                                     </div>
                                 </div>
+                                <div className="w-full h-full relative flex items-center justify-center md:p-10 lg:hidden">
+                                    <SanityImage image={image} className="hidden md:block w-full h-full object-cover absolute inset-0" />
+                                    <div className="bg-white text-off-black relative z-[2] p-10 w-full">
+                                        <ContactForm />
+                                    </div>
+                                </div>
                                 {whyUs && (
                                     <div>
                                         <CaseStudyRichText content={whyUs} />
@@ -99,65 +103,15 @@ export default function ContactLandingPage({ data, logoMarquee }: ContactLanding
                                 <LogoMarquee data={logoMarqueeData} bgColor="off-black" disableInvertedLogoBg />
                             </div>
                         </div>
-                        <div className="w-full h-full">
-                            <SanityImage image={image} className="w-full h-full object-cover" />
+                        <div className="hidden w-full h-full relative lg:flex items-center justify-center p-10">
+                            <SanityImage image={image} className="w-full h-full object-cover absolute inset-0" />
+                            <div className="bg-white text-off-black relative z-[2] p-10">
+                                <ContactForm />
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
         </main>
-        // <main className="min-h-screen bg-off-black text-white">
-        //     {/* Hero Section */}
-        //     <section className="pt-40 pb-20">
-        //         <div className="container">
-        //             <div className="flex flex-col items-center text-center gap-y-8 max-w-4xl mx-auto">
-        //                 {heading && (
-        //                     <h1
-        //                         className="text-100px uppercase leading-[0.94]"
-        //                         dangerouslySetInnerHTML={{ __html: heading }}
-        //                     />
-        //                 )}
-        //                 {description && (
-        //                     <p className="text-lg md:text-xl opacity-80 max-w-2xl">
-        //                         {description}
-        //                     </p>
-        //                 )}
-        //             </div>
-        //         </div>
-        //     </section>
-
-        //     {/* Content Section */}
-        //     <section className="py-36">
-        //         <div className="container">
-        //             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 max-w-7xl mx-auto">
-        //                 {/* Left Column - Contact Form */}
-        //                 <div>
-        //                     <ContactForm submitButtonText="Send Message" />
-        //                 </div>
-
-        //                 {/* Right Column - Why Us & Image */}
-        //                 <div className="flex flex-col gap-y-12">
-        //                     {whyUs && (
-        //                         <div>
-        //                             <h2 className="text-4xl md:text-5xl font-heading uppercase mb-8">
-        //                                 Why Us
-        //                             </h2>
-        //                             <CaseStudyRichText content={whyUs} />
-        //                         </div>
-        //                     )}
-                            
-        //                     {image && (
-        //                         <div className="relative aspect-video w-full overflow-hidden rounded-lg">
-        //                             <SanityImage
-        //                                 image={image}
-        //                                 className="w-full h-full object-cover"
-        //                             />
-        //                         </div>
-        //                     )}
-        //                 </div>
-        //             </div>
-        //         </div>
-        //     </section>
-        // </main>
     );
 }

@@ -1,126 +1,106 @@
-"use client";
+import { useState } from 'react';
+import Link from 'next/link';
 
-import { useState, FormEvent } from "react";
+export default function ContactForm() {
+  const [result, setResult] = useState("");
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
-interface ContactFormProps {
-    submitButtonText?: string;
-}
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    formData.append("access_key", "8dbc213e-e741-4b2d-86cb-fe9ac33c8371");
 
-export default function ContactForm({ submitButtonText = "Send Message" }: ContactFormProps) {
-    const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        message: "",
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      body: formData
     });
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
 
-    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setIsSubmitting(true);
-        setSubmitStatus("idle");
+    const data = await response.json();
+    setFormSubmitted(data.success ? true : false);
 
-        try {
-            // TODO: Replace with your form submission endpoint
-            const response = await fetch("/api/contact", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(formData),
-            });
+  };
 
-            if (response.ok) {
-                setSubmitStatus("success");
-                setFormData({ name: "", email: "", message: "" });
-            } else {
-                setSubmitStatus("error");
-            }
-        } catch (error) {
-            console.error("Form submission error:", error);
-            setSubmitStatus("error");
-        } finally {
-            setIsSubmitting(false);
-        }
-    };
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        });
-    };
-
-    return (
-        <form onSubmit={handleSubmit} className="flex flex-col gap-y-6">
-            <div className="flex flex-col gap-y-2">
-                <label htmlFor="name" className="text-sm uppercase opacity-60">
-                    Name
-                </label>
-                <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-accent-orange transition-colors"
-                    placeholder="Your name"
-                />
+  return (
+    <div>
+        {formSubmitted ? (
+            <div className="flex flex-col items-center text-center gap-y-3">
+                <h2 className="text-40px font-heading uppercase">Thank you!</h2>
+                <p>We'll be in touch as soon as we</p>
+                <Link href="/" className="w-full min-h-[55px] bg-off-black text-white rounded-[3px] px-6 py-3 hover:bg-accent-orange hover:text-off-black transition-colors duration-200 font-mono text-sm uppercase flex items-center justify-between gap-x-3 cursor-pointer mt-6">
+                    <span>Back to home</span>
+                    <ArrowIcon />
+                </Link>
             </div>
-
-            <div className="flex flex-col gap-y-2">
-                <label htmlFor="email" className="text-sm uppercase opacity-60">
-                    Email
-                </label>
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-accent-orange transition-colors"
-                    placeholder="your.email@example.com"
-                />
-            </div>
-
-            <div className="flex flex-col gap-y-2">
-                <label htmlFor="message" className="text-sm uppercase opacity-60">
-                    Message
-                </label>
-                <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    rows={6}
-                    className="bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-accent-orange transition-colors resize-none"
-                    placeholder="Your message..."
-                />
-            </div>
-
-            {submitStatus === "success" && (
-                <div className="p-4 bg-green-500/20 border border-green-500/50 rounded-lg text-green-500">
-                    Thank you! Your message has been sent successfully.
+        ) : (
+            <form onSubmit={onSubmit} className="flex flex-col gap-y-8">
+                <div className="flex flex-col gap-y-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div className="flex flex-col gap-y-2">
+                            <label className="font-medium" htmlFor="firstName">First name</label>
+                            <input className="p-4 min-h-[55px] bg-[#FAFAFA] border border-[#DEDEDE] rounded-[3px]" type="text" name="firstName" id="firstName" />
+                        </div>
+                        <div className="flex flex-col gap-y-2">
+                            <label className="font-medium flex items-center gap-x-2 flex-wrap gap-y-1" htmlFor="lastName">
+                                <span>Last name</span>
+                                <span className="opacity-60 text-xs">{`(optional)`}</span>
+                            </label>
+                            <input className="p-4 min-h-[55px] bg-[#FAFAFA] border border-[#DEDEDE] rounded-[3px]" type="text" name="lastName" id="lastName" />
+                        </div>
+                    </div>
+                    <div className="grid grid-cols-1">
+                        <div className="flex flex-col gap-y-2">
+                            <label className="font-medium" htmlFor="emailAddress">Email address*</label>
+                            <input className="p-4 min-h-[55px] bg-[#FAFAFA] border border-[#DEDEDE] rounded-[3px]" type="email" name="emailAddress" id="emailAddress" required />
+                        </div>
+                    </div>
+                    <div className="grid grid-cols-1">
+                        <div className="flex flex-col gap-y-2">
+                            <label className="font-medium flex items-center gap-x-2 flex-wrap gap-y-1" htmlFor="mobileNumber">
+                                <span>Mobile number</span>
+                                <span className="opacity-60 text-xs">{`(optional)`}</span>
+                            </label>
+                            <input className="p-4 min-h-[55px] bg-[#FAFAFA] border border-[#DEDEDE] rounded-[3px]" type="tel" name="mobileNumber" id="mobileNumber" />
+                        </div>
+                    </div>
+                    <div className="grid grid-cols-1">
+                        <div className="flex flex-col gap-y-2">
+                            <label className="font-medium" htmlFor="message">Message*</label>
+                            <textarea className="p-4 bg-[#FAFAFA] border border-[#DEDEDE] rounded-[3px] min-h-[120px]" name="message" id="message" required></textarea>
+                        </div>
+                    </div>
                 </div>
-            )}
-
-            {submitStatus === "error" && (
-                <div className="p-4 bg-red-500/20 border border-red-500/50 rounded-lg text-red-500">
-                    Sorry, there was an error sending your message. Please try again.
-                </div>
-            )}
-
-            <button
-                type="submit"
-                disabled={isSubmitting}
-                className="bg-accent-orange text-off-black rounded-[3px] px-6 py-3 font-mono uppercase hover:bg-accent-orange/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-                {isSubmitting ? "Sending..." : submitButtonText}
-            </button>
-        </form>
-    );
+                <button type="submit" className="w-full min-h-[55px] bg-off-black text-white rounded-[3px] px-6 py-3 hover:bg-accent-orange hover:text-off-black transition-colors duration-200 font-mono text-sm uppercase flex items-center justify-between gap-x-3 cursor-pointer">
+                    <span>Get in touch</span>
+                    <ArrowIcon />
+                </button>
+            </form>
+        )}
+    </div>
+  );
 }
 
+const ArrowIcon = () => {
+    return (
+        <svg
+            aria-hidden
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+                d="M11.5781 15.7142L17.3676 9.92473L11.5781 4.13525"
+                stroke="currentColor"
+                strokeWidth="1.32331"
+                strokeMiterlimit="10"
+            />
+            <path
+                d="M17.3686 9.9248H1.6543"
+                stroke="currentColor"
+                strokeWidth="1.32331"
+                strokeMiterlimit="10"
+            />
+        </svg>
+    )
+}
