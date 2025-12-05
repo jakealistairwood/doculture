@@ -171,6 +171,7 @@ export const projectQuery = groq`
     _type,
     title,
     slug,
+    logo,
     excerpt,
     date,
     categories[]->{

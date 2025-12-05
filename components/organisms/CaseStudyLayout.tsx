@@ -69,17 +69,24 @@ export default function CaseStudyLayout({ project }: CaseStudyLayoutProps) {
             <section className="pt-40">
                 <div className="container">
                     <div className="flex flex-col gap-y-12 items-center text-center">
-                        <div className="flex flex-col gap-y-8 items-center text-center max-w-[856px] w-full mx-auto">
-                            {project?.title && (
-                                <h1 className="text-100px uppercase leading-[0.94]" dangerouslySetInnerHTML={{ __html: project?.title }} />
-                            )}
-                            {hasCategories && (
-                                <div className="flex items-center flex-wrap gap-3">
-                                    {project?.categories?.map((category, i) => (
-                                        <div className="py-1 px-2 border border-white/[25%] text-sm uppercase font-medium rounded-sm">{category?.title}</div>
-                                    ))}
+                        <div className="flex flex-col items-center text-center gap-y-8">
+                            {project?.logo && (
+                                <div className="max-w-[150px]">
+                                    <SanityImage image={project?.logo} />
                                 </div>
                             )}
+                            <div className="flex flex-col gap-y-8 items-center text-center max-w-[856px] w-full mx-auto">
+                                {project?.title && (
+                                    <h1 className="text-100px uppercase leading-[0.94]" dangerouslySetInnerHTML={{ __html: project?.title }} />
+                                )}
+                                {hasCategories && (
+                                    <div className="flex items-center flex-wrap gap-3">
+                                        {project?.categories?.map((category, i) => (
+                                            <div key={`project-categories-${i}-${category?._key}`} className="py-1 px-2 border border-white/[25%] text-sm uppercase font-medium rounded-sm">{category?.title}</div>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
                         </div>
                         {project?.video ? (
                             <div className="w-full aspect-video relative overflow-hidden rounded-lg">
