@@ -1,13 +1,98 @@
-import { useState } from 'react';
+"use client";
+
+import { useState, FormEvent } from 'react';
 import Link from 'next/link';
+
+interface FormErrors {
+  firstName?: string;
+  emailAddress?: string;
+  message?: string;
+}
 
 export default function ContactForm() {
   const [result, setResult] = useState("");
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
 
-  const onSubmit = async (event) => {
+  const validateField = (name: string, value: string): string => {
+    switch (name) {
+      case 'firstName':
+        if (!value.trim()) {
+          return 'First name is required';
+        }
+        return '';
+      case 'emailAddress':
+        if (!value.trim()) {
+          return 'Email address is required';
+        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+          return 'Please enter a valid email address';
+        }
+        return '';
+      case 'message':
+        if (!value.trim()) {
+          return 'Message is required';
+        }
+        return '';
+      default:
+        return '';
+    }
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setTouched(prev => ({ ...prev, [name]: true }));
+    const error = validateField(name, value);
+    setErrors(prev => ({ ...prev, [name]: error }));
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    // Clear error when user starts typing
+    if (touched[name] && errors[name as keyof FormErrors]) {
+      const error = validateField(name, value);
+      setErrors(prev => ({ ...prev, [name]: error }));
+    }
+  };
+
+  const validateForm = (formData: FormData): boolean => {
+    const newErrors: FormErrors = {};
+    
+    const firstName = formData.get('firstName') as string;
+    const emailAddress = formData.get('emailAddress') as string;
+    const message = formData.get('message') as string;
+
+    const firstNameError = validateField('firstName', firstName || '');
+    if (firstNameError) newErrors.firstName = firstNameError;
+
+    const emailError = validateField('emailAddress', emailAddress || '');
+    if (emailError) newErrors.emailAddress = emailError;
+
+    const messageError = validateField('message', message || '');
+    if (messageError) newErrors.message = messageError;
+
+    setErrors(newErrors);
+    
+    // Mark all fields as touched
+    setTouched({
+      firstName: true,
+      emailAddress: true,
+      message: true,
+    });
+
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formData = new FormData(event.target);
+    const formData = new FormData(event.currentTarget);
+    
+    // Validate form before submission
+    if (!validateForm(formData)) {
+      return;
+    }
+
     formData.append("access_key", "8dbc213e-e741-4b2d-86cb-fe9ac33c8371");
 
     const response = await fetch("https://api.web3forms.com/submit", {
@@ -36,8 +121,22 @@ export default function ContactForm() {
                 <div className="flex flex-col gap-y-6">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                         <div className="flex flex-col gap-y-2">
-                            <label className="font-medium" htmlFor="firstName">First name</label>
-                            <input className="p-4 min-h-[55px] bg-[#FAFAFA] border border-[#DEDEDE] rounded-[3px]" type="text" name="firstName" id="firstName" />
+                            <label className="font-medium" htmlFor="firstName">First name*</label>
+                            <input 
+                                className={`p-4 min-h-[55px] bg-[#FAFAFA] border rounded-[3px] ${
+                                    touched.firstName && errors.firstName 
+                                        ? 'border-red-500' 
+                                        : 'border-[#DEDEDE]'
+                                }`}
+                                type="text" 
+                                name="firstName" 
+                                id="firstName" 
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                            />
+                            {touched.firstName && errors.firstName && (
+                                <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>
+                            )}
                         </div>
                         <div className="flex flex-col gap-y-2">
                             <label className="font-medium flex items-center gap-x-2 flex-wrap gap-y-1" htmlFor="lastName">
@@ -50,7 +149,21 @@ export default function ContactForm() {
                     <div className="grid grid-cols-1">
                         <div className="flex flex-col gap-y-2">
                             <label className="font-medium" htmlFor="emailAddress">Email address*</label>
-                            <input className="p-4 min-h-[55px] bg-[#FAFAFA] border border-[#DEDEDE] rounded-[3px]" type="email" name="emailAddress" id="emailAddress" required />
+                            <input 
+                                className={`p-4 min-h-[55px] bg-[#FAFAFA] border rounded-[3px] ${
+                                    touched.emailAddress && errors.emailAddress 
+                                        ? 'border-red-500' 
+                                        : 'border-[#DEDEDE]'
+                                }`}
+                                type="email" 
+                                name="emailAddress" 
+                                id="emailAddress" 
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                            />
+                            {touched.emailAddress && errors.emailAddress && (
+                                <p className="text-red-500 text-sm mt-1">{errors.emailAddress}</p>
+                            )}
                         </div>
                     </div>
                     <div className="grid grid-cols-1">
@@ -65,7 +178,20 @@ export default function ContactForm() {
                     <div className="grid grid-cols-1">
                         <div className="flex flex-col gap-y-2">
                             <label className="font-medium" htmlFor="message">Message*</label>
-                            <textarea className="p-4 bg-[#FAFAFA] border border-[#DEDEDE] rounded-[3px] min-h-[120px]" name="message" id="message" required></textarea>
+                            <textarea 
+                                className={`p-4 bg-[#FAFAFA] border rounded-[3px] min-h-[120px] ${
+                                    touched.message && errors.message 
+                                        ? 'border-red-500' 
+                                        : 'border-[#DEDEDE]'
+                                }`}
+                                name="message" 
+                                id="message" 
+                                onBlur={handleBlur}
+                                onChange={handleChange}
+                            ></textarea>
+                            {touched.message && errors.message && (
+                                <p className="text-red-500 text-sm mt-1">{errors.message}</p>
+                            )}
                         </div>
                     </div>
                 </div>
