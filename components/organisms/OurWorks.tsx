@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useMemo } from "react";
-import { motion } from "framer-motion";
+import { useState, useMemo, useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { Project } from "@/sanity/types";
 import Link from "next/link";
 import SanityImage from "@/components/atoms/SanityImage";
@@ -28,6 +28,24 @@ const arrowAnimation = {
         opacity: 1,
     }
 }
+
+const fadeInProject = {
+        initial: {
+            opacity: 0,
+            y: 100,
+            filter: "blur(20px)",
+        },
+        animate: (i) => ({
+            opacity: 1,
+            y: 0,
+            filter: "blur(0px)",
+            transition: {
+                delay: i % 2 !== 0 ? 0.1 : 0,
+                duration: 0.3,
+                ease: "easeOut",
+            },
+        })
+    }
 
 export default function OurWorks({ projects }: OurWorkProps) {
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -139,12 +157,12 @@ export default function OurWorks({ projects }: OurWorkProps) {
                             </div>
                         ) : (
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                                {filteredProjects.map((project) => {
+                                {filteredProjects.map((project, i) => {
                                     const slug = project.slug?.current;
                                     if (!slug) return null;
 
                                     return (
-                                        <ProjectPreviewCard key={project._id} project={project} slug={slug} />
+                                        <ProjectPreviewCard key={project._id} project={project} slug={slug} index={i} />
                                     );
                                 })}
                             </div>
@@ -160,16 +178,28 @@ export default function OurWorks({ projects }: OurWorkProps) {
 interface ProjectPreviewCardProps {
     project: Project;
     slug: string;
+    index: number;
 }
 
-const ProjectPreviewCard = ({ project, slug }: ProjectPreviewCardProps) => {
+const ProjectPreviewCard = ({ project, slug, index }: ProjectPreviewCardProps) => {
     const [hovered, setHovered] = useState(false);
+    const projectRef = useRef(null);
+
+    const isInView = useInView(projectRef, {
+        amount: 0.2,
+        once: true,
+    });
     return (
-        <div
+        <motion.div
             key={project._id}
             className="relative flex flex-col gap-y-11 group"
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
+            variants={fadeInProject}
+            initial="initial" 
+            animate={isInView ? "animate" : "initial"} 
+            custom={index} 
+            ref={projectRef}
         >
             {project.coverImage && (
                 <div className="relative aspect-[711/400] overflow-hidden">
@@ -219,6 +249,6 @@ const ProjectPreviewCard = ({ project, slug }: ProjectPreviewCardProps) => {
                         </div>
                     )}
             </div>
-        </div>
+        </motion.div>
     )
 }
