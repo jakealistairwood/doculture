@@ -56,25 +56,40 @@ const overflowMap = {
 export function Section({ section }: SectionProps) {
   const options = section.sectionOptions;
 
-  const isContainedSection = options?.isContainedSection;
-  const containedSectionBgColor = options?.containedBgColor;
+  const isContainedSection = options?.isContainedSection ?? false;
+  const containedSectionBgColor = options?.containedBgColor || "none";
 
-  const containedSectionBgClass = isContainedSection ? bgColorMap[containedSectionBgColor] : "";
+  const containedSectionBgClass = isContainedSection && containedSectionBgColor 
+    ? bgColorMap[containedSectionBgColor as keyof typeof bgColorMap] || "" 
+    : "";
   const containedSectionClasses = isContainedSection ? "rounded-[10px] p-20" : "";
 
+  const bgColor = options?.bgColor || "none";
+  const paddingTop = options?.paddingTop || "none";
+  const paddingBottom = options?.paddingBottom || "none";
+  const marginTop = options?.marginTop || "none";
+  const marginBottom = options?.marginBottom || "none";
+  const overflow = options?.overflow || "hidden";
+
   const sectionClasses = clsx(
-    bgColorMap[options?.bgColor],
-    spacingMap.paddingTop[options?.paddingTop],
-    spacingMap.paddingBottom[options?.paddingBottom],
-    spacingMap.marginTop[options?.marginTop],
-    spacingMap.marginBottom[options?.marginBottom],
-    overflowMap[options?.overflow]
+    bgColorMap[bgColor as keyof typeof bgColorMap],
+    spacingMap.paddingTop[paddingTop as keyof typeof spacingMap.paddingTop],
+    spacingMap.paddingBottom[paddingBottom as keyof typeof spacingMap.paddingBottom],
+    spacingMap.marginTop[marginTop as keyof typeof spacingMap.marginTop],
+    spacingMap.marginBottom[marginBottom as keyof typeof spacingMap.marginBottom],
+    overflowMap[overflow as keyof typeof overflowMap]
   );
   
   const content = (
     <>
       {section.components?.map((component) => (
-        <ComponentRenderer key={component._key} component={component} bgColor={options?.bgColor} isContainedSection={isContainedSection} containedBgColor={containedSectionBgColor} />
+        <ComponentRenderer 
+          key={component._key} 
+          component={component} 
+          bgColor={bgColor} 
+          isContainedSection={isContainedSection} 
+          containedBgColor={containedSectionBgColor} 
+        />
       ))}
     </>
   );
@@ -89,7 +104,7 @@ export function Section({ section }: SectionProps) {
         content
       ) : (
         <div className="container">
-          <div className={`flex flex-col ${spacingMap.componentSpacing[options?.componentSpacing] || ""} ${containedSectionBgClass} ${containedSectionClasses}`}>
+          <div className={`flex flex-col ${spacingMap.componentSpacing[options?.componentSpacing as keyof typeof spacingMap.componentSpacing] || spacingMap.componentSpacing.default} ${containedSectionBgClass} ${containedSectionClasses}`}>
             {content}
           </div>
         </div>

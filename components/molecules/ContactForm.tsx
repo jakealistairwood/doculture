@@ -10,7 +10,6 @@ interface FormErrors {
 }
 
 export default function ContactForm() {
-  const [result, setResult] = useState("");
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});

@@ -91,7 +91,11 @@ const Footer = () => {
 
 export default Footer;
 
-const SocialIconRenderer = ({ type }) => {
+interface SocialIconRendererProps {
+    type: string;
+}
+
+const SocialIconRenderer = ({ type }: SocialIconRendererProps) => {
     if (type === "instagram") {
         return (
             <svg className="w-full h-full" aria-hidden width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -111,8 +115,12 @@ const SocialIconRenderer = ({ type }) => {
     return null;
 }
 
+interface SocialIconProps {
+    type: string;
+    url: string;
+}
 
-const SocialIcon = ({ type, url }) => {
+const SocialIcon = ({ type, url }: SocialIconProps) => {
     return (
         <Link
             href={url}

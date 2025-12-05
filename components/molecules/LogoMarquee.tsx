@@ -4,7 +4,7 @@ import { useInView } from "motion/react";
 import { useMemo, useRef } from "react";
 import Marquee from "react-fast-marquee";
 import SanityImage from "@/components/atoms/SanityImage";
-import { Logos, LogoMarquee as LogoMarqueeType } from "@/sanity/types";
+import { Logos, LogoMarquee as LogoMarqueeType, ReusableBlock } from "@/sanity/types";
 import getHexColor from "@/utils/getHexColor";
 
 interface LogoMarqueeProps {
@@ -14,16 +14,22 @@ interface LogoMarqueeProps {
     disableInvertedLogoBg?: boolean;
 }
 
+type DereferencedLogos = Omit<Logos, 'logoMarqueeBlock'> & {
+    logoMarqueeBlock?: ReusableBlock;
+};
+
 type LogoItem =
     NonNullable<LogoMarqueeType["logos"]> extends Array<infer Item>
         ? Item
         : never;
 
-const LogoMarquee = ({ data, speed, bgColor, disableInvertedLogoBg = false }: LogoMarqueeProps) => {
+const LogoMarquee = ({ data, speed = 50, bgColor, disableInvertedLogoBg = false }: LogoMarqueeProps) => {
     const containerRef = useRef<HTMLDivElement | null>(null);
     const isInView = useInView(containerRef, { amount: 0.2, once: false });
 
-    const logoMarquee = data?.logoMarqueeBlock?.logoMarquee;
+    // Cast to handle dereferenced structure from query
+    const dereferencedData = data as DereferencedLogos | undefined;
+    const logoMarquee = dereferencedData?.logoMarqueeBlock?.logoMarquee;
 
     const logos = useMemo<LogoItem[]>(() => {
         const resolved = logoMarquee?.logos ?? [];
@@ -64,14 +70,14 @@ const LogoMarquee = ({ data, speed, bgColor, disableInvertedLogoBg = false }: Lo
         );
     };
 
-    const gradientColor = getHexColor(bgColor);
+    const gradientColor = getHexColor(bgColor) || undefined;
 
     const marqueeContent = (
         <Marquee
             play={isInView}
             gradient
             gradientColor={gradientColor}
-            speed={50}
+            speed={speed}
         >
             {logos.map((logo) => renderLogo(logo, `mx-12 flex ${disableInvertedLogoBg ? "" : "invert"}`))}
         </Marquee>
@@ -108,7 +114,7 @@ const LogoMarquee = ({ data, speed, bgColor, disableInvertedLogoBg = false }: Lo
             <div
                 data-component="logo-marquee"
                 ref={containerRef}
-                className="flex flex-col gap-y-6 gap-x-20 py-8 md:flex-row md:items-center md:justify-between py-4 min-h-[51px]"
+                className="flex flex-col gap-y-6 gap-x-20 py-4 md:flex-row md:items-center md:justify-between min-h-[51px]"
             >
                 {labelContent}
                 <div className="flex-1 max-w-[1000px] w-full">{marqueeContent}</div>

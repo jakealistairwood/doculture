@@ -21,7 +21,7 @@ const FeatureCards = ({ data, bgColor }: FeatureCardsProps) => {
     const { layout = "threeCols", features = [] } = data || {};
 
     const containerRef = useRef<HTMLDivElement | null>(null);
-    const isInView = useInView(containerRef, { amount: 0.3, once: true });
+    const isInView = useInView(containerRef, { amount: 0.1, once: true });
 
     const gridContainerClasses = layoutMap[layout] || "grid-cols-3";
 

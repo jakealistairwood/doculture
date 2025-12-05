@@ -11,8 +11,9 @@ const HeaderMarquee = dynamic(() => import('@/components/molecules/HeaderMarquee
 const FeatureCards = dynamic(() => import('@/components/molecules/FeatureCards'));
 const StudioCarousel = dynamic(() => import('@/components/organisms/StudioCarousel'));
 const TimedAccordionSlider = dynamic(() => import('@/components/molecules/TimedAccordionSlider'));
+const SelectedWorks = dynamic(() => import('@/components/organisms/SelectedWorks'));
 
-import { Masthead as MastheadType, HomeMasthead as HomeMastheadType, TextCard as TextCardType, Asset as AssetType, Logos as LogosType, LinkCards as LinkCardsType, FeatureCards as FeatureCardsType, StudioCarousel as StudioCarouselType } from '@/sanity/types';
+import { Masthead as MastheadType, HomeMasthead as HomeMastheadType, TextCard as TextCardType, Asset as AssetType, Logos as LogosType, LinkCards as LinkCardsType, FeatureCards as FeatureCardsType, StudioCarousel as StudioCarouselType, SelectedWorks as SelectedWorksType, Section } from '@/sanity/types';
 
 type HeaderMarqueeType = {
     _type: 'headerMarquee';
@@ -29,10 +30,17 @@ type TimedAccordionSliderType = {
     }>;
 };
 
-type Component = MastheadType | HomeMastheadType | TextCardType | AssetType | LogosType | LinkCardsType | HeaderMarqueeType | FeatureCardsType | StudioCarouselType | TimedAccordionSliderType;
+type Component = MastheadType | HomeMastheadType | TextCardType | AssetType | LogosType | LinkCardsType | HeaderMarqueeType | SelectedWorksType | FeatureCardsType | StudioCarouselType | TimedAccordionSliderType;
+
+// Component with optional _key for Section components
+// This allows components from Section which have { _key: string } & ComponentType
+type ComponentWithKey = Component & { _key?: string };
+
+// Extract component type from Section's components array
+type SectionComponent = NonNullable<Section['components']>[number];
 
 interface ComponentRendererProps {
-  component: Component;
+  component: ComponentWithKey | SectionComponent | (Component & { _key: string });
   bgColor: string;
   isContainedSection: boolean;
   containedBgColor: string;
@@ -54,6 +62,8 @@ export function ComponentRenderer({ component, bgColor, isContainedSection = fal
         return <LinkCards data={component} />
     case 'headerMarquee':
         return <HeaderMarquee data={component} bgColor={bgColor} />
+    case 'selectedWorks':
+        return <SelectedWorks data={component} />
     case 'featureCards':
         return <FeatureCards data={component} bgColor={bgColor} />
     case 'studioCarousel':

@@ -13,6 +13,28 @@
  */
 
 // Source: schema.json
+export type TimedAccordionSlider = {
+  _type: "timedAccordionSlider";
+  items?: Array<{
+    heading?: string;
+    content?: BlockContent;
+    image?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      altText?: string;
+      _type: "image";
+    };
+    _key: string;
+  }>;
+};
+
 export type ContactLandingPage = {
   _type: "contactLandingPage";
   heading?: string;
@@ -586,10 +608,10 @@ export type Project = {
 export type SectionOptions = {
   _type: "sectionOptions";
   id?: string;
-  bgColor?: "none" | "black" | "white" | "lightGrey" | "offBlack";
+  bgColor?: "none" | "black" | "white" | "lightGrey" | "darkGrey" | "offBlack";
   removeContainer?: boolean;
   isContainedSection?: boolean;
-  containedBgColor?: "none" | "black" | "white" | "lightGrey" | "offBlack";
+  containedBgColor?: "none" | "black" | "white" | "lightGrey" | "darkGrey" | "offBlack";
   paddingTop?: "none" | "sm" | "md" | "lg";
   paddingBottom?: "none" | "sm" | "md" | "lg";
   marginTop?: "none" | "sm" | "md" | "lg";
@@ -622,7 +644,9 @@ export type Section = {
     _key: string;
   } & FeatureCards | {
     _key: string;
-  } & StudioCarousel>;
+  } & StudioCarousel | {
+    _key: string;
+  } & TimedAccordionSlider>;
   sectionOptions?: SectionOptions;
 };
 
@@ -736,5 +760,5 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = ContactLandingPage | LandingPage | Seo | SanityImageCrop | SanityImageHotspot | BlockContent | Slug | GlobalCTA | CaseStudyImage | CaseStudyRichText | CaseStudyBuilder | StudioCarousel | Studio | FeatureCards | SelectedWorks | HeaderMarquee | LinkCards | Logos | Asset | LogoMarquee | Link | LinksWrapper | TextCardOptions | TextCard | HomeMasthead | ReusableBlock | Masthead | Post | Author | Category | Project | SectionOptions | Section | Page | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = TimedAccordionSlider | ContactLandingPage | LandingPage | Seo | SanityImageCrop | SanityImageHotspot | BlockContent | Slug | GlobalCTA | CaseStudyImage | CaseStudyRichText | CaseStudyBuilder | StudioCarousel | Studio | FeatureCards | SelectedWorks | HeaderMarquee | LinkCards | Logos | Asset | LogoMarquee | Link | LinksWrapper | TextCardOptions | TextCard | HomeMasthead | ReusableBlock | Masthead | Post | Author | Category | Project | SectionOptions | Section | Page | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 export declare const internalGroqTypeReferenceTo: unique symbol;
