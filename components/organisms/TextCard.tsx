@@ -1,6 +1,8 @@
 "use client";
 
-import { TextCard as TextCardType } from "@/sanity/types";
+import { TextCard as TextCardType, BlockContent } from "@/sanity/types";
+import { PortableText } from "@portabletext/react";
+import SanityImage from "@/components/atoms/SanityImage";
 import clsx from "clsx";
 
 interface TextCardProps {
@@ -22,7 +24,7 @@ const subheadingBgColorMap = {
   white: "bg-[#F1F1F1] text-black/[80%]",
   black: "bg-white/[10%] text-white",
   lightGrey: "bg-white text-black/[80%]",
-  darkGrey: "bg-white/[10%] text-off-black",
+  darkGrey: "bg-white/[10%] text-white",
   offBlack: "bg-white/[10%] text-white"
 }
 
@@ -78,9 +80,89 @@ const TextCard = ({ data, bgColor, isContainedSection, containedBgColor }: TextC
             )}
           </div>
             {data.content && (
-                <p className="text-card__content opacity-80" style={{
-                  maxWidth: `${contentMaxWidth}px`
-                }}>{data.content}</p>
+                <div 
+                    className="text-card__content opacity-80"
+                    style={{
+                        maxWidth: contentMaxWidth ? `${contentMaxWidth}px` : undefined
+                    }}
+                >
+                    <PortableText 
+                        value={data.content as BlockContent} 
+                        components={{
+                            block: {
+                                normal: ({ children }: { children: React.ReactNode }) => (
+                                    <p className="mb-4 last:mb-0">{children}</p>
+                                ),
+                                h1: ({ children }: { children: React.ReactNode }) => (
+                                    <h1 className="text-2xl md:text-3xl font-heading uppercase mb-4">{children}</h1>
+                                ),
+                                h2: ({ children }: { children: React.ReactNode }) => (
+                                    <h2 className="text-xl md:text-2xl font-heading uppercase mb-4">{children}</h2>
+                                ),
+                                h3: ({ children }: { children: React.ReactNode }) => (
+                                    <h3 className="text-lg md:text-xl font-heading uppercase mb-4">{children}</h3>
+                                ),
+                                h4: ({ children }: { children: React.ReactNode }) => (
+                                    <h4 className="text-base md:text-lg font-heading uppercase mb-4">{children}</h4>
+                                ),
+                                blockquote: ({ children }: { children: React.ReactNode }) => (
+                                    <blockquote className="border-l-4 border-current pl-4 py-2 my-4 italic">{children}</blockquote>
+                                ),
+                            },
+                            marks: {
+                                strong: ({ children }: { children: React.ReactNode }) => (
+                                    <strong className="font-bold">{children}</strong>
+                                ),
+                                em: ({ children }: { children: React.ReactNode }) => (
+                                    <em className="italic">{children}</em>
+                                ),
+                                link: ({ value, children }: { value: { href?: string }; children: React.ReactNode }) => {
+                                    const target = value?.href?.startsWith('http') ? '_blank' : undefined;
+                                    const rel = target === '_blank' ? 'noopener noreferrer' : undefined;
+                                    return (
+                                        <a
+                                            href={value?.href}
+                                            target={target}
+                                            rel={rel}
+                                            className="underline hover:no-underline transition-all"
+                                        >
+                                            {children}
+                                        </a>
+                                    );
+                                },
+                            },
+                            list: {
+                                bullet: ({ children }: { children: React.ReactNode }) => (
+                                    <ul className="list-disc list-inside mb-4 space-y-2 ml-4">{children}</ul>
+                                ),
+                                number: ({ children }: { children: React.ReactNode }) => (
+                                    <ol className="list-decimal list-inside mb-4 space-y-2 ml-4">{children}</ol>
+                                ),
+                            },
+                            listItem: {
+                                bullet: ({ children }: { children: React.ReactNode }) => (
+                                    <li>{children}</li>
+                                ),
+                                number: ({ children }: { children: React.ReactNode }) => (
+                                    <li>{children}</li>
+                                ),
+                            },
+                            types: {
+                                image: ({ value }: { value: any }) => {
+                                    if (!value?.asset?._ref && !value?.asset?._id) return null;
+                                    return (
+                                        <div className="my-4">
+                                            <SanityImage
+                                                image={value}
+                                                className="w-full h-auto rounded-lg"
+                                            />
+                                        </div>
+                                    );
+                                },
+                            },
+                        }}
+                    />
+                </div>
             )}
         </div>
     );

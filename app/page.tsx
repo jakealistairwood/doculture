@@ -38,5 +38,9 @@ export default async function Home() {
         );
     }
 
-    return <PageLayout page={page} />;
+    return (
+        <>
+            <PageLayout page={page} />
+        </>
+    );
 }

@@ -404,7 +404,7 @@ export type TextCard = {
   _type: "textCard";
   subheading?: string;
   heading?: string;
-  content?: string;
+  content?: BlockContent;
   textCardOptions?: TextCardOptions;
 };
 

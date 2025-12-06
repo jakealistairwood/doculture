@@ -13,34 +13,26 @@ const StudioCarousel = dynamic(() => import('@/components/organisms/StudioCarous
 const TimedAccordionSlider = dynamic(() => import('@/components/molecules/TimedAccordionSlider'));
 const SelectedWorks = dynamic(() => import('@/components/organisms/SelectedWorks'));
 
-import { Masthead as MastheadType, HomeMasthead as HomeMastheadType, TextCard as TextCardType, Asset as AssetType, Logos as LogosType, LinkCards as LinkCardsType, FeatureCards as FeatureCardsType, StudioCarousel as StudioCarouselType, SelectedWorks as SelectedWorksType, Section } from '@/sanity/types';
+import { 
+  Masthead as MastheadType, 
+  HomeMasthead as HomeMastheadType, 
+  TextCard as TextCardType, 
+  Asset as AssetType, 
+  Logos as LogosType, 
+  LinkCards as LinkCardsType, 
+  FeatureCards as FeatureCardsType, 
+  StudioCarousel as StudioCarouselType, 
+  SelectedWorks as SelectedWorksType, 
+  HeaderMarquee as HeaderMarqueeType,
+  TimedAccordionSlider as TimedAccordionSliderType,
+  Section 
+} from '@/sanity/types';
 
-type HeaderMarqueeType = {
-    _type: 'headerMarquee';
-    items?: string[];
-};
-
-type TimedAccordionSliderType = {
-    _type: 'timedAccordionSlider';
-    items?: Array<{
-        _key?: string;
-        heading?: string;
-        content?: any;
-        image?: any;
-    }>;
-};
-
-type Component = MastheadType | HomeMastheadType | TextCardType | AssetType | LogosType | LinkCardsType | HeaderMarqueeType | SelectedWorksType | FeatureCardsType | StudioCarouselType | TimedAccordionSliderType;
-
-// Component with optional _key for Section components
-// This allows components from Section which have { _key: string } & ComponentType
-type ComponentWithKey = Component & { _key?: string };
-
-// Extract component type from Section's components array
+// Extract component type from Section's components array (already includes _key)
 type SectionComponent = NonNullable<Section['components']>[number];
 
 interface ComponentRendererProps {
-  component: ComponentWithKey | SectionComponent | (Component & { _key: string });
+  component: SectionComponent;
   bgColor: string;
   isContainedSection: boolean;
   containedBgColor: string;
@@ -49,27 +41,27 @@ interface ComponentRendererProps {
 export function ComponentRenderer({ component, bgColor, isContainedSection = false, containedBgColor }: ComponentRendererProps) {
   switch (component._type) {
     case 'masthead':
-        return <Masthead data={component} />;
+        return <Masthead data={component as MastheadType} />;
     case 'homeMasthead':
-      return <HomeMasthead data={component} />;
+      return <HomeMasthead data={component as HomeMastheadType} />;
     case 'textCard':
-      return <TextCard data={component} bgColor={bgColor} isContainedSection={isContainedSection} containedBgColor={containedBgColor} />;
+      return <TextCard data={component as TextCardType} bgColor={bgColor} isContainedSection={isContainedSection} containedBgColor={containedBgColor} />;
     case 'asset':
-      return <Asset data={component} />;
+      return <Asset data={component as AssetType} />;
     case 'logos':
-        return <LogoMarquee data={component} bgColor={bgColor} />
+        return <LogoMarquee data={component as LogosType} bgColor={bgColor} />
     case 'linkCards':
-        return <LinkCards data={component} />
+        return <LinkCards data={component as LinkCardsType} />
     case 'headerMarquee':
-        return <HeaderMarquee data={component} bgColor={bgColor} />
+        return <HeaderMarquee data={component as HeaderMarqueeType} bgColor={bgColor} />
     case 'selectedWorks':
-        return <SelectedWorks data={component} />
+        return <SelectedWorks data={component as SelectedWorksType} />
     case 'featureCards':
-        return <FeatureCards data={component} bgColor={bgColor} />
+        return <FeatureCards data={component as FeatureCardsType} bgColor={bgColor} />
     case 'studioCarousel':
-        return <StudioCarousel data={component} />
+        return <StudioCarousel data={component as StudioCarouselType} />
     case 'timedAccordionSlider':
-        return <TimedAccordionSlider data={component} bgColor={bgColor} />
+        return <TimedAccordionSlider data={component as TimedAccordionSliderType} bgColor={bgColor} />
     default:
       console.warn(`Unknown component type: ${(component as any)._type}`);
       return null;

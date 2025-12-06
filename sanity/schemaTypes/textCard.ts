@@ -18,7 +18,7 @@ export const textCard = defineType({
         defineField({
             name: 'content',
             title: 'Content',
-            type: 'text'
+            type: 'blockContent'
         }),
         defineField({
             name: 'textCardOptions',
