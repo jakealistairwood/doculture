@@ -2,8 +2,6 @@ import { type SchemaTypeDefinition } from "sanity";
 
 import { blockContentType } from "./blockContentType";
 import { categoryType } from "./categoryType";
-import { postType } from "./postType";
-import { authorType } from "./authorType";
 import { pageType } from "./page";
 import { seo } from "./seo";
 import { section } from "./section";
@@ -34,6 +32,7 @@ import { landingPage } from "./landingPage";
 import { contactLandingPage } from "./landingPages/contactLandingPage";
 import { timedAccordionSlider } from "./timedAccordionSlider";
 import { imageGrid } from "./imageGrid";
+import { globalOptions } from "./globalOptions";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
     types: [
@@ -44,8 +43,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
         project,
         blockContentType,
         categoryType,
-        postType,
-        authorType,
         masthead,
         homeMasthead,
         textCard,
@@ -70,6 +67,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
         landingPage,
         contactLandingPage,
         timedAccordionSlider,
-        imageGrid
+        imageGrid,
+        globalOptions
     ],
 };

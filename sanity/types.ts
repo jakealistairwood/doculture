@@ -13,6 +13,25 @@
  */
 
 // Source: schema.json
+export type GlobalOptions = {
+  _id: string;
+  _type: "globalOptions";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  contactEmail?: string;
+  contactMobile?: string;
+  companyAddress?: {
+    street?: string;
+    city?: string;
+    state?: string;
+    postalCode?: string;
+    country?: string;
+  };
+  instagramUrl?: string;
+  linkedinUrl?: string;
+};
+
 export type ImageGrid = {
   _type: "imageGrid";
   images?: Array<{
@@ -406,7 +425,7 @@ export type Link = {
   _type: "link";
   type?: "button" | "textLink";
   buttonSize?: "default" | "sm" | "lg";
-  buttonStyle?: "primary" | "outline";
+  buttonStyle?: "primary" | "outline" | "accent";
   url?: string;
   label?: string;
 };
@@ -792,5 +811,5 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = ImageGrid | TimedAccordionSlider | ContactLandingPage | LandingPage | Seo | SanityImageCrop | SanityImageHotspot | BlockContent | Slug | GlobalCTA | CaseStudyImage | CaseStudyRichText | CaseStudyBuilder | StudioCarousel | Studio | FeatureCards | SelectedWorks | HeaderMarquee | LinkCards | Logos | TwoColTextAsset | Asset | LogoMarquee | Link | LinksWrapper | TextCardOptions | TextCard | HomeMasthead | ReusableBlock | Masthead | Post | Author | Category | Project | SectionOptions | Section | Page | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = GlobalOptions | ImageGrid | TimedAccordionSlider | ContactLandingPage | LandingPage | Seo | SanityImageCrop | SanityImageHotspot | BlockContent | Slug | GlobalCTA | CaseStudyImage | CaseStudyRichText | CaseStudyBuilder | StudioCarousel | Studio | FeatureCards | SelectedWorks | HeaderMarquee | LinkCards | Logos | TwoColTextAsset | Asset | LogoMarquee | Link | LinksWrapper | TextCardOptions | TextCard | HomeMasthead | ReusableBlock | Masthead | Post | Author | Category | Project | SectionOptions | Section | Page | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 export declare const internalGroqTypeReferenceTo: unique symbol;

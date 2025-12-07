@@ -18,10 +18,17 @@ interface AppWrapperProps {
       };
     };
   } | null;
+  globalOptions?: {
+    contactEmail?: string;
+    contactMobile?: string;
+    companyAddress?: any;
+    instagramUrl?: string;
+    linkedinUrl?: string;
+  } | null;
   landingPageSlugs?: string[];
 }
 
-export default function AppWrapper({ children, globalCTA, landingPageSlugs = [] }: AppWrapperProps) {
+export default function AppWrapper({ children, globalCTA, globalOptions, landingPageSlugs = [] }: AppWrapperProps) {
   const pathname = usePathname();
   const isStudioRoute = pathname?.startsWith("/studio");
   
@@ -40,7 +47,7 @@ export default function AppWrapper({ children, globalCTA, landingPageSlugs = [] 
       <Header />
       {children}
       {globalCTA?.globalCTA && <GlobalCTA data={globalCTA.globalCTA} />}
-      <Footer />
+      <Footer globalOptions={globalOptions} />
     </>
   );
 }

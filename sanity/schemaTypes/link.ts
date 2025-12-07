@@ -40,6 +40,7 @@ export const link = defineField({
                 list: [
                     { value: 'primary', title: 'Primary' },
                     { value: 'outline', title: 'Outline' },
+                    { value: 'accent', title: 'Accent' }
                 ],
                 layout: 'radio'
             },

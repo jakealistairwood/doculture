@@ -44,7 +44,7 @@ export default function GlobalCTA({ data }: GlobalCTAProps) {
                             className="absolute z-[1] inset-0 w-full h-full object-cover"
                         />
                         <div className="hidden bg-white text-off-black lg:flex relative z-[2] flex-col gap-y-8 p-10">
-                            <div className="flex flex-col">
+                            <div className="flex flex-col gap-y-4">
                                 {heading && (
                                     <h2
                                         className="text-40px font-heading uppercase leading-[0.94]"
@@ -55,7 +55,7 @@ export default function GlobalCTA({ data }: GlobalCTAProps) {
                                 )}
 
                                 {description && (
-                                    <p className="text-lg md:text-xl opacity-80 max-w-2xl">
+                                    <p className="text-lg opacity-80 max-w-2xl">
                                         {description}
                                     </p>
                                 )}

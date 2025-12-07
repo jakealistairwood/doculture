@@ -340,6 +340,24 @@ export const globalCTAQuery = groq`
   }
 `;
 
+export const globalOptionsQuery = groq`
+  *[_type == "globalOptions"][0]{
+    _id,
+    _type,
+    contactEmail,
+    contactMobile,
+    companyAddress[]{
+      ...,
+      _type == "image" => {
+        ...,
+        asset
+      }
+    },
+    instagramUrl,
+    linkedinUrl
+  }
+`;
+
 export const landingPageQuery = groq`
   *[_type == "landingPage" && slug.current == $slug][0]{
     _id,

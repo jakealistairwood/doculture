@@ -83,93 +83,95 @@ const Header = () => {
                     transform: isVisible ? 'translateY(0)' : 'translateY(-100%)',
                 }}
             >
-                <div className="max-w-[1440px] px-4 w-full mx-auto">
-                    <nav className="flex items-center justify-between">
-                        <div className="flex items-center gap-x-20">
-                            <Link
-                                href="/"
-                                className="relative block aspect-[117/23] w-[117px] h-[23px]"
-                                aria-label="Go to homepage"
-                            >
-                                <Image 
-                                    src="/images/logo.svg" 
-                                    alt="Logo" 
-                                    fill 
-                                    className={`object-contain ${isScrolled ? "invert" : ""}`}
-                                    priority 
-                                />
-                            </Link>
-                            <ul className="hidden lg:flex items-center gap-x-8 font-medium opacity-80">
-                                <li>
-                                    <Link href="/">Home</Link>
-                                </li>
-                                <li>
-                                    <Link href="/about">About</Link>
-                                </li>
-                                <li>
-                                    <Link href="/services">Services</Link>
-                                </li>
-                                <li>
-                                    <Link href="/our-work">Work</Link>
+                <div className="px-4 w-full mx-auto">
+                    <div className="container">
+                        <nav className="flex items-center justify-between">
+                            <div className="flex items-center gap-x-20">
+                                <Link
+                                    href="/"
+                                    className="relative block aspect-[117/23] w-[117px] h-[23px]"
+                                    aria-label="Go to homepage"
+                                >
+                                    <Image 
+                                        src="/images/logo.svg" 
+                                        alt="Logo" 
+                                        fill 
+                                        className={`object-contain ${isScrolled ? "invert" : ""}`}
+                                        priority 
+                                    />
+                                </Link>
+                                <ul className="hidden lg:flex items-center gap-x-8 font-medium opacity-80">
+                                    <li>
+                                        <Link href="/">Home</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/about">About</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/services">Services</Link>
+                                    </li>
+                                    <li>
+                                        <Link href="/our-work">Work</Link>
+                                    </li>
+                                </ul>
+                            </div>
+                            <ul className="hidden lg:flex items-center gap-x-12">
+                                <li className="">
+                                    <Link
+                                        href="/contact"
+                                        className={clsx(
+                                            "inline-flex items-center justify-center font-medium rounded-[3px] text-sm uppercase px-6 py-3",
+                                            !isScrolled ? "border border-white/25 hover:bg-accent-orange hover:text-off-black hover:border-accent-orange/100" : "",
+                                            isScrolled ? "border border-black/25 hover:bg-accent-orange hover:text-off-black hover:border-accent-orange/100" : "",
+                                            "transition-all duration-200 ease"
+                                        )}
+                                    >
+                                        Get in touch
+                                    </Link>
                                 </li>
                             </ul>
-                        </div>
-                        <ul className="hidden lg:flex items-center gap-x-12">
-                            <li className="">
-                                <Link
-                                    href="/contact"
-                                    className={clsx(
-                                        "inline-flex items-center justify-center font-medium rounded-[3px] text-sm uppercase px-6 py-3",
-                                        !isScrolled ? "border border-white/25 hover:bg-accent-orange hover:text-off-black hover:border-accent-orange/100" : "",
-                                        isScrolled ? "border border-black/25 hover:bg-accent-orange hover:text-off-black hover:border-accent-orange/100" : "",
-                                        "transition-all duration-200 ease"
-                                    )}
-                                >
-                                    Get in touch
-                                </Link>
-                            </li>
-                        </ul>
-                        <button
-                            type="button"
-                            onClick={toggleMobileMenu}
-                            className="flex lg:hidden items-center justify-center gap-x-3 relative"
-                            aria-label={isMobileMenuOpen ? "Close mobile navigation" : "Open mobile navigation"}
-                            aria-expanded={isMobileMenuOpen}
-                        >
-                            <span 
-                                className={clsx(
-                                    "font-medium transition-opacity duration-300",
-                                    isScrolled || isMobileMenuOpen ? "text-off-black" : "text-white"
-                                )}
-                                aria-hidden
+                            <button
+                                type="button"
+                                onClick={toggleMobileMenu}
+                                className="flex lg:hidden items-center justify-center gap-x-3 relative"
+                                aria-label={isMobileMenuOpen ? "Close mobile navigation" : "Open mobile navigation"}
+                                aria-expanded={isMobileMenuOpen}
                             >
-                                {isMobileMenuOpen ? "Close" : "Menu"}
-                            </span>
-                            <div className="flex flex-col gap-y-1.5 w-[20px] justify-center" aria-hidden>
-                                <div 
+                                <span 
                                     className={clsx(
-                                        "h-[1.5px] w-full transition-all duration-300 origin-center",
-                                        isScrolled || isMobileMenuOpen ? "bg-off-black" : "bg-white",
-                                        isMobileMenuOpen && "rotate-45 translate-y-[3px]"
-                                    )} 
-                                />
-                                <div 
-                                    className={clsx(
-                                        "h-[1.5px] w-full transition-all duration-300",
-                                        isScrolled || isMobileMenuOpen ? "bg-off-black" : "bg-white",
-                                        isMobileMenuOpen && "opacity-0"
-                                    )} 
-                                />
-                                <div 
-                                    className={clsx(
-                                        "h-[1.5px] w-full transition-all duration-300 origin-center",
-                                        isScrolled || isMobileMenuOpen ? "bg-off-black" : "bg-white",
-                                        isMobileMenuOpen && "-rotate-45 -translate-y-[3px]"
-                                    )} 
-                                />
-                            </div>
-                        </button>
-                    </nav>
+                                        "font-medium transition-opacity duration-300",
+                                        isScrolled || isMobileMenuOpen ? "text-off-black" : "text-white"
+                                    )}
+                                    aria-hidden
+                                >
+                                    {isMobileMenuOpen ? "Close" : "Menu"}
+                                </span>
+                                <div className="flex flex-col gap-y-1.5 w-[20px] justify-center" aria-hidden>
+                                    <div 
+                                        className={clsx(
+                                            "h-[1.5px] w-full transition-all duration-300 origin-center",
+                                            isScrolled || isMobileMenuOpen ? "bg-off-black" : "bg-white",
+                                            isMobileMenuOpen && "rotate-45 translate-y-[3px]"
+                                        )} 
+                                    />
+                                    <div 
+                                        className={clsx(
+                                            "h-[1.5px] w-full transition-all duration-300",
+                                            isScrolled || isMobileMenuOpen ? "bg-off-black" : "bg-white",
+                                            isMobileMenuOpen && "opacity-0"
+                                        )} 
+                                    />
+                                    <div 
+                                        className={clsx(
+                                            "h-[1.5px] w-full transition-all duration-300 origin-center",
+                                            isScrolled || isMobileMenuOpen ? "bg-off-black" : "bg-white",
+                                            isMobileMenuOpen && "-rotate-45 -translate-y-[3px]"
+                                        )} 
+                                    />
+                                </div>
+                            </button>
+                        </nav>
+                    </div>
                 </div>
             </header>
 

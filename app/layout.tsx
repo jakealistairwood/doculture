@@ -3,7 +3,7 @@ import { Geist, Geist_Mono, Anton } from "next/font/google";
 import localFont from "next/font/local";
 import AppWrapper from "@/components/globals/AppWrapper";
 import { client } from "@/sanity/lib/client";
-import { globalCTAQuery, landingPageSlugsQuery } from "@/sanity/lib/queries";
+import { globalCTAQuery, globalOptionsQuery, landingPageSlugsQuery } from "@/sanity/lib/queries";
 import "./globals.css";
 
 const anton = Anton({
@@ -49,8 +49,9 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [globalCTA, landingPages] = await Promise.all([
+  const [globalCTA, globalOptions, landingPages] = await Promise.all([
     client.fetch(globalCTAQuery),
+    client.fetch(globalOptionsQuery),
     client.fetch(landingPageSlugsQuery),
   ]);
 
@@ -61,7 +62,7 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${anton.variable} ${ppEditorialOld.variable} antialiased bg-black`}
       >
-        <AppWrapper globalCTA={globalCTA} landingPageSlugs={landingPageSlugs}>
+        <AppWrapper globalCTA={globalCTA} globalOptions={globalOptions} landingPageSlugs={landingPageSlugs}>
           {children}
         </AppWrapper>
       </body>
