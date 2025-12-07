@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import SanityImage from "../atoms/SanityImage";
 import VideoPlayer from "../atoms/VideoPlayer";
 import Link from "next/link";
-import { SelectedWorks, Project } from "@/sanity/types";
+import type { SelectedWorks, Project } from "@/sanity/types";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
@@ -24,7 +24,6 @@ const SelectedWorks = ({ data }: SelectedWorksProps) => {
     const [selectedVideoPoster, setSelectedVideoPoster] = useState<any>(null);
     const swiperRef = useRef<SwiperType | null>(null);
 
-    // Extract actual project objects - after query dereferencing, caseStudies contains Project objects
     const projects = (caseStudies || []).filter((item): item is Project => {
         // Check if item is a valid Project (has _id)
         return item && typeof item === 'object' && '_id' in item;
@@ -40,10 +39,6 @@ const SelectedWorks = ({ data }: SelectedWorksProps) => {
 
     const handleNext = () => {
         swiperRef.current?.slideNext();
-    };
-
-    const handleDotClick = (index: number) => {
-        swiperRef.current?.slideTo(index);
     };
 
     const handleWatchVideo = (video: string | undefined, poster: any) => {

@@ -1,6 +1,5 @@
 "use client";
 
-import { PortableText } from "@portabletext/react";
 import SanityImage from "@/components/atoms/SanityImage";
 import ContactForm from "@/components/molecules/ContactForm";
 import CaseStudyRichText from "@/components/molecules/CaseStudyRichText";
@@ -52,10 +51,12 @@ export default function ContactLandingPage({ data, logoMarquee }: ContactLanding
     const { heading, description, whyUs, image, logoMarqueeBlock } = data;
 
     const logoMarqueeData = logoMarqueeBlock ? {
+        _type: "logos" as const,
         logoMarqueeBlock: logoMarqueeBlock
     } : logoMarquee ? {
+        _type: "logos" as const,
         logoMarqueeBlock: logoMarquee
-    } : null;
+    } : undefined;
 
     return (
         <main id="contact-landing-page" className="bg-off-black text-white min-h-screen py-20 flex items-center justify-center">
@@ -99,9 +100,11 @@ export default function ContactLandingPage({ data, logoMarquee }: ContactLanding
                                     </div>
                                 )}
                             </div>
-                            <div>
-                                <LogoMarquee data={logoMarqueeData} bgColor="off-black" disableInvertedLogoBg />
-                            </div>
+                            {logoMarqueeData && (
+                                <div>
+                                    <LogoMarquee data={logoMarqueeData} bgColor="off-black" disableInvertedLogoBg />
+                                </div>
+                            )}
                         </div>
                         <div className="hidden w-full h-full relative lg:flex items-center justify-center p-10">
                             <SanityImage image={image} className="w-full h-full object-cover absolute inset-0" />

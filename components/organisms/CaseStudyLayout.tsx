@@ -82,7 +82,7 @@ export default function CaseStudyLayout({ project }: CaseStudyLayoutProps) {
                                 {hasCategories && (
                                     <div className="flex items-center flex-wrap gap-3">
                                         {project?.categories?.map((category, i) => (
-                                            <div key={`project-categories-${i}-${category?._key}`} className="py-1 px-2 border border-white/[25%] text-sm uppercase font-medium rounded-sm">{category?.title}</div>
+                                            <div key={`project-categories-${i}-${category?._key}`} className="py-1 px-2 border border-white/25 text-sm uppercase font-medium rounded-sm">{category?.title}</div>
                                         ))}
                                     </div>
                                 )}
@@ -118,7 +118,7 @@ export default function CaseStudyLayout({ project }: CaseStudyLayoutProps) {
                                 </div>
                             )}
                         </aside>
-                        <article className="max-w-[768px]">
+                        <article className="max-w-768px">
                             {/* {project.date && (
                                 <p className="text-sm opacity-60 mb-20">
                                     {new Date(project.date).toLocaleDateString('en-US', {
