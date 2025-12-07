@@ -78,7 +78,7 @@ const StudioCarousel = ({ data }: StudioCarouselProps) => {
                 }}
             >
                 {studios.map((studio, index) => (
-                    <SwiperSlide key={studio._id || index} className="w-full h-full">
+                    <SwiperSlide key={studio._id || index} className="w-full h-full flex flex-col !items-start">
                         <div className="flex flex-col aspect-video w-full mx-auto relative rounded-lg overflow-hidden">
                             {studio.coverImage && (
                                 <div className="w-full h-full absolute inset-0">
@@ -88,7 +88,8 @@ const StudioCarousel = ({ data }: StudioCarouselProps) => {
                                     />
                                 </div>
                             )}
-                            <div className="flex flex-col relative z-[2] p-10 mt-auto">
+                            {/* Desktop: Content overlays on image */}
+                            <div className="hidden lg:flex flex-col relative z-[2] p-10 mt-auto">
                                 <div className="absolute h-full w-full inset-0" style={{
                                     background: "linear-gradient(0deg,rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%)"
                                 }} />
@@ -115,6 +116,31 @@ const StudioCarousel = ({ data }: StudioCarouselProps) => {
                                     </ul>
                                 )}
                             </div>
+                        </div>
+                        {/* Mobile/Tablet: Content appears below image */}
+                        <div className="flex flex-col relative pt-8 mt-auto lg:hidden">
+                            {studio.title && (
+                                <h2 className="studio-slide-text text-3xl xl:text-5xl font-heading uppercase mb-4 relative z-[3]">
+                                    {studio.title}
+                                </h2>
+                            )}
+                            {studio.description && (
+                                <p className="studio-slide-text text-lg md:text-xl mb-6 max-w-2xl relative z-[3]">
+                                    {studio.description}
+                                </p>
+                            )}
+                            {studio.features && studio.features.length > 0 && (
+                                <ul className="studio-slide-text flex flex-wrap gap-4 relative z-[3]">
+                                    {studio.features.map((feature, featureIndex) => (
+                                        <li
+                                            key={featureIndex}
+                                            className="px-4 py-2 border border-current rounded-md text-sm uppercase"
+                                        >
+                                            {feature}
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
                         </div>
                     </SwiperSlide>
                 ))}

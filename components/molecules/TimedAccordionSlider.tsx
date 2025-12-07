@@ -168,7 +168,7 @@ export default function TimedAccordionSlider({ data, bgColor }: TimedAccordionSl
                                             animate={{ height: "auto", opacity: 1 }}
                                             exit={{ height: 0, opacity: 0 }}
                                             transition={{ duration: 0.3 }}
-                                            className="overflow-hidden"
+                                            className="overflow-hidden flex flex-col"
                                         >
                                             <div className="pb-6 pt-0">
                                                 <div className="prose prose-invert max-w-[90%]">
@@ -178,6 +178,19 @@ export default function TimedAccordionSlider({ data, bgColor }: TimedAccordionSl
                                                     />
                                                 </div>
                                             </div>
+                                            <motion.div
+                                                key={activeIndex}
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                exit={{ opacity: 0 }}
+                                                transition={{ duration: 0.5 }}
+                                                className="relative aspect-auto w-full h-full block lg:hidden"
+                                            >
+                                                <SanityImage
+                                                    image={activeImage}
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            </motion.div>
                                         </motion.div>
                                     )}
                                 </AnimatePresence>
@@ -187,7 +200,7 @@ export default function TimedAccordionSlider({ data, bgColor }: TimedAccordionSl
                 </div>
 
                 {/* Image - Right Side */}
-                <div className="relative aspect-[685/780] lg:sticky lg:top-20">
+                <div className="hidden lg:block relative aspect-[685/780] lg:sticky lg:top-20">
                     <AnimatePresence mode="wait">
                         {activeImage && (
                             <motion.div

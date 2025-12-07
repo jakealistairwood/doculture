@@ -64,6 +64,11 @@ const subheadingBgColorMap: Record<string, string> = {
   offBlack: "bg-white/[10%] text-white"
 }
 
+const listTypeMap: Record<string, string> = {
+  bullet: 'prose-bullet',
+  tick: 'prose-tick'
+};
+
 const TextCard = ({ data, bgColor, isContainedSection, containedBgColor }: TextCardProps) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const headingRef = useRef<HTMLElement>(null);
@@ -76,6 +81,7 @@ const TextCard = ({ data, bgColor, isContainedSection, containedBgColor }: TextC
         centerAlign = false,
         centerAlignOnMobile = false,
         contentFontSize = "16px",
+        listType = "bullet",
         headingFontSize = "40px",
         subheadingTag = "h2",
         headingTag = "h3",
@@ -108,6 +114,8 @@ const TextCard = ({ data, bgColor, isContainedSection, containedBgColor }: TextC
       !centerAlign && centerAlignOnMobile && "mx-auto md:mx-0",
       !centerAlign && !centerAlignOnMobile && "mx-0",
     );
+
+    const proseListType = listTypeMap[listType || "bullet"] || "prose-bullet";
 
     // Animate heading with same animation as HomeMasthead
     useGSAP(() => {
@@ -269,7 +277,7 @@ const TextCard = ({ data, bgColor, isContainedSection, containedBgColor }: TextC
             {data.content && (
                 <div 
                     ref={contentRef}
-                    className="text-card__content opacity-80"
+                    className={`text-card__content ${proseListType} opacity-80`}
                     style={{
                         maxWidth: contentMaxWidth ? `${contentMaxWidth}px` : undefined
                     }}

@@ -77,22 +77,36 @@ export const textCardOptions = defineType({
             name: 'contentFontSize',
             title: 'Content Font Size',
             type: 'string',
+            description: 'Controls the font size of paragraphs and lists inside the content rich text editor',
             options: {
                 list: [
-                    { value: '16px', title: '16px' },
-                    { value: '18px', title: '18px' },
-                    { value: '20px', title: '20px' },
-                    { value: '24px', title: '24px' }
+                    { value: 'default', title: 'Default' },
+                    { value: 'md', title: 'Medium' },
+                    { value: 'lg', title: 'Large' },
                 ],
                 layout: 'radio'
             },
-            initialValue: '18px'
+            initialValue: 'default'
         }),
         defineField({
             name: 'contentMaxWidth',
             title: 'Content Max Width',
             type: 'number',
             description: 'Please enter a value here to set the max width of the content container (px)'
+        }),
+        defineField({
+            name: 'listType',
+            title: 'List Type',
+            type: 'string',
+            description: 'Allows you to control the list type when using content rich text editor',
+            options: {
+                list: [
+                    { value: 'bullet', title: 'Bullet' },
+                    { value: 'tick', title: 'Tick' }
+                ],
+                layout: 'radio'
+            },
+            initialValue: 'bullet'
         })
     ]
 })
