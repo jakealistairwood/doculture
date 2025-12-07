@@ -58,6 +58,11 @@ h1 {
   font-family: var(--font-anton);
 }
 
+button,
+a {
+  cursor: pointer;
+}
+
 /* .text-136px {
   font-size: clamp(2.5rem, 1.964vw + 0.607rem, 8.5rem);
   line-height: 1.1;

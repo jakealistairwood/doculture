@@ -14,11 +14,20 @@ interface VideoPlayerProps {
         showTitleOnPoster?: boolean;
     };
     buttonClassName?: string;
+    isOpen?: boolean;
+    onClose?: () => void;
+    showPosterButton?: boolean;
 }
 
 const VideoPlayer = (props: VideoPlayerProps) => {
-    const [playVideo, setPlayVideo] = useState(false);
+    const { isOpen: controlledIsOpen, onClose, showPosterButton = true } = props;
+    const [internalPlayVideo, setInternalPlayVideo] = useState(false);
     const [mounted, setMounted] = useState(false);
+    
+    // Use controlled state if provided, otherwise use internal state
+    const isControlled = controlledIsOpen !== undefined;
+    const playVideo = isControlled ? controlledIsOpen : internalPlayVideo;
+    const setPlayVideo = isControlled ? (onClose || (() => {})) : setInternalPlayVideo;
 
     useEffect(() => {
         setMounted(true);
@@ -30,7 +39,11 @@ const VideoPlayer = (props: VideoPlayerProps) => {
 
         const handleEscape = (e: KeyboardEvent) => {
             if (e.key === "Escape") {
-                setPlayVideo(false);
+                if (isControlled && onClose) {
+                    onClose();
+                } else {
+                    setInternalPlayVideo(false);
+                }
             }
         };
 
@@ -41,23 +54,33 @@ const VideoPlayer = (props: VideoPlayerProps) => {
             document.removeEventListener("keydown", handleEscape);
             document.body.style.overflow = "unset";
         };
-    }, [playVideo]);
+    }, [playVideo, isControlled, onClose]);
 
     const modalContent = playVideo ? (
-        <div
-            className="fixed inset-0 h-screen w-screen bg-black/80 flex items-center justify-center z-[9999]"
-            onClick={(e) => {
-                if (e.target === e.currentTarget) {
-                    setPlayVideo(false);
-                }
-            }}
-        >
-            <div className="relative aspect-[16/9] max-w-[1100px] w-full mx-auto bg-black rounded-lg overflow-hidden">
-                <button
-                    onClick={() => setPlayVideo(false)}
-                    className="absolute top-4 right-4 z-10 text-white bg-black/50 hover:bg-black/70 rounded-full p-2 transition-colors"
-                    aria-label="Close video"
-                >
+            <div
+                className="fixed inset-0 h-screen w-screen bg-black/80 flex items-center justify-center z-[9999]"
+                onClick={(e) => {
+                    if (e.target === e.currentTarget) {
+                        if (isControlled && onClose) {
+                            onClose();
+                        } else {
+                            setInternalPlayVideo(false);
+                        }
+                    }
+                }}
+            >
+                <div className="relative aspect-[16/9] max-w-[1100px] w-full mx-auto bg-black rounded-lg overflow-hidden">
+                    <button
+                        onClick={() => {
+                            if (isControlled && onClose) {
+                                onClose();
+                            } else {
+                                setInternalPlayVideo(false);
+                            }
+                        }}
+                        className="absolute top-4 right-4 z-10 text-white bg-black/50 hover:bg-black/70 rounded-full p-2 transition-colors"
+                        aria-label="Close video"
+                    >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-6 w-6"
@@ -87,10 +110,18 @@ const VideoPlayer = (props: VideoPlayerProps) => {
 
     return (
         <>
-            {props?.poster && (
+            {props?.poster && showPosterButton && (
                 <button
                     type="button"
-                    onClick={() => setPlayVideo(true)}
+                    onClick={() => {
+                        if (isControlled && onClose) {
+                            // For controlled mode, we need to trigger the parent's open handler
+                            // Since we don't have onOpen, we'll use a different approach
+                            // The parent should handle opening via isOpen prop
+                        } else {
+                            setInternalPlayVideo(true);
+                        }
+                    }}
                     className={props.buttonClassName || "relative flex items-center justify-center md:rounded-[10px] overflow-hidden max-w-[1180px] w-full mx-auto aspect-[16/9] cursor-pointer group"}
                     aria-label="Play Video"
                 >
@@ -102,7 +133,7 @@ const VideoPlayer = (props: VideoPlayerProps) => {
                         <div className="relative flex items-center justify-between w-full px-8 pb-8 mt-auto">
                             <div className="absolute bg-gradient-to-t from-black/80 via-black/40 to-transparent z-[2] w-full h-full inset-0" />
                             <div className="z-[2] relative text-left">
-                                <h3 className="text-white text-[3.5rem] font-heading uppercase">
+                                <h3 className="text-white text-[2rem] md:text-[3.5rem] font-heading uppercase">
                                     {props.options.title}
                                 </h3>
                             </div>

@@ -164,8 +164,17 @@ export const pageQuery = groq`
         _type == "selectedWorks" => {
             _key,
             _type,
-            caseStudies[]{
-                project->
+            caseStudies[]->{
+                _id,
+                title,
+                slug,
+                excerpt,
+                video,
+                coverImage,
+                categories[]->{
+                    _id,
+                    title
+                }
             }
         },
         _type == "featureCards" => {

@@ -62,7 +62,7 @@ export function Section({ section }: SectionProps) {
   const containedSectionBgClass = isContainedSection && containedSectionBgColor 
     ? bgColorMap[containedSectionBgColor as keyof typeof bgColorMap] || "" 
     : "";
-  const containedSectionClasses = isContainedSection ? "rounded-[10px] p-20" : "";
+  const containedSectionClasses = isContainedSection ? "rounded-[10px] px-8 py-12 md:py-20 sm:px-12 md:px-20 p-20" : "";
 
   const bgColor = options?.bgColor || "none";
   const paddingTop = options?.paddingTop || "none";
