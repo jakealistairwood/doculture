@@ -35,7 +35,7 @@ export function generateMetadataFromSEO(
         images: [
           {
             url: ogImageUrl,
-            alt: seo.ogImage?.alt || title,
+            alt: seo?.ogImage?.alt || title,
           },
         ],
       }),
