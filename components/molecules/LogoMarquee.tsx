@@ -97,7 +97,7 @@ const LogoMarquee = ({ data, speed = 50, bgColor, disableInvertedLogoBg = false 
                 className="space-y-6 py-8"
             >
                 {labelContent}
-                <div className="flex flex-wrap items-center justify-center gap-8">
+                <div className="flex flex-col lg:flex-row lg:flex-wrap text-center lg:text-left items-center justify-center gap-8 py-8 lg:py-0">
                     {logos.map((logo) =>
                         renderLogo(
                             logo,

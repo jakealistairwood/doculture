@@ -104,6 +104,7 @@ export const pageQuery = groq`
                 subheading,
                 heading,
                 content,
+                links,
                 textCardOptions
             },
             asset{

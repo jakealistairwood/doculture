@@ -120,7 +120,7 @@ const Header = () => {
                                     <Link
                                         href="/contact"
                                         className={clsx(
-                                            "inline-flex items-center justify-center font-medium rounded-[3px] text-sm uppercase px-6 py-3",
+                                            "inline-flex items-center justify-center font-mono font-medium rounded-[3px] text-sm uppercase px-6 py-3",
                                             !isScrolled ? "border border-white/25 hover:bg-accent-orange hover:text-off-black hover:border-accent-orange/100" : "",
                                             isScrolled ? "border border-black/25 hover:bg-accent-orange hover:text-off-black hover:border-accent-orange/100" : "",
                                             "transition-all duration-200 ease"

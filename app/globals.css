@@ -82,7 +82,8 @@ a {
 }
 
 .text-40px {
-  font-size: clamp(1.5rem, 1.964vw + 0.607rem, 2.375rem);
+  /* font-size: clamp(1.5rem, 1.964vw + 0.607rem, 2.375rem); */
+  font-size: clamp(2rem, 1.8571rem + 0.7143vw, 2.5rem);
   line-height: 1.1;
 }
 

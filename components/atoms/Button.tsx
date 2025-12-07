@@ -1,12 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import clsx from "clsx";
 
 interface ButtonProps {
     href: string;
     label: string;
     size?: "sm" | "default" | "lg";
-    style?: "primary" | "outline";
+    style?: "primary" | "outline" | "accent";
     className?: string;
 }
 
@@ -36,12 +37,13 @@ const Button = ({
     const buttonBaseStyles = "inline-flex items-center justify-center font-medium transition-colors rounded-[3px]";
     const buttonSizeStyles = {
         sm: "px-4 py-2 text-sm",
-        default: "px-6 py-3 text-base",
+        default: "px-6 py-3 text-sm",
         lg: "px-8 py-4 text-lg",
     };
     const buttonStyleStyles = {
         primary: "bg-white text-black hover:bg-white/90",
-        outline: "border-2 border-white text-white hover:bg-white hover:text-black",
+        outline: "border-2 border-black/10 text-off-black font-medium hover:bg-accent-orange hover:text-black",
+        accent: "bg-accent-orange text-off-black hover:bg-accent-orange/90 font-mono uppercase",
     };
 
     // Use anchor tag for hash links, Link component for regular links

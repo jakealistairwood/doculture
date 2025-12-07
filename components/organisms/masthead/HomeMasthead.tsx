@@ -114,6 +114,7 @@ export function HomeMasthead({ data }: HomeMastheadProps) {
                         />
                     </div>
                 )}
+                <p className="absolute bottom-8 left-1/2 -translate-x-1/2 z-[2] opacity-50">&#91;Scroll Down&#93;</p>
             </div>
         </div>
     );

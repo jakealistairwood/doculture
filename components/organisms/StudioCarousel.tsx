@@ -45,7 +45,7 @@ const StudioCarousel = ({ data }: StudioCarouselProps) => {
                 modules={[Navigation, Pagination]}
                 spaceBetween={30}
                 slidesPerView={1.001}
-                centeredSlides={true}
+                // centeredSlides={true}
                 loop
                 // loopAdditionalSlides={2}
                 navigation={{
