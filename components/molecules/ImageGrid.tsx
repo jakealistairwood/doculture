@@ -10,24 +10,14 @@ interface ImageGridProps {
     bgColor?: string;
 }
 
-const aspectRatioMap = {
-    square: "aspect-square",
-    landscape: "aspect-[4/3]",
-    portrait: "aspect-[3/4]",
-    wide: "aspect-video",
-    auto: ""
-} as const;
-
 const ImageGrid = ({ data, bgColor }: ImageGridProps) => {
-    const { images = [], aspectRatio = 'square' } = data || {};
+    const { images = [] } = data || {};
     const containerRef = useRef<HTMLDivElement>(null);
     const isInView = useInView(containerRef, { amount: 0.1, once: true });
 
     if (!images || images.length === 0) {
         return null;
     }
-
-    const aspectRatioClass = aspectRatioMap[aspectRatio as keyof typeof aspectRatioMap] || "aspect-square";
 
     const imageAnimationVariant = {
         initial: {
@@ -49,14 +39,14 @@ const ImageGrid = ({ data, bgColor }: ImageGridProps) => {
             ref={containerRef}
         >
             {images.map((imageItem, index) => {
-                if (!imageItem?.asset?._ref && !imageItem?.asset?._id) {
+                if (!imageItem?.asset?._ref) {
                     return null;
                 }
 
                 return (
                     <motion.div
                         key={imageItem._key || index}
-                        className={`relative overflow-hidden ${aspectRatio !== 'auto' ? aspectRatioClass : ''}`}
+                        className="relative overflow-hidden aspect-square"
                         variants={imageAnimationVariant}
                         initial="initial"
                         animate={isInView ? "animate" : "initial"}
@@ -68,7 +58,7 @@ const ImageGrid = ({ data, bgColor }: ImageGridProps) => {
                     >
                         <SanityImage
                             image={imageItem}
-                            className={aspectRatio === 'auto' ? "w-full h-auto object-cover" : "w-full h-full object-cover"}
+                            className="w-full h-full object-cover"
                         />
                     </motion.div>
                 );

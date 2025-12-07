@@ -195,6 +195,7 @@ export const pageQuery = groq`
             aspectRatio,
             images[]{
                 _key,
+                _id,
                 asset,
                 altText
             }
