@@ -8,6 +8,15 @@ import SanityImage from "@/components/atoms/SanityImage";
 import VideoPlayer from "@/components/atoms/VideoPlayer";
 import TableOfContents from "@/components/molecules/TableOfContents";
 
+// Helper type for dereferenced category (categories are dereferenced in query)
+type DereferencedCategory = {
+    _id: string;
+    title?: string;
+    slug?: {
+        current?: string;
+    };
+};
+
 interface CaseStudyLayoutProps {
     project: Project;
 }
@@ -81,9 +90,16 @@ export default function CaseStudyLayout({ project }: CaseStudyLayoutProps) {
                                 )}
                                 {hasCategories && (
                                     <div className="flex items-center flex-wrap gap-3">
-                                        {project?.categories?.map((category, i) => (
-                                            <div key={`project-categories-${i}-${category?._key}`} className="py-1 px-2 border border-white/25 text-sm uppercase font-medium rounded-sm">{category?.title}</div>
-                                        ))}
+                                        {project?.categories?.map((category, i) => {
+                                            // Categories are dereferenced in the query (see queries.ts), so they have title
+                                            // Type assertion needed because Project type defines them as references
+                                            const dereferencedCategory = category as unknown as DereferencedCategory;
+                                            return (
+                                                <div key={`project-categories-${i}-${dereferencedCategory?._id || i}`} className="py-1 px-2 border border-white/25 text-sm uppercase font-medium rounded-sm">
+                                                    {dereferencedCategory?.title}
+                                                </div>
+                                            );
+                                        })}
                                     </div>
                                 )}
                             </div>
