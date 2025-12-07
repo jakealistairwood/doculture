@@ -120,65 +120,53 @@ const StudioCarousel = ({ data }: StudioCarouselProps) => {
                 ))}
             </Swiper>
 
-            {/* Custom Navigation Arrows */}
+            {/* Custom Navigation Controls - Below Carousel */}
             {studios.length > 1 && (
-                <>
-                    <button
-                        onClick={handlePrevious}
-                        className="swiper-button-prev-custom absolute left-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/50 hover:bg-black/70 text-white transition-colors"
-                        aria-label="Previous studio"
-                    >
-                        <svg
-                            className="w-6 h-6"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M15 19l-7-7 7-7"
-                            />
-                        </svg>
-                    </button>
-                    <button
-                        onClick={handleNext}
-                        className="swiper-button-next-custom absolute right-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/50 hover:bg-black/70 text-white transition-colors"
-                        aria-label="Next studio"
-                    >
-                        <svg
-                            className="w-6 h-6"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M9 5l7 7-7 7"
-                            />
-                        </svg>
-                    </button>
-                </>
-            )}
-
-            {/* Custom Pagination Dots */}
-            {studios.length > 1 && (
-                <div className="flex justify-center gap-2 mt-8 z-20 relative">
-                    {studios.map((_, index) => (
+                <div className="flex items-center justify-between gap-4 mt-8 z-20 relative">
+                    {/* Slide Indicator */}
+                    <div className="text-2xl font-heading uppercase font-medium tabular-nums">
+                        {String(activeIndex + 1).padStart(2, '0')}/{String(studios.length).padStart(2, '0')}
+                    </div>
+                    <div className="flex items-center gap-3">
                         <button
-                            key={index}
-                            onClick={() => handleDotClick(index)}
-                            className={`rounded-full transition-all duration-300 ${
-                                index === activeIndex
-                                    ? 'bg-current w-8 h-2 opacity-100'
-                                    : 'bg-current w-2 h-2 opacity-30'
-                            }`}
-                            aria-label={`Go to studio ${index + 1}`}
-                        />
-                    ))}
+                            onClick={handlePrevious}
+                            className="swiper-button-prev-custom p-2 bg-white/10 text-white hover:bg-accent-orange hover:text-off-black transition-colors"
+                            aria-label="Previous studio"
+                        >
+                            <svg
+                                className="w-6 h-6"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M15 19l-7-7 7-7"
+                                />
+                            </svg>
+                        </button>
+                        <button
+                            onClick={handleNext}
+                            className="swiper-button-next-custom p-2 bg-white/10 text-white hover:bg-accent-orange hover:text-off-black transition-colors"
+                            aria-label="Next studio"
+                        >
+                            <svg
+                                className="w-6 h-6"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M9 5l7 7-7 7"
+                                />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             )}
 

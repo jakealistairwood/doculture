@@ -124,7 +124,7 @@ export default function CaseStudyLayout({ project }: CaseStudyLayoutProps) {
                     </div>
                 </div>
             </section>
-            <section className="py-36">
+            <section className="py-16 lg:py-36">
                 <div className="container">
                     <div className="grid grid-cols-1 md:grid-cols-[210px_auto] gap-16 md:gap-20 lg:gap-40 relative">
                         <aside className="relative">

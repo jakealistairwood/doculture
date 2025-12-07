@@ -33,6 +33,8 @@ import { contactLandingPage } from "./landingPages/contactLandingPage";
 import { timedAccordionSlider } from "./timedAccordionSlider";
 import { imageGrid } from "./imageGrid";
 import { globalOptions } from "./globalOptions";
+import { aboutLandingPage } from "./landingPages/aboutLandingPage";
+import { teamMember } from "./teamMember";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
     types: [
@@ -68,6 +70,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
         contactLandingPage,
         timedAccordionSlider,
         imageGrid,
-        globalOptions
+        globalOptions,
+        aboutLandingPage,
+        teamMember
     ],
 };

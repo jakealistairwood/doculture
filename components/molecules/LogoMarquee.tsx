@@ -84,7 +84,7 @@ const LogoMarquee = ({ data, speed = 50, bgColor, disableInvertedLogoBg = false 
     );
 
     const labelContent = data?.label ? (
-        <p className="text-xl font-serif">
+        <p className="text-xl font-serif whitespace-nowrap">
             {data.label}
         </p>
     ) : null;
@@ -97,7 +97,7 @@ const LogoMarquee = ({ data, speed = 50, bgColor, disableInvertedLogoBg = false 
                 className="space-y-6 py-8"
             >
                 {labelContent}
-                <div className="flex flex-col lg:flex-row lg:flex-wrap text-center lg:text-left items-center justify-center gap-8 py-8 lg:py-0">
+                <div className="flex flex-col lg:flex-row text-center lg:text-left items-center justify-center gap-8 py-8 lg:py-0">
                     {logos.map((logo) =>
                         renderLogo(
                             logo,
@@ -114,7 +114,7 @@ const LogoMarquee = ({ data, speed = 50, bgColor, disableInvertedLogoBg = false 
             <div
                 data-component="logo-marquee"
                 ref={containerRef}
-                className="flex flex-col gap-y-6 gap-x-20 py-4 md:flex-row md:items-center md:justify-between min-h-[51px]"
+                className="flex flex-col lg:flex-row text-center lg:text-left gap-y-6 gap-x-20 py-4 lg:items-center lg:justify-between min-h-[51px]"
             >
                 {labelContent}
                 <div className="flex-1 max-w-[1000px] w-full">{marqueeContent}</div>

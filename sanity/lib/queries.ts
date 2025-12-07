@@ -402,6 +402,71 @@ export const landingPageQuery = groq`
                 }
             }
     },
+    aboutLandingPage{
+      masthead{
+        heading,
+        description,
+        asset{
+          id,
+          type,
+          image{
+            ...,
+            asset
+          },
+          video,
+          videoPoster{
+            ...,
+            asset
+          },
+          videoOptions
+        },
+        mastheadMaxWidth
+      },
+      aboutUsContent[]{
+        _key,
+        _type,
+        title,
+        components[]{
+          _key,
+          _type,
+          _type == "caseStudyRichText" => {
+            content[]{
+              ...,
+              _type == "image" => {
+                ...,
+                asset->
+              }
+            }
+          },
+          _type == "caseStudyImage" => {
+            type,
+            image{
+              ...,
+              asset
+            },
+            video,
+            videoPoster{
+              ...,
+              asset
+            },
+            videoOptions
+          }
+        }
+      },
+      meetTheTeam{
+        heading,
+        teamMembers[]->{
+          _id,
+          name,
+          role,
+          headshot{
+            ...,
+            asset
+          },
+          content
+        }
+      }
+    },
     seo{
       title,
       description,

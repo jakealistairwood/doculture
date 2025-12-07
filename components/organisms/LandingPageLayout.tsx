@@ -1,8 +1,7 @@
 "use client";
 
-import SanityImage from "@/components/atoms/SanityImage";
-import ContactForm from "@/components/molecules/ContactForm";
 import ContactLandingPage from "@/components/organisms/landingPages/ContactLandingPage";
+import AboutLandingPage from "@/components/organisms/landingPages/AboutLandingPage";
 
 interface LandingPageData {
     _id: string;
@@ -11,7 +10,7 @@ interface LandingPageData {
     slug?: {
         current?: string;
     };
-    template?: "contact";
+    template?: "contact" | "about";
     contactLandingPage?: {
         heading?: string;
         description?: string;
@@ -32,23 +31,44 @@ interface LandingPageData {
             };
         };
     };
+    aboutLandingPage?: {
+        masthead?: {
+            heading?: string;
+            description?: string;
+            asset?: any;
+        };
+        aboutUsContent?: Array<{
+            _key?: string;
+            _type?: string;
+            title?: string;
+            components?: Array<any>;
+        }>;
+    };
 }
 
 interface LandingPageLayoutProps {
     landingPage: LandingPageData;
     logoMarquee?: any;
+    globalCTA?: any;
+    globalOptions?: any;
 }
 
-export default function LandingPageLayout({ landingPage, logoMarquee }: LandingPageLayoutProps) {
+export default function LandingPageLayout({ landingPage, logoMarquee, globalCTA, globalOptions }: LandingPageLayoutProps) {
     if (!landingPage) {
         return null;
     }
 
-    const { template, contactLandingPage } = landingPage;
+    const { template, contactLandingPage, aboutLandingPage } = landingPage;
 
     if (template === "contact" && contactLandingPage) {
         return (
             <ContactLandingPage data={contactLandingPage} logoMarquee={logoMarquee} />
+        );
+    }
+
+    if (template === "about" && aboutLandingPage) {
+        return (
+            <AboutLandingPage data={aboutLandingPage} globalCTA={globalCTA} globalOptions={globalOptions} />
         );
     }
 

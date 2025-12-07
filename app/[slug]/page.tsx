@@ -1,5 +1,5 @@
 import { client } from "@/sanity/lib/client";
-import { pageQuery, landingPageQuery, logoMarqueeQuery } from "@/sanity/lib/queries";
+import { pageQuery, landingPageQuery, logoMarqueeQuery, globalCTAQuery, globalOptionsQuery } from "@/sanity/lib/queries";
 import { Page } from "@/sanity/types";
 import { PageLayout } from "@/layout/PageLayout";
 import LandingPageLayout from "@/components/organisms/LandingPageLayout";
@@ -72,11 +72,14 @@ export default async function DynamicPage({ params }: PageProps) {
         }
 
         if (landingPage) {
-            // Fetch logo marquee for landing pages (fallback if not selected in contactLandingPage)
-            const logoMarquee = await client.fetch(logoMarqueeQuery);
-            console.log('DynamicPage - landingPage:', landingPage);
-            console.log('DynamicPage - logoMarquee from query:', logoMarquee);
-            return <LandingPageLayout landingPage={landingPage} logoMarquee={logoMarquee} />;
+            // Fetch logo marquee, globalCTA, and globalOptions for landing pages
+            const [logoMarquee, globalCTA, globalOptions] = await Promise.all([
+                client.fetch(logoMarqueeQuery),
+                client.fetch(globalCTAQuery),
+                client.fetch(globalOptionsQuery),
+            ]);
+
+            return <LandingPageLayout landingPage={landingPage} logoMarquee={logoMarquee} globalCTA={globalCTA} globalOptions={globalOptions} />;
         }
     }
 

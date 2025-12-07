@@ -183,22 +183,6 @@ const Header = () => {
                 )}
                 aria-hidden={!isMobileMenuOpen}
             >
-                {/* Close button inside menu */}
-                <button
-                    type="button"
-                    onClick={closeMobileMenu}
-                    className="absolute top-5 right-4 flex items-center justify-center gap-x-3 z-[102]"
-                    aria-label="Close mobile navigation"
-                >
-                    <span className="font-medium text-off-black" aria-hidden>
-                        Close
-                    </span>
-                    <div className="flex flex-col gap-y-1.5 w-[20px] justify-center" aria-hidden>
-                        <div className="h-[1.5px] w-full bg-off-black rotate-45 translate-y-[3px] transition-all duration-300 origin-center" />
-                        <div className="h-[1.5px] w-full bg-off-black opacity-0 transition-all duration-300" />
-                        <div className="h-[1.5px] w-full bg-off-black -rotate-45 -translate-y-[3px] transition-all duration-300 origin-center" />
-                    </div>
-                </button>
                 <nav className="h-full flex flex-col">
                     <div className="flex-1 flex flex-col items-center justify-center px-4">
                         <ul className="flex flex-col items-center gap-y-8 text-center">

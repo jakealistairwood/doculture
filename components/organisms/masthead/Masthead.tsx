@@ -14,7 +14,7 @@ export function Masthead({ data }: MastheadProps) {
         <div data-component="masthead" className="h-screen">
             <div className="bg-black text-white h-full relative overflow-hidden flex flex-col items-center justify-center p-10">
                 <div className="flex flex-col md:flex-row gap-y-16 gap-x-24 relative z-[2]">
-                    <div className="flex flex-col gap-y-8">
+                    <div className="flex flex-col items-center text-center gap-y-8">
                         {data.heading && (
                             <h1 className="text-120px leading-none uppercase subt_1 max-w-[700px]">
                                 {/* <SplitTextComponent
@@ -59,6 +59,7 @@ export function Masthead({ data }: MastheadProps) {
                         />
                     </div>
                 )}
+                <p className="absolute bottom-8 left-1/2 -translate-x-1/2 z-[2] opacity-60">&#91;Scroll Down&#93;</p>
             </div>
         </div>
     );

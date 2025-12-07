@@ -29,6 +29,7 @@ export const landingPage = defineType({
             options: {
                 list: [
                     { value: 'contact', title: 'Contact' },
+                    { value: 'about', title: 'About' }
                 ],
                 layout: 'radio'
             },
@@ -40,6 +41,12 @@ export const landingPage = defineType({
             title: 'Contact Landing Page',
             type: 'contactLandingPage',
             hidden: ({parent}) => parent?.template !== 'contact'
+        }),
+        defineField({
+            name: 'aboutLandingPage',
+            title: 'About Landing Page',
+            type: 'aboutLandingPage',
+            hidden: ({parent}) => parent?.template !== 'about'
         }),
         defineField({
             name: 'seo',
