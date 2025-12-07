@@ -73,6 +73,13 @@ export const asset = defineType({
                     title: 'Title',
                     type: 'string'
                 }),
+                defineField({
+                    name: 'showTitleOnPoster',
+                    title: 'Show Title on Poster',
+                    type: 'boolean',
+                    description: 'If enabled, the video title will be displayed on the poster image',
+                    initialValue: false
+                }),
             ],
             hidden: ({parent}) => parent?.type !== 'video'
         })

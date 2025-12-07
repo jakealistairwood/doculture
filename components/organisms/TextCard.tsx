@@ -3,6 +3,7 @@
 import { TextCard as TextCardType, BlockContent } from "@/sanity/types";
 import { PortableText } from "@portabletext/react";
 import SanityImage from "@/components/atoms/SanityImage";
+import LinksWrapper from "@/components/molecules/LinksWrapper";
 import clsx from "clsx";
 
 interface TextCardProps {
@@ -163,6 +164,9 @@ const TextCard = ({ data, bgColor, isContainedSection, containedBgColor }: TextC
                         }}
                     />
                 </div>
+            )}
+            {data.links && data.links.length > 0 && (
+                <LinksWrapper links={data.links} />
             )}
         </div>
     );

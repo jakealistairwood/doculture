@@ -18,13 +18,15 @@ export const section = defineType({
                 { type: 'homeMasthead' },
                 { type: 'textCard' },
                 { type: 'asset' },
+                { type: 'twoColTextAsset' },
                 { type: 'logos' },
                 { type: 'linkCards' },
                 { type: 'headerMarquee' },
                 { type: 'selectedWorks' },
                 { type: 'featureCards' },
                 { type: 'studioCarousel' },
-                { type: 'timedAccordionSlider' }
+                { type: 'timedAccordionSlider' },
+                { type: 'imageGrid' }
             ]
         }),
         defineField({

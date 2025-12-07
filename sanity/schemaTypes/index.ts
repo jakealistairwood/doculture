@@ -19,6 +19,7 @@ import { reusableBlock } from "./reusableBlock";
 import { logoMarquee } from "./reusableBlocks/logoMarquee";
 import { logos } from "./logos";
 import { asset } from "./asset";
+import { twoColTextAsset } from "./twoColTextAsset";
 import { linkCards } from "./linkCards";
 import { headerMarquee } from "./headerMarquee";
 import { selectedWorks } from "./selectedWorks";
@@ -32,6 +33,7 @@ import { globalCTA } from "./reusableBlocks/globalCTA";
 import { landingPage } from "./landingPage";
 import { contactLandingPage } from "./landingPages/contactLandingPage";
 import { timedAccordionSlider } from "./timedAccordionSlider";
+import { imageGrid } from "./imageGrid";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
     types: [
@@ -53,6 +55,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
         reusableBlock,
         logoMarquee,
         asset,
+        twoColTextAsset,
         logos,
         linkCards,
         headerMarquee,
@@ -66,6 +69,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
         globalCTA,
         landingPage,
         contactLandingPage,
-        timedAccordionSlider
+        timedAccordionSlider,
+        imageGrid
     ],
 };

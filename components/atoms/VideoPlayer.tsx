@@ -4,12 +4,14 @@ import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import SanityImage from "./SanityImage";
 import ReactPlayer from "react-player";
+import clsx from "clsx";
 
 interface VideoPlayerProps {
     video?: string;
     poster?: any;
     options?: {
         title?: string;
+        showTitleOnPoster?: boolean;
     };
     buttonClassName?: string;
 }
@@ -94,16 +96,36 @@ const VideoPlayer = (props: VideoPlayerProps) => {
                 >
                     <SanityImage
                         image={props?.poster}
-                        className="w-full h-full object-cover relative z-[2] scale-100 group-hover:scale-[1.02] duration-400 ease transition-transform will-change-transform"
+                        className="w-full h-full object-cover absolute inset-0 z-[2] scale-100 group-hover:scale-[1.02] duration-400 ease transition-transform will-change-transform"
                     />
-                    <div
-                        className="w-[45px] md:w-[75px] aspect-square rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[2] flex items-center justify-center flex-none bg-black/25 backdrop-blur-md"
-                        aria-hidden
-                    >
-                        <div className="relative aspect-[31/37] w-1/3">
-                            <PlayIcon />
+                    {props?.options?.title && props?.options?.showTitleOnPoster && (
+                        <div className="relative flex items-center justify-between w-full px-8 pb-8 mt-auto">
+                            <div className="absolute bg-gradient-to-t from-black/80 via-black/40 to-transparent z-[2] w-full h-full inset-0" />
+                            <div className="z-[2] relative text-left">
+                                <h3 className="text-white text-[3.5rem] font-heading uppercase">
+                                    {props.options.title}
+                                </h3>
+                            </div>
+                            <div
+                                className="w-[45px] md:w-[75px] aspect-square rounded-full z-[3] flex items-center justify-center flex-none bg-accent-orange/90 backdrop-blur-md relative z-[3]"
+                                aria-hidden
+                            >
+                                <div className="relative aspect-[31/37] w-1/3">
+                                    <PlayIcon />
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    )}
+                    {!props?.options?.showTitleOnPoster && (
+                        <div
+                            className="w-[45px] md:w-[75px] aspect-square rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[3] flex items-center justify-center flex-none bg-accent-orange/90 backdrop-blur-md"
+                            aria-hidden
+                        >
+                            <div className="relative aspect-[31/37] w-1/3">
+                                <PlayIcon />
+                            </div>
+                        </div>
+                    )}
                 </button>
             )}
             {mounted && createPortal(modalContent, document.body)}

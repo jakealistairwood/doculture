@@ -80,6 +80,7 @@ export const pageQuery = groq`
             subheading,
             heading,
             content,
+            links,
             textCardOptions
         },
         _type == "asset" => {
@@ -91,6 +92,30 @@ export const pageQuery = groq`
             video,
             videoPoster,
             videoOptions
+        },
+        _type == "twoColTextAsset" => {
+            _key,
+            _type,
+            alignTextVertically,
+            reverseDirection,
+            textCard{
+                _key,
+                _type,
+                subheading,
+                heading,
+                content,
+                textCardOptions
+            },
+            asset{
+                _key,
+                _type,
+                id,
+                type,
+                image,
+                video,
+                videoPoster,
+                videoOptions
+            }
         },
         _type == "logos" => {
             _key,
@@ -153,6 +178,16 @@ export const pageQuery = groq`
                 icon,
                 title,
                 description
+            }
+        },
+        _type == "imageGrid" => {
+            _key,
+            _type,
+            aspectRatio,
+            images[]{
+                _key,
+                asset,
+                altText
             }
         },
         _type == "studioCarousel" => {

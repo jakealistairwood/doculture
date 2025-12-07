@@ -13,6 +13,24 @@
  */
 
 // Source: schema.json
+export type ImageGrid = {
+  _type: "imageGrid";
+  images?: Array<{
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    altText?: string;
+    _type: "image";
+    _key: string;
+  }>;
+};
+
 export type TimedAccordionSlider = {
   _type: "timedAccordionSlider";
   items?: Array<{
@@ -319,6 +337,14 @@ export type Logos = {
   };
 };
 
+export type TwoColTextAsset = {
+  _type: "twoColTextAsset";
+  textCard?: TextCard;
+  asset?: Asset;
+  alignTextVertically?: boolean;
+  reverseDirection?: boolean;
+};
+
 export type Asset = {
   _type: "asset";
   id?: string;
@@ -352,6 +378,7 @@ export type Asset = {
   };
   videoOptions?: {
     title?: string;
+    showTitleOnPoster?: boolean;
   };
 };
 
@@ -405,6 +432,7 @@ export type TextCard = {
   subheading?: string;
   heading?: string;
   content?: BlockContent;
+  links?: LinksWrapper;
   textCardOptions?: TextCardOptions;
 };
 
@@ -634,6 +662,8 @@ export type Section = {
     _key: string;
   } & Asset | {
     _key: string;
+  } & TwoColTextAsset | {
+    _key: string;
   } & Logos | {
     _key: string;
   } & LinkCards | {
@@ -646,7 +676,9 @@ export type Section = {
     _key: string;
   } & StudioCarousel | {
     _key: string;
-  } & TimedAccordionSlider>;
+  } & TimedAccordionSlider | {
+    _key: string;
+  } & ImageGrid>;
   sectionOptions?: SectionOptions;
 };
 
@@ -760,5 +792,5 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = TimedAccordionSlider | ContactLandingPage | LandingPage | Seo | SanityImageCrop | SanityImageHotspot | BlockContent | Slug | GlobalCTA | CaseStudyImage | CaseStudyRichText | CaseStudyBuilder | StudioCarousel | Studio | FeatureCards | SelectedWorks | HeaderMarquee | LinkCards | Logos | Asset | LogoMarquee | Link | LinksWrapper | TextCardOptions | TextCard | HomeMasthead | ReusableBlock | Masthead | Post | Author | Category | Project | SectionOptions | Section | Page | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = ImageGrid | TimedAccordionSlider | ContactLandingPage | LandingPage | Seo | SanityImageCrop | SanityImageHotspot | BlockContent | Slug | GlobalCTA | CaseStudyImage | CaseStudyRichText | CaseStudyBuilder | StudioCarousel | Studio | FeatureCards | SelectedWorks | HeaderMarquee | LinkCards | Logos | TwoColTextAsset | Asset | LogoMarquee | Link | LinksWrapper | TextCardOptions | TextCard | HomeMasthead | ReusableBlock | Masthead | Post | Author | Category | Project | SectionOptions | Section | Page | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 export declare const internalGroqTypeReferenceTo: unique symbol;

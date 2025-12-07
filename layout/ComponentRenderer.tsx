@@ -5,10 +5,12 @@ import { Masthead } from '@/components/organisms/masthead/Masthead';
 
 const TextCard = dynamic(() => import('@/components/organisms/TextCard'));
 const Asset = dynamic(() => import('@/components/molecules/Asset'));
+const TwoColTextAsset = dynamic(() => import('@/components/organisms/TwoColTextAsset'));
 const LogoMarquee = dynamic(() => import('@/components/molecules/LogoMarquee'));
 const LinkCards = dynamic(() => import('@/components/molecules/LinkCards'));
 const HeaderMarquee = dynamic(() => import('@/components/molecules/HeaderMarquee'));
 const FeatureCards = dynamic(() => import('@/components/molecules/FeatureCards'));
+const ImageGrid = dynamic(() => import('@/components/molecules/ImageGrid'));
 const StudioCarousel = dynamic(() => import('@/components/organisms/StudioCarousel'));
 const TimedAccordionSlider = dynamic(() => import('@/components/molecules/TimedAccordionSlider'));
 const SelectedWorks = dynamic(() => import('@/components/organisms/SelectedWorks'));
@@ -17,10 +19,12 @@ import {
   Masthead as MastheadType, 
   HomeMasthead as HomeMastheadType, 
   TextCard as TextCardType, 
-  Asset as AssetType, 
+  Asset as AssetType,
+  TwoColTextAsset as TwoColTextAssetType,
   Logos as LogosType, 
   LinkCards as LinkCardsType, 
-  FeatureCards as FeatureCardsType, 
+  FeatureCards as FeatureCardsType,
+  ImageGrid as ImageGridType,
   StudioCarousel as StudioCarouselType, 
   SelectedWorks as SelectedWorksType, 
   HeaderMarquee as HeaderMarqueeType,
@@ -47,7 +51,9 @@ export function ComponentRenderer({ component, bgColor, isContainedSection = fal
     case 'textCard':
       return <TextCard data={component as TextCardType} bgColor={bgColor} isContainedSection={isContainedSection} containedBgColor={containedBgColor} />;
     case 'asset':
-      return <Asset data={component as AssetType} />;
+      return <Asset data={component as AssetType} bgColor={bgColor} />;
+    case 'twoColTextAsset':
+      return <TwoColTextAsset data={component as TwoColTextAssetType} bgColor={bgColor} isContainedSection={isContainedSection} containedBgColor={containedBgColor} />;
     case 'logos':
         return <LogoMarquee data={component as LogosType} bgColor={bgColor} />
     case 'linkCards':
@@ -57,7 +63,9 @@ export function ComponentRenderer({ component, bgColor, isContainedSection = fal
     case 'selectedWorks':
         return <SelectedWorks data={component as SelectedWorksType} />
     case 'featureCards':
-        return <FeatureCards data={component as FeatureCardsType} bgColor={bgColor} />
+      return <FeatureCards data={component as FeatureCardsType} bgColor={bgColor} />
+    case 'imageGrid':
+      return <ImageGrid data={component as ImageGridType} bgColor={bgColor} />
     case 'studioCarousel':
         return <StudioCarousel data={component as StudioCarouselType} />
     case 'timedAccordionSlider':

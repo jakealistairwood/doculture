@@ -4,46 +4,37 @@ import { useRef } from "react";
 import { Asset as AssetType } from "@/sanity/types";
 import SanityImage from "@/components/atoms/SanityImage";
 import VideoPlayer from "@/components/atoms/VideoPlayer";
-import { useInView, motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 
 interface AssetProps {
     data: AssetType;
+    bgColor?: string;
 }
 
-const Asset = ({ data }: AssetProps) => {
-    const ref = useRef(null);
-
-    const isInView = useInView(ref, {
-        amount: 0.3,
-        once: true
-    });
-
+const Asset = ({ data, bgColor }: AssetProps) => {
     if (!data) {
         return null;
     }
 
     const { type, image, video, videoPoster, videoOptions, id } = data;
 
+    const ref = useRef(null);
+    const isInView = useInView(ref, {
+        amount: 0.2,
+        once: true
+    })
+
     if (type === "image" && image) {
         return (
-            <motion.div 
+            <div 
                 className="w-full" 
-                id={id} 
-                ref={ref}
-                initial={{
-                    opacity: 0,
-                    y: 20
-                }}
-                animate={{
-                    opacity: isInView ? 1 : 0,
-                    y: isInView ? 0 : 20
-                }}
+                id={id}
             >
                 <SanityImage
                     image={image}
                     className="w-full h-auto object-cover"
                 />
-            </motion.div>
+            </div>
         );
     }
 

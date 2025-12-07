@@ -21,6 +21,10 @@ export const textCard = defineType({
             type: 'blockContent'
         }),
         defineField({
+            name: 'links',
+            type: 'linksWrapper'
+        }),
+        defineField({
             name: 'textCardOptions',
             type: 'textCardOptions'
         })
