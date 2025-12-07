@@ -1,12 +1,12 @@
 "use client";
 
-import { HomeMasthead as HomeMastheadType } from "@/sanity/types";
+import { Masthead as MastheadType } from "@/sanity/types";
 import { SplitTextComponent } from "@/components/atoms/SplitText";
 import SanityImage from "@/components/atoms/SanityImage";
 import LinksWrapper from "@/components/molecules/LinksWrapper";
 
 interface MastheadProps {
-    data: HomeMastheadType;
+    data: MastheadType;
 }
 
 export function Masthead({ data }: MastheadProps) {

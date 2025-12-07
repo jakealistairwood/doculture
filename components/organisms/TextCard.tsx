@@ -1,10 +1,13 @@
 "use client";
 
 import { TextCard as TextCardType, BlockContent } from "@/sanity/types";
-import { PortableText } from "@portabletext/react";
+import { PortableText, PortableTextComponents } from "@portabletext/react";
 import SanityImage from "@/components/atoms/SanityImage";
 import LinksWrapper from "@/components/molecules/LinksWrapper";
 import clsx from "clsx";
+
+// Extract types from BlockContent
+type BlockContentImage = Extract<BlockContent[number], { _type: "image" }>;
 
 interface TextCardProps {
     data: TextCardType;
@@ -13,15 +16,15 @@ interface TextCardProps {
     containedBgColor: string;
 }
 
-const headingFontSizeMap = {
-  "16px": "text-16px",
+const headingFontSizeMap: Record<string, string> = {
+  "24px": "text-24px",
   "40px": "text-40px",
   "80px": "text-80px !leading-[1.1]",
   "100px": "text-100px",
   "120px": "text-120px"
 };
 
-const subheadingBgColorMap = {
+const subheadingBgColorMap: Record<string, string> = {
   white: "bg-[#F1F1F1] text-black/[80%]",
   black: "bg-white/[10%] text-white",
   lightGrey: "bg-white text-black/[80%]",
@@ -45,10 +48,14 @@ const TextCard = ({ data, bgColor, isContainedSection, containedBgColor }: TextC
     const SubheadingTag = subheadingTag || "h2";
     const HeadingTag = headingTag || "h3";
 
-    const headingFontSizeClass = headingFontSizeMap[headingFontSize] || "text-40px";
+    const headingFontSizeClass = headingFontSizeMap[headingFontSize || "40px"] || "text-40px";
 
-    const subheadingBgColor = subheadingBgColorMap[bgColor] || "bg-[#F1F1F1] text-black/[80%]";
-    const containedSubheadingBgColor = subheadingBgColorMap[containedBgColor] || "bg-[#F1F1F1] text-black/[80%]";
+    const subheadingBgColor = (bgColor && bgColor in subheadingBgColorMap) 
+        ? subheadingBgColorMap[bgColor] 
+        : "bg-[#F1F1F1] text-black/[80%]";
+    const containedSubheadingBgColor = (containedBgColor && containedBgColor in subheadingBgColorMap)
+        ? subheadingBgColorMap[containedBgColor]
+        : "bg-[#F1F1F1] text-black/[80%]";
 
     const subheadingBg = isContainedSection ? containedSubheadingBgColor : subheadingBgColor;
 
@@ -91,38 +98,39 @@ const TextCard = ({ data, bgColor, isContainedSection, containedBgColor }: TextC
                         value={data.content as BlockContent} 
                         components={{
                             block: {
-                                normal: ({ children }: { children: React.ReactNode }) => (
+                                normal: ({ children }: { children?: React.ReactNode }) => (
                                     <p className="mb-4 last:mb-0">{children}</p>
                                 ),
-                                h1: ({ children }: { children: React.ReactNode }) => (
+                                h1: ({ children }: { children?: React.ReactNode }) => (
                                     <h1 className="text-2xl md:text-3xl font-heading uppercase mb-4">{children}</h1>
                                 ),
-                                h2: ({ children }: { children: React.ReactNode }) => (
+                                h2: ({ children }: { children?: React.ReactNode }) => (
                                     <h2 className="text-xl md:text-2xl font-heading uppercase mb-4">{children}</h2>
                                 ),
-                                h3: ({ children }: { children: React.ReactNode }) => (
+                                h3: ({ children }: { children?: React.ReactNode }) => (
                                     <h3 className="text-lg md:text-xl font-heading uppercase mb-4">{children}</h3>
                                 ),
-                                h4: ({ children }: { children: React.ReactNode }) => (
+                                h4: ({ children }: { children?: React.ReactNode }) => (
                                     <h4 className="text-base md:text-lg font-heading uppercase mb-4">{children}</h4>
                                 ),
-                                blockquote: ({ children }: { children: React.ReactNode }) => (
+                                blockquote: ({ children }: { children?: React.ReactNode }) => (
                                     <blockquote className="border-l-4 border-current pl-4 py-2 my-4 italic">{children}</blockquote>
                                 ),
                             },
                             marks: {
-                                strong: ({ children }: { children: React.ReactNode }) => (
+                                strong: ({ children }: { children?: React.ReactNode }) => (
                                     <strong className="font-bold">{children}</strong>
                                 ),
-                                em: ({ children }: { children: React.ReactNode }) => (
+                                em: ({ children }: { children?: React.ReactNode }) => (
                                     <em className="italic">{children}</em>
                                 ),
-                                link: ({ value, children }: { value: { href?: string }; children: React.ReactNode }) => {
-                                    const target = value?.href?.startsWith('http') ? '_blank' : undefined;
+                                link: ({ value, children }: { value?: { href?: string }; children?: React.ReactNode }) => {
+                                    const href = value?.href;
+                                    const target = href?.startsWith('http') ? '_blank' : undefined;
                                     const rel = target === '_blank' ? 'noopener noreferrer' : undefined;
                                     return (
                                         <a
-                                            href={value?.href}
+                                            href={href}
                                             target={target}
                                             rel={rel}
                                             className="underline hover:no-underline transition-all"
@@ -133,24 +141,24 @@ const TextCard = ({ data, bgColor, isContainedSection, containedBgColor }: TextC
                                 },
                             },
                             list: {
-                                bullet: ({ children }: { children: React.ReactNode }) => (
+                                bullet: ({ children }: { children?: React.ReactNode }) => (
                                     <ul className="list-disc list-inside mb-4 space-y-2 ml-4">{children}</ul>
                                 ),
-                                number: ({ children }: { children: React.ReactNode }) => (
+                                number: ({ children }: { children?: React.ReactNode }) => (
                                     <ol className="list-decimal list-inside mb-4 space-y-2 ml-4">{children}</ol>
                                 ),
                             },
                             listItem: {
-                                bullet: ({ children }: { children: React.ReactNode }) => (
+                                bullet: ({ children }: { children?: React.ReactNode }) => (
                                     <li>{children}</li>
                                 ),
-                                number: ({ children }: { children: React.ReactNode }) => (
+                                number: ({ children }: { children?: React.ReactNode }) => (
                                     <li>{children}</li>
                                 ),
                             },
                             types: {
-                                image: ({ value }: { value: any }) => {
-                                    if (!value?.asset?._ref && !value?.asset?._id) return null;
+                                image: ({ value }: { value: BlockContentImage }) => {
+                                    if (!value?.asset?._ref) return null;
                                     return (
                                         <div className="my-4">
                                             <SanityImage
@@ -161,7 +169,7 @@ const TextCard = ({ data, bgColor, isContainedSection, containedBgColor }: TextC
                                     );
                                 },
                             },
-                        }}
+                        } as PortableTextComponents}
                     />
                 </div>
             )}

@@ -1,6 +1,6 @@
 "use client";
 
-import { PortableText } from "@portabletext/react";
+import { PortableText, PortableTextComponents } from "@portabletext/react";
 import { BlockContent } from "@/sanity/types";
 import SanityImage from "@/components/atoms/SanityImage";
 
@@ -8,10 +8,16 @@ interface CaseStudyRichTextProps {
     content: BlockContent;
 }
 
+// Extract types from BlockContent
+type BlockContentImage = Extract<BlockContent[number], { _type: "image" }>;
+type BlockContentBlock = Extract<BlockContent[number], { _type: "block" }>;
+type BlockContentSpan = NonNullable<BlockContentBlock["children"]>[number];
+type BlockContentLink = NonNullable<BlockContentBlock["markDefs"]>[number] & { _type: "link" };
+
 // Custom components for PortableText
 const components = {
     types: {
-        image: ({ value }: { value: any }) => {
+        image: ({ value }: { value: BlockContentImage }) => {
             if (!value?.asset?._ref) {
                 return null;
             }
@@ -26,18 +32,18 @@ const components = {
         },
     },
     block: {
-        h1: ({ children }: { children: React.ReactNode }) => (
+        h1: ({ children }: { children?: React.ReactNode }) => (
             <h1 className="text-4xl md:text-5xl font-heading uppercase mt-12 mb-6 first:mt-0">
                 {children}
             </h1>
         ),
-        h2: ({ children, value }: { children: React.ReactNode; value?: any }) => {
+        h2: ({ children, value }: { children?: React.ReactNode; value?: BlockContentBlock }) => {
             // Generate ID from text content
             let text = '';
             if (value?.children) {
                 text = value.children
-                    .filter((child: any) => child._type === 'span')
-                    .map((span: any) => span.text || '')
+                    .filter((child: BlockContentSpan): child is BlockContentSpan => child._type === 'span')
+                    .map((span) => span.text || '')
                     .join('');
             } else if (typeof children === 'string') {
                 text = children;
@@ -59,40 +65,41 @@ const components = {
                 </h2>
             );
         },
-        h3: ({ children }: { children: React.ReactNode }) => (
+        h3: ({ children }: { children?: React.ReactNode }) => (
             <h3 className="text-2xl font-medium mt-10 mb-4">
                 {children}
             </h3>
         ),
-        h4: ({ children }: { children: React.ReactNode }) => (
+        h4: ({ children }: { children?: React.ReactNode }) => (
             <h4 className="text-xl md:text-2xl font-heading uppercase mt-8 mb-4">
                 {children}
             </h4>
         ),
-        normal: ({ children }: { children: React.ReactNode }) => (
+        normal: ({ children }: { children?: React.ReactNode }) => (
             <p className="text-base md:text-lg leading-relaxed mb-6">
                 {children}
             </p>
         ),
-        blockquote: ({ children }: { children: React.ReactNode }) => (
+        blockquote: ({ children }: { children?: React.ReactNode }) => (
             <blockquote className="border-l-4 border-current pl-6 py-4 my-8 italic text-lg">
                 {children}
             </blockquote>
         ),
     },
     marks: {
-        strong: ({ children }: { children: React.ReactNode }) => (
+        strong: ({ children }: { children?: React.ReactNode }) => (
             <strong className="font-bold">{children}</strong>
         ),
-        em: ({ children }: { children: React.ReactNode }) => (
+        em: ({ children }: { children?: React.ReactNode }) => (
             <em className="italic">{children}</em>
         ),
-        link: ({ value, children }: { value: { href?: string }; children: React.ReactNode }) => {
-            const target = value?.href?.startsWith('http') ? '_blank' : undefined;
+        link: ({ value, children }: { value?: BlockContentLink; children?: React.ReactNode }) => {
+            const href = value?.href;
+            const target = href?.startsWith('http') ? '_blank' : undefined;
             const rel = target === '_blank' ? 'noopener noreferrer' : undefined;
             return (
                 <a
-                    href={value?.href}
+                    href={href}
                     target={target}
                     rel={rel}
                     className="text-blue-600 dark:text-blue-400 hover:underline"
@@ -103,26 +110,26 @@ const components = {
         },
     },
     list: {
-        bullet: ({ children }: { children: React.ReactNode }) => (
+        bullet: ({ children }: { children?: React.ReactNode }) => (
             <ul className="list-disc list-inside mb-6 space-y-2 ml-4">
                 {children}
             </ul>
         ),
-        number: ({ children }: { children: React.ReactNode }) => (
+        number: ({ children }: { children?: React.ReactNode }) => (
             <ol className="list-decimal list-inside mb-6 space-y-2 ml-4">
                 {children}
             </ol>
         ),
     },
     listItem: {
-        bullet: ({ children }: { children: React.ReactNode }) => (
+        bullet: ({ children }: { children?: React.ReactNode }) => (
             <li className="text-base md:text-lg leading-relaxed">{children}</li>
         ),
-        number: ({ children }: { children: React.ReactNode }) => (
+        number: ({ children }: { children?: React.ReactNode }) => (
             <li className="text-base md:text-lg leading-relaxed">{children}</li>
         ),
     },
-};
+} as PortableTextComponents;
 
 export default function CaseStudyRichText({ content }: CaseStudyRichTextProps) {
     if (!content || content.length === 0) {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo, useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, Variants } from "framer-motion";
 import { Project } from "@/sanity/types";
 import Link from "next/link";
 import SanityImage from "@/components/atoms/SanityImage";
@@ -29,13 +29,13 @@ const arrowAnimation = {
     }
 }
 
-const fadeInProject = {
+const fadeInProject: Variants = {
         initial: {
             opacity: 0,
             y: 100,
             filter: "blur(20px)",
         },
-        animate: (i) => ({
+        animate: (i: number) => ({
             opacity: 1,
             y: 0,
             filter: "blur(0px)",

@@ -194,7 +194,7 @@ export default function ContactForm() {
                         </div>
                     </div>
                 </div>
-                <button type="submit" className="w-full min-h-[55px] bg-off-black text-white rounded-[3px] px-6 py-3 hover:bg-accent-orange hover:text-off-black transition-colors duration-200 font-mono text-sm uppercase flex items-center justify-between gap-x-3 cursor-pointer">
+                <button type="submit" className="w-full min-h-[55px] bg-off-black text-white rounded-[3px] px-6 py-3 hover:bg-accent-orange hover:text-off-black transition-colors duration-200 font-mono uppercase flex items-center justify-between gap-x-3">
                     <span>Get in touch</span>
                     <ArrowIcon />
                 </button>

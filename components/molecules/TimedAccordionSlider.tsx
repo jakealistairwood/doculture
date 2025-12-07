@@ -1,10 +1,13 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { PortableText } from "@portabletext/react";
+import { PortableText, PortableTextComponents } from "@portabletext/react";
 import { motion, AnimatePresence } from "framer-motion";
 import SanityImage from "@/components/atoms/SanityImage";
 import { BlockContent } from "@/sanity/types";
+
+// Extract types from BlockContent
+type BlockContentImage = Extract<BlockContent[number], { _type: "image" }>;
 
 interface AccordionItem {
     _key?: string;
@@ -74,32 +77,32 @@ export default function TimedAccordionSlider({ data, bgColor }: TimedAccordionSl
     // PortableText components for rendering blockContent
     const portableTextComponents = {
         block: {
-            normal: ({ children }: { children: React.ReactNode }) => (
+            normal: ({ children }: { children?: React.ReactNode }) => (
                 <p className="mb-4 last:mb-0">{children}</p>
             ),
-            h1: ({ children }: { children: React.ReactNode }) => (
+            h1: ({ children }: { children?: React.ReactNode }) => (
                 <h1 className="text-3xl md:text-4xl font-heading uppercase mb-4">{children}</h1>
             ),
-            h2: ({ children }: { children: React.ReactNode }) => (
+            h2: ({ children }: { children?: React.ReactNode }) => (
                 <h2 className="text-2xl md:text-3xl font-heading uppercase mb-4">{children}</h2>
             ),
-            h3: ({ children }: { children: React.ReactNode }) => (
+            h3: ({ children }: { children?: React.ReactNode }) => (
                 <h3 className="text-xl md:text-2xl font-heading uppercase mb-4">{children}</h3>
             ),
-            blockquote: ({ children }: { children: React.ReactNode }) => (
+            blockquote: ({ children }: { children?: React.ReactNode }) => (
                 <blockquote className="border-l-4 border-current pl-4 italic my-4">{children}</blockquote>
             ),
         },
         marks: {
-            strong: ({ children }: { children: React.ReactNode }) => (
+            strong: ({ children }: { children?: React.ReactNode }) => (
                 <strong className="font-bold">{children}</strong>
             ),
-            em: ({ children }: { children: React.ReactNode }) => (
+            em: ({ children }: { children?: React.ReactNode }) => (
                 <em className="italic">{children}</em>
             ),
         },
         types: {
-            image: ({ value }: { value: any }) => {
+            image: ({ value }: { value: BlockContentImage }) => {
                 if (!value?.asset?._ref) return null;
                 return (
                     <div className="my-4">
@@ -108,7 +111,7 @@ export default function TimedAccordionSlider({ data, bgColor }: TimedAccordionSl
                 );
             },
         },
-    };
+    } as PortableTextComponents;
 
     return (
         <div className="w-full" data-component="timed-accordion-slider">

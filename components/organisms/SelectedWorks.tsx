@@ -24,10 +24,20 @@ const SelectedWorks = ({ data }: SelectedWorksProps) => {
     const [selectedVideoPoster, setSelectedVideoPoster] = useState<any>(null);
     const swiperRef = useRef<SwiperType | null>(null);
 
-    const projects = (caseStudies || []).filter((item): item is Project => {
-        // Check if item is a valid Project (has _id)
-        return item && typeof item === 'object' && '_id' in item;
-    }) as Project[];
+    // caseStudies are dereferenced in the query (see queries.ts), so they come as Project objects
+    // Type assertion needed because SelectedWorks type defines them as references
+    // Note: The query doesn't fetch _type, so we validate by checking for _id (references have _ref, not _id)
+    const caseStudiesAsProjects = (caseStudies as unknown) as Array<Partial<Project> & { _id?: string }>;
+    
+    const projects = caseStudiesAsProjects.filter((item): item is Project => {
+        // Validate that item is a dereferenced Project (has _id - references don't have _id, only _ref)
+        return (
+            item !== null &&
+            typeof item === 'object' &&
+            item._id !== undefined &&
+            typeof item._id === 'string'
+        );
+    });
 
     if (!projects || projects.length === 0) {
         return null;

@@ -25,7 +25,8 @@ import {
   LinkCards as LinkCardsType, 
   FeatureCards as FeatureCardsType,
   ImageGrid as ImageGridType,
-  StudioCarousel as StudioCarouselType, 
+  StudioCarousel as StudioCarouselType,
+  Studio,
   SelectedWorks as SelectedWorksType, 
   HeaderMarquee as HeaderMarqueeType,
   TimedAccordionSlider as TimedAccordionSliderType,
@@ -41,6 +42,11 @@ interface ComponentRendererProps {
   isContainedSection: boolean;
   containedBgColor: string;
 }
+
+// Helper type for dereferenced StudioCarousel (studios are dereferenced in query)
+type DereferencedStudioCarousel = Omit<StudioCarouselType, 'studios'> & {
+  studios?: Array<Partial<Studio> & { _id?: string; _type?: string }>;
+};
 
 export function ComponentRenderer({ component, bgColor, isContainedSection = false, containedBgColor }: ComponentRendererProps) {
   switch (component._type) {
@@ -66,8 +72,21 @@ export function ComponentRenderer({ component, bgColor, isContainedSection = fal
       return <FeatureCards data={component as FeatureCardsType} bgColor={bgColor} />
     case 'imageGrid':
       return <ImageGrid data={component as ImageGridType} bgColor={bgColor} />
-    case 'studioCarousel':
-        return <StudioCarousel data={component as StudioCarouselType} />
+    case 'studioCarousel': {
+        // studios are dereferenced in the query (see queries.ts), so they come as Studio objects
+        // Type assertion needed because StudioCarousel type defines them as references
+        const componentWithDereferencedStudios = (component as unknown) as DereferencedStudioCarousel;
+        // Validate and filter studios to ensure they are proper Studio objects
+        const validStudios = componentWithDereferencedStudios.studios?.filter((studio): studio is Studio => {
+            return (
+                studio !== null &&
+                typeof studio === 'object' &&
+                studio._id !== undefined &&
+                studio._type === 'studio'
+            );
+        });
+        return <StudioCarousel data={{ ...componentWithDereferencedStudios, studios: validStudios }} />
+    }
     case 'timedAccordionSlider':
         return <TimedAccordionSlider data={component as TimedAccordionSliderType} bgColor={bgColor} />
     default:

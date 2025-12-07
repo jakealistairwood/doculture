@@ -43,23 +43,33 @@ interface ContactLandingPageProps {
     logoMarquee?: any;
 }
 
-export default function ContactLandingPage({ data, logoMarquee }: ContactLandingPageProps) {
+export default function ContactLandingPage({
+    data,
+    logoMarquee,
+}: ContactLandingPageProps) {
     if (!data) {
         return null;
     }
 
     const { heading, description, whyUs, image, logoMarqueeBlock } = data;
 
-    const logoMarqueeData = logoMarqueeBlock ? {
-        _type: "logos" as const,
-        logoMarqueeBlock: logoMarqueeBlock
-    } : logoMarquee ? {
-        _type: "logos" as const,
-        logoMarqueeBlock: logoMarquee
-    } : undefined;
+    const logoMarqueeData = logoMarqueeBlock
+        ? {
+              _type: "logos" as const,
+              logoMarqueeBlock: logoMarqueeBlock,
+          }
+        : logoMarquee
+          ? {
+                _type: "logos" as const,
+                logoMarqueeBlock: logoMarquee,
+            }
+          : undefined;
 
     return (
-        <main id="contact-landing-page" className="bg-off-black text-white min-h-screen py-20 flex items-center justify-center">
+        <main
+            id="contact-landing-page"
+            className="bg-off-black text-white min-h-screen py-20 flex items-center justify-center"
+        >
             <section className="">
                 <div className="container">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-40">
@@ -71,16 +81,23 @@ export default function ContactLandingPage({ data, logoMarquee }: ContactLanding
                                         className="relative block aspect-[117/23] w-[117px] h-[23px]"
                                         aria-label="Go to homepage"
                                     >
-                                        <Image 
-                                            src="/images/logo.svg" 
-                                            alt="Logo" 
-                                            fill 
+                                        <Image
+                                            src="/images/logo.svg"
+                                            alt="Logo"
+                                            fill
                                             className="object-contain"
-                                            priority 
+                                            priority
                                         />
                                     </Link>
                                     <div className="flex flex-col gap-y-4">
-                                        <h1 className="text-80px font-heading uppercase !leading-[0.94]" dangerouslySetInnerHTML={{ __html: heading }} />
+                                        {heading && (
+                                            <h1
+                                                className="text-80px font-heading uppercase !leading-[0.94]"
+                                                dangerouslySetInnerHTML={{
+                                                    __html: heading,
+                                                }}
+                                            />
+                                        )}
                                         {description && (
                                             <p className="text-lg md:text-xl opacity-80 max-w-2xl">
                                                 {description}
@@ -89,7 +106,10 @@ export default function ContactLandingPage({ data, logoMarquee }: ContactLanding
                                     </div>
                                 </div>
                                 <div className="w-full h-full relative flex items-center justify-center md:p-10 lg:hidden">
-                                    <SanityImage image={image} className="hidden md:block w-full h-full object-cover absolute inset-0" />
+                                    <SanityImage
+                                        image={image}
+                                        className="hidden md:block w-full h-full object-cover absolute inset-0"
+                                    />
                                     <div className="bg-white text-off-black relative z-[2] p-10 w-full">
                                         <ContactForm />
                                     </div>
@@ -102,12 +122,19 @@ export default function ContactLandingPage({ data, logoMarquee }: ContactLanding
                             </div>
                             {logoMarqueeData && (
                                 <div>
-                                    <LogoMarquee data={logoMarqueeData} bgColor="off-black" disableInvertedLogoBg />
+                                    <LogoMarquee
+                                        data={logoMarqueeData}
+                                        bgColor="off-black"
+                                        disableInvertedLogoBg
+                                    />
                                 </div>
                             )}
                         </div>
                         <div className="hidden w-full h-full relative lg:flex items-center justify-center p-10">
-                            <SanityImage image={image} className="w-full h-full object-cover absolute inset-0" />
+                            <SanityImage
+                                image={image}
+                                className="w-full h-full object-cover absolute inset-0"
+                            />
                             <div className="bg-white text-off-black relative z-[2] p-10">
                                 <ContactForm />
                             </div>
