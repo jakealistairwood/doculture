@@ -92,7 +92,7 @@ export default function ContactForm() {
       return;
     }
 
-    formData.append("access_key", "8dbc213e-e741-4b2d-86cb-fe9ac33c8371");
+    formData.append("access_key", process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "");
 
     const response = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
@@ -107,7 +107,7 @@ export default function ContactForm() {
   return (
     <div>
         {formSubmitted ? (
-            <div className="flex flex-col items-center text-center gap-y-3">
+            <div className="flex flex-col items-center text-center gap-y-3 w-full">
                 <h2 className="text-40px font-heading uppercase">Thank you!</h2>
                 <p>We'll be in touch as soon as we</p>
                 <Link href="/" className="w-full min-h-[55px] bg-off-black text-white rounded-[3px] px-6 py-3 hover:bg-accent-orange hover:text-off-black transition-colors duration-200 font-mono text-sm uppercase flex items-center justify-between gap-x-3 cursor-pointer mt-6">

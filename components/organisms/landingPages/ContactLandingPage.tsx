@@ -135,7 +135,7 @@ export default function ContactLandingPage({
                                 image={image}
                                 className="w-full h-full object-cover absolute inset-0"
                             />
-                            <div className="bg-white text-off-black relative z-[2] p-10">
+                            <div className="bg-white text-off-black relative z-[2] p-10 w-full">
                                 <ContactForm />
                             </div>
                         </div>
