@@ -69,7 +69,7 @@ const VideoPlayer = (props: VideoPlayerProps) => {
                     }
                 }}
             >
-                <div className="relative aspect-[16/9] max-w-[1100px] w-full mx-auto bg-black rounded-lg overflow-hidden">
+                <div className="aspect-[16/9] max-w-[1100px] w-full mx-auto bg-black rounded-lg overflow-hidden">
                     <button
                         onClick={() => {
                             if (isControlled && onClose) {

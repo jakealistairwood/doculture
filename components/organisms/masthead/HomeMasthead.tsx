@@ -78,31 +78,33 @@ export function HomeMasthead({ data }: HomeMastheadProps) {
 
     return (
         <div data-component="home-masthead" className="h-screen">
-            <div className="bg-black text-white h-full relative overflow-hidden flex flex-col items-center justify-center p-10">
-                <div className="flex flex-col gap-y-16 gap-x-24 relative z-[2] p-16">
-                    <FrameCorner className="absolute aspect-square w-[64px] top-0 left-0" />
-                    <FrameCorner className="absolute aspect-square w-[64px] top-0 right-0 rotate-90" />
-                    <FrameCorner className="absolute aspect-square w-[64px] bottom-0 right-0 rotate-180" />
-                    <FrameCorner className="absolute aspect-square w-[64px] bottom-0 left-0 rotate-270" />
-                    <div className="flex flex-col items-center text-center gap-y-8">
-                        {data.heading && (
-                            <h1 
-                                ref={headingRef}
-                                data-split="heading"
-                                className="text-120px leading-none uppercase max-w-[700px] overflow-hidden"
-                            >
-                                {data.heading}
-                            </h1>
-                        )}
-                        {data.content && (
-                            <p
-                                className="font-serif font-light text-4xl"
-                                dangerouslySetInnerHTML={{ __html: data?.content }}
-                            />
-                        )}
-                        {data.links && data.links.length > 0 && (
-                            <LinksWrapper links={data.links} />
-                        )}
+            <div className="bg-black text-white h-full relative overflow-hidden flex flex-col items-center justify-center p-6 sm:p-10">
+                <div className="container">
+                    <div className="flex flex-col gap-y-16 gap-x-24 relative z-[2] py-24 sm:py-16 sm:px-16">
+                        <FrameCorner className="absolute aspect-square w-[40px] sm:w-[64px] top-0 left-0" />
+                        <FrameCorner className="absolute aspect-square w-[40px] sm:w-[64px] top-0 right-0 rotate-90" />
+                        <FrameCorner className="absolute aspect-square w-[40px] sm:w-[64px] bottom-0 right-0 rotate-180" />
+                        <FrameCorner className="absolute aspect-square w-[40px] sm:w-[64px] bottom-0 left-0 rotate-270" />
+                        <div className="flex flex-col items-center text-center gap-y-8">
+                            {data.heading && (
+                                <h1 
+                                    ref={headingRef}
+                                    data-split="heading"
+                                    className="text-120px leading-none uppercase max-w-[700px] overflow-hidden"
+                                >
+                                    {data.heading}
+                                </h1>
+                            )}
+                            {data.content && (
+                                <p
+                                    className="font-serif font-light text-2xl sm:text-4xl"
+                                    dangerouslySetInnerHTML={{ __html: data?.content }}
+                                />
+                            )}
+                            {data.links && data.links.length > 0 && (
+                                <LinksWrapper links={data.links} />
+                            )}
+                        </div>
                     </div>
                 </div>
                 {data.image && (

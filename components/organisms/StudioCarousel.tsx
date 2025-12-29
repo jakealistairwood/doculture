@@ -6,6 +6,7 @@ import { Studio } from "@/sanity/types";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
+import NumberFlow from "@number-flow/react";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -150,8 +151,11 @@ const StudioCarousel = ({ data }: StudioCarouselProps) => {
             {studios.length > 1 && (
                 <div className="flex items-center justify-between gap-4 mt-8 z-20 relative">
                     {/* Slide Indicator */}
-                    <div className="text-2xl font-heading uppercase font-medium tabular-nums">
-                        {String(activeIndex + 1).padStart(2, '0')}/{String(studios.length).padStart(2, '0')}
+                    <div className="text-4xl font-heading uppercase font-medium tabular-nums">
+                        <span>0<NumberFlow value={activeIndex + 1} trend={0} format={{ notation: "compact" }} /></span>
+                        <span>/</span>
+                        <span>{String(studios.length).padStart(2, '0')}</span>
+                        {/* {String(activeIndex + 1).padStart(2, '0')}/{String(studios.length).padStart(2, '0')} */}
                     </div>
                     <div className="flex items-center gap-3">
                         <button

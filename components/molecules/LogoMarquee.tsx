@@ -12,6 +12,7 @@ interface LogoMarqueeProps {
     speed?: number;
     bgColor?: string;
     disableInvertedLogoBg?: boolean;
+    isOnContactPage?: boolean;
 }
 
 type DereferencedLogos = Omit<Logos, 'logoMarqueeBlock'> & {
@@ -23,7 +24,7 @@ type LogoItem =
         ? Item
         : never;
 
-const LogoMarquee = ({ data, speed = 50, bgColor, disableInvertedLogoBg = false }: LogoMarqueeProps) => {
+const LogoMarquee = ({ data, speed = 50, bgColor, disableInvertedLogoBg = false, isOnContactPage = false }: LogoMarqueeProps) => {
     const containerRef = useRef<HTMLDivElement | null>(null);
     const isInView = useInView(containerRef, { amount: 0.2, once: false });
 
@@ -79,7 +80,7 @@ const LogoMarquee = ({ data, speed = 50, bgColor, disableInvertedLogoBg = false 
             gradientColor={gradientColor}
             speed={speed}
         >
-            {logos.map((logo) => renderLogo(logo, `mx-12 flex ${disableInvertedLogoBg ? "" : "invert"}`))}
+            {logos.map((logo) => renderLogo(logo, `marquee-logo ${isOnContactPage ? "marquee-logo--contact mx-8 md:mx-10" : "mx-12"} flex ${disableInvertedLogoBg ? "" : "invert"}`))}
         </Marquee>
     );
 

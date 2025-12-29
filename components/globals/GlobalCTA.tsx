@@ -38,7 +38,7 @@ export default function GlobalCTA({ data }: GlobalCTAProps) {
         <section className="bg-off-black text-white">
             {image && (
                 <div className="flex flex-col">
-                    <div className="relative aspect-[1420/678] max-w-[1420px] w-full mx-auto flex items-end justify-end">
+                    <div className="relative aspect-[1/1] md:aspect-[1420/678] max-w-[1420px] w-full mx-auto flex items-end justify-end">
                         <SanityImage
                             image={image}
                             className="absolute z-[1] inset-0 w-full h-full object-cover"

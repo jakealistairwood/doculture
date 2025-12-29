@@ -36,7 +36,7 @@ const LinksWrapper = ({ links = [] }: LinksWrapperProps) => {
                 const buttonSize = link.buttonSize || "default";
                 const buttonStyle = link.buttonStyle || "primary";
 
-                const textLinkStyles = "text-white hover:text-white/80 underline underline-offset-4 transition-colors";
+                const textLinkStyles = "link-group text-white hover:text-white/80 transition-colors";
 
                 if (isButton) {
                     return (
@@ -69,7 +69,7 @@ const LinksWrapper = ({ links = [] }: LinksWrapperProps) => {
                         href={url}
                         className={textLinkStyles}
                     >
-                        {link.label}
+                        <span data-underline-link="alt">{link.label}</span>
                     </Link>
                 );
             })}

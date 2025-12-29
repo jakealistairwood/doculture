@@ -10,6 +10,7 @@ const Header = () => {
     const [isVisible, setIsVisible] = useState(true);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const lastScrollY = useRef(0);
+    const buttonTextRef = useRef<HTMLSpanElement>(null);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -37,6 +38,28 @@ const Header = () => {
         return () => {
             window.removeEventListener("scroll", handleScroll);
         };
+    }, []);
+
+    // Character stagger animation for "Get in Touch" button
+    useEffect(() => {
+        const el = buttonTextRef.current;
+        if (!el) return;
+
+        const offsetIncrement = 0.01;
+        const text = el.textContent || "";
+        el.innerHTML = "";
+
+        [...text].forEach((char, index) => {
+            const span = document.createElement("span");
+            span.textContent = char;
+            span.style.transitionDelay = `${index * offsetIncrement}s`;
+
+            if (char === " ") {
+                span.style.whiteSpace = "pre";
+            }
+
+            el.appendChild(span);
+        });
     }, []);
 
     // Prevent body scroll when mobile menu is open and handle escape key
@@ -73,7 +96,7 @@ const Header = () => {
         <>
             <header 
                 className={clsx(
-                    "fixed py-5 top-0 left-0 h-fit w-full transition-all duration-300",
+                    "fixed py-4 top-0 left-0 h-fit w-full transition-all duration-300",
                     isMobileMenuOpen ? "z-[102]" : "z-[100]",
                     isScrolled 
                         ? "bg-white/95 backdrop-blur-sm text-black border-b border-black/10" 
@@ -83,7 +106,7 @@ const Header = () => {
                     transform: isVisible ? 'translateY(0)' : 'translateY(-100%)',
                 }}
             >
-                <div className="px-4 w-full mx-auto">
+                <div className="w-full mx-auto">
                     <div className="container">
                         <nav className="flex items-center justify-between">
                             <div className="flex items-center gap-x-20">
@@ -102,16 +125,24 @@ const Header = () => {
                                 </Link>
                                 <ul className="hidden lg:flex items-center gap-x-8 font-medium opacity-80">
                                     <li>
-                                        <Link href="/">Home</Link>
+                                        <Link className="link-group" href="/">
+                                            <span data-underline-link>Home</span>
+                                        </Link>
                                     </li>
                                     <li>
-                                        <Link href="/about">About</Link>
+                                        <Link className="link-group" href="/about">
+                                            <span data-underline-link>About</span>
+                                        </Link>
                                     </li>
                                     <li>
-                                        <Link href="/services">Services</Link>
+                                        <Link className="link-group" href="/services">
+                                            <span data-underline-link>Services</span>
+                                        </Link>
                                     </li>
                                     <li>
-                                        <Link href="/our-work">Work</Link>
+                                        <Link className="link-group" href="/our-work">
+                                            <span data-underline-link>Work</span>
+                                        </Link>
                                     </li>
                                 </ul>
                             </div>
@@ -120,13 +151,22 @@ const Header = () => {
                                     <Link
                                         href="/contact"
                                         className={clsx(
-                                            "inline-flex items-center justify-center font-mono font-medium rounded-[3px] text-sm uppercase px-6 py-3",
-                                            !isScrolled ? "border border-white/25 hover:bg-accent-orange hover:text-off-black hover:border-accent-orange/100" : "",
-                                            isScrolled ? "border border-black/25 hover:bg-accent-orange hover:text-off-black hover:border-accent-orange/100" : "",
+                                            "btn-animate-chars inline-flex items-center justify-center font-mono font-medium rounded-[3px] text-sm uppercase px-6 py-3 relative overflow-hidden",
+                                            !isScrolled ? "border border-white/25 hover:text-off-black hover:border-accent-orange/100" : "",
+                                            isScrolled ? "border border-black/25 hover:text-off-black hover:border-accent-orange/100" : "",
                                             "transition-all duration-200 ease"
                                         )}
                                     >
-                                        Get in touch
+                                        <div className="btn-animate-chars__bg" />
+                                        <span
+                                            ref={buttonTextRef}
+                                            data-button-animate-chars
+                                            className="btn-animate-chars__text relative z-10"
+                                            aria-hidden
+                                        >
+                                            Get in touch
+                                        </span>
+                                        <span className="sr-only">Get in touch</span>
                                     </Link>
                                 </li>
                             </ul>

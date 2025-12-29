@@ -68,13 +68,13 @@ export default function ContactLandingPage({
     return (
         <main
             id="contact-landing-page"
-            className="bg-off-black text-white min-h-screen py-20 flex items-center justify-center"
+            className="bg-off-black text-white min-h-screen py-12 md:py-20 flex items-center justify-center"
         >
             <section className="">
                 <div className="container">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-40">
                         <div className="flex flex-col gap-y-12 md:gap-y-20">
-                            <div className="flex flex-col gap-y-14">
+                            <div className="flex flex-col gap-y-10 md:gap-y-14">
                                 <div className="flex flex-col gap-y-16">
                                     <Link
                                         href="/"
@@ -110,7 +110,7 @@ export default function ContactLandingPage({
                                         image={image}
                                         className="hidden md:block w-full h-full object-cover absolute inset-0"
                                     />
-                                    <div className="bg-white text-off-black relative z-[2] p-10 w-full">
+                                    <div className="bg-white text-off-black relative z-[2] px-8 py-10 md:p-10 w-full">
                                         <ContactForm />
                                     </div>
                                 </div>
@@ -126,6 +126,7 @@ export default function ContactLandingPage({
                                         data={logoMarqueeData}
                                         bgColor="off-black"
                                         disableInvertedLogoBg
+                                        isOnContactPage
                                     />
                                 </div>
                             )}
@@ -135,7 +136,7 @@ export default function ContactLandingPage({
                                 image={image}
                                 className="w-full h-full object-cover absolute inset-0"
                             />
-                            <div className="bg-white text-off-black relative z-[2] p-10 w-full">
+                            <div className="bg-white text-off-black relative z-[2] px-8 py-10 md:p-10 w-full">
                                 <ContactForm />
                             </div>
                         </div>

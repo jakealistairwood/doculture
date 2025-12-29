@@ -22,15 +22,15 @@ const spacingMap = {
   },
   paddingTop: {
     none: "pt-0",
-    sm: "pt-10",
-    md: "pt-20",
-    lg: "pt-36",
+    sm: "pt-12",
+    md: "pt-12 md:pt-20",
+    lg: "pt-12 md:pt-36",
   },
   paddingBottom: {
     none: "pb-0",
-    sm: "pb-10",
-    md: "pb-20",
-    lg: "pb-36",
+    sm: "pb-12",
+    md: "pb-12 md:pb-20",
+    lg: "pb-12 md:pb-36",
   },
   componentSpacing: {
     default: 'gap-y-12 md:gap-y-20',
