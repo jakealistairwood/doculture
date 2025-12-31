@@ -88,10 +88,62 @@ export type SanityImageHotspot = {
 export type AboutLandingPage = {
   _type: "aboutLandingPage";
   masthead?: {
+    subheading?: string;
     heading?: string;
     description?: string;
-    asset?: Asset;
-    mastheadMaxWidth?: number;
+    links?: LinksWrapper;
+    leftTopImage?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      altText?: string;
+      _type: "image";
+    };
+    leftBottomImage?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      altText?: string;
+      _type: "image";
+    };
+    rightTopImage?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      altText?: string;
+      _type: "image";
+    };
+    rightBottomImage?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      altText?: string;
+      _type: "image";
+    };
   };
   aboutUsContent?: Array<{
     _key: string;
@@ -220,42 +272,9 @@ export type Seo = {
   };
 };
 
-export type Asset = {
-  _type: "asset";
-  id?: string;
-  type?: "image" | "video";
-  image?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    altText?: string;
-    _type: "image";
-  };
-  video?: string;
-  videoPoster?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    altText?: string;
-    _type: "image";
-  };
-  videoOptions?: {
-    title?: string;
-    showTitleOnPoster?: boolean;
-  };
-};
+export type LinksWrapper = Array<{
+  _key: string;
+} & Link>;
 
 export type Slug = {
   _type: "slug";
@@ -444,6 +463,43 @@ export type TwoColTextAsset = {
   reverseDirection?: boolean;
 };
 
+export type Asset = {
+  _type: "asset";
+  id?: string;
+  type?: "image" | "video";
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    altText?: string;
+    _type: "image";
+  };
+  video?: string;
+  videoPoster?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    altText?: string;
+    _type: "image";
+  };
+  videoOptions?: {
+    title?: string;
+    showTitleOnPoster?: boolean;
+  };
+};
+
 export type LogoMarquee = {
   _type: "logoMarquee";
   title?: string;
@@ -473,10 +529,6 @@ export type Link = {
   label?: string;
 };
 
-export type LinksWrapper = Array<{
-  _key: string;
-} & Link>;
-
 export type TextCardOptions = {
   _type: "textCardOptions";
   centerAlign?: boolean;
@@ -497,6 +549,66 @@ export type TextCard = {
   content?: BlockContent;
   links?: LinksWrapper;
   textCardOptions?: TextCardOptions;
+};
+
+export type AboutMasthead = {
+  _type: "aboutMasthead";
+  subheading?: string;
+  heading?: string;
+  content?: string;
+  links?: LinksWrapper;
+  leftTopImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    altText?: string;
+    _type: "image";
+  };
+  leftBottomImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    altText?: string;
+    _type: "image";
+  };
+  rightTopImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    altText?: string;
+    _type: "image";
+  };
+  rightBottomImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    altText?: string;
+    _type: "image";
+  };
 };
 
 export type HomeMasthead = {
@@ -643,6 +755,8 @@ export type Section = {
     _key: string;
   } & HomeMasthead | {
     _key: string;
+  } & AboutMasthead | {
+    _key: string;
   } & TextCard | {
     _key: string;
   } & Asset | {
@@ -777,5 +891,5 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = TeamMember | BlockContent | SanityImageCrop | SanityImageHotspot | AboutLandingPage | GlobalOptions | ImageGrid | TimedAccordionSlider | ContactLandingPage | LandingPage | Seo | Asset | Slug | GlobalCTA | CaseStudyImage | CaseStudyRichText | CaseStudyBuilder | StudioCarousel | Studio | FeatureCards | SelectedWorks | HeaderMarquee | LinkCards | Logos | TwoColTextAsset | LogoMarquee | Link | LinksWrapper | TextCardOptions | TextCard | HomeMasthead | ReusableBlock | Masthead | Category | Project | SectionOptions | Section | Page | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = TeamMember | BlockContent | SanityImageCrop | SanityImageHotspot | AboutLandingPage | GlobalOptions | ImageGrid | TimedAccordionSlider | ContactLandingPage | LandingPage | Seo | LinksWrapper | Slug | GlobalCTA | CaseStudyImage | CaseStudyRichText | CaseStudyBuilder | StudioCarousel | Studio | FeatureCards | SelectedWorks | HeaderMarquee | LinkCards | Logos | TwoColTextAsset | Asset | LogoMarquee | Link | TextCardOptions | TextCard | AboutMasthead | HomeMasthead | ReusableBlock | Masthead | Category | Project | SectionOptions | Section | Page | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 export declare const internalGroqTypeReferenceTo: unique symbol;

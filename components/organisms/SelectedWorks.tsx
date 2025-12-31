@@ -180,7 +180,7 @@ const SelectedWorks = ({ data }: SelectedWorksProps) => {
                                                     return (
                                                         <li
                                                             key={categoryIndex}
-                                                            className="py-1 px-2 border border-white/[25%] text-xs uppercase font-medium rounded-sm"
+                                                            className="md:py-1 md:px-2 md:border md:border-white/[25%] text-xs uppercase font-medium rounded-sm opacity-75 md:opacity-100"
                                                         >
                                                             {categoryTitle}
                                                         </li>
@@ -222,7 +222,7 @@ const SelectedWorks = ({ data }: SelectedWorksProps) => {
             {projects.length > 1 && (
                 <div className="flex items-center justify-between gap-4 mt-8 z-20 relative">
                     {/* Slide Indicator */}
-                    <div className="text-4xl font-heading uppercase font-medium tabular-nums">
+                    <div className="text-2xl md:text-4xl font-heading uppercase font-medium tabular-nums">
                         <span>0<NumberFlow value={activeIndex + 1} trend={0} format={{ notation: "compact" }} /></span>
                         <span>/</span>
                         <span>{String(projects.length).padStart(2, '0')}</span>

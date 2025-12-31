@@ -10,11 +10,18 @@ import Header from "@/components/globals/Header";
 import GlobalCTA from "@/components/globals/GlobalCTA";
 import Footer from "@/components/globals/Footer";
 import HeaderMarquee from "@/components/molecules/HeaderMarquee";
+import LinksWrapper from "@/components/molecules/LinksWrapper";
 
 interface AboutLandingPageData {
     masthead?: {
         heading?: string;
+        subheading?: string;
         description?: string;
+        links?: any;
+        leftTopImage?: any;
+        leftBottomImage?: any;
+        rightTopImage?: any;
+        rightBottomImage?: any;
         asset?: {
             id?: string;
             type?: "image" | "video";
@@ -39,6 +46,37 @@ interface AboutLandingPageData {
             };
         };
         mastheadMaxWidth?: number;
+    };
+    ourMission?: {
+        subheading?: string;
+        heading?: string;
+        images?: Array<{
+            asset?: any;
+            altText?: string;
+        }>;
+    };
+    whyWeExist?: {
+        heading?: string;
+        content?: any;
+    };
+    ourJourney?: {
+        heading?: string;
+        content?: any;
+        image?: {
+            asset?: any;
+            altText?: string;
+        };
+    };
+    ourValues?: {
+        heading?: string;
+        values?: Array<{
+            icon?: {
+                asset?: any;
+                altText?: string;
+            };
+            heading?: string;
+            description?: string;
+        }>;
     };
     aboutUsContent?: Array<{
         _key?: string;
@@ -145,7 +183,7 @@ export default function AboutLandingPage({ data, globalCTA, globalOptions }: Abo
         return null;
     }
 
-    const { masthead, aboutUsContent, meetTheTeam } = data;
+    const { masthead, ourMission, whyWeExist, ourJourney, ourValues, aboutUsContent, meetTheTeam } = data;
 
     // Determine asset type and content
     const asset = masthead?.asset;
@@ -158,100 +196,171 @@ export default function AboutLandingPage({ data, globalCTA, globalOptions }: Abo
             <Header />
             <main className="min-h-screen bg-off-black text-white">
                 {/* Masthead Section */}
-                <section className="pt-40">
+            <section className="relative min-h-screen flex items-center justify-center">
                 <div className="container">
-                    <div className="flex flex-col gap-y-12 items-center text-center">
-                        <div className="flex flex-col gap-y-8 items-center text-center max-w-[856px] w-full mx-auto" style={{
+                    <div className="flex flex-col gap-y-12 items-center text-center relative">
+                        <div className="flex flex-col gap-y-4 md:gap-y-8 items-center text-center max-w-[722px] w-full mx-auto relative z-[2]" style={{
                             maxWidth: `${masthead?.mastheadMaxWidth}px`
                         }}>
+                            <div className="flex flex-col">
+                                {masthead?.subheading && (
+                                    <h1 className="!font-mono uppercase">{masthead?.subheading}</h1>
+                                )}
+                            </div>
                             {masthead?.heading && (
-                                <h1 className="text-100px uppercase leading-[0.94]" dangerouslySetInnerHTML={{ __html: masthead.heading }} />
+                                <h1 className="text-80px uppercase leading-[0.94]" dangerouslySetInnerHTML={{ __html: masthead.heading }} />
                             )}
                             {masthead?.description && (
-                                <p className="font-serif font-light text-4xl">
+                                <p className="font-serif font-light text-2xl md:text-4xl">
                                     {masthead.description}
                                 </p>
                             )}
+                            {masthead?.links && (
+                                <LinksWrapper links={masthead.links} />
+                            )}
                         </div>
-                        {hasVideo ? (
-                            <div className="w-full aspect-video relative overflow-hidden rounded-lg">
-                                <VideoPlayer
-                                    video={asset.video!}
-                                    poster={asset.videoPoster}
-                                    options={asset.videoOptions}
-                                    buttonClassName="relative flex items-center justify-center rounded-lg overflow-hidden w-full h-full cursor-pointer group"
-                                />
-                            </div>
-                        ) : hasImage && (
-                            <div className="w-full aspect-video relative overflow-hidden rounded-lg">
-                                <SanityImage
-                                    image={asset.image}
-                                    className="w-full h-full object-cover"
-                                    priority
-                                />
-                            </div>
-                        )}
+                    </div>
+                    {/* Four absolutely positioned images */}
+                    {masthead?.leftTopImage && (
+                        <div className="absolute top-0 left-0 aspect-[285/186] max-w-[286px] overflow-hidden">
+                            <SanityImage
+                                image={masthead.leftTopImage}
+                                className="w-full h-full object-cover"
+                                priority
+                            />
+                        </div>
+                    )}
+                    {masthead?.leftBottomImage && (
+                        <div className="absolute bottom-0 left-0 aspect-[219/290] max-w-[219px] overflow-hidden">
+                            <SanityImage
+                                image={masthead.leftBottomImage}
+                                className="w-full h-full object-cover"
+                                priority
+                            />
+                        </div>
+                    )}
+                    {masthead?.rightTopImage && (
+                        <div className="absolute top-0 right-0 aspect-[285/186] max-w-[285px] overflow-hidden">
+                            <SanityImage
+                                image={masthead.rightTopImage}
+                                className="w-full h-full object-cover"
+                                priority
+                            />
+                        </div>
+                    )}
+                    {masthead?.rightBottomImage && (
+                        <div className="absolute bottom-0 right-0 aspect-[233/309] max-w-[233px] overflow-hidden">
+                            <SanityImage
+                                image={masthead.rightBottomImage}
+                                className="w-full h-full object-cover"
+                                priority
+                            />
+                        </div>
+                    )}
+                </div>
+            </section>
+
+            <section className="bg-off-black text-white">
+                <div className="container">
+                    <div className="flex flex-col gap-y-12 md:gap-y-20">
+                        <div className="flex flex-col gap-y-6 max-w-[786px] mx-auto items-center text-center">
+                            {ourMission?.subheading && (
+                                <h2 className="!font-mono uppercase opacity-75" dangerouslySetInnerHTML={{ __html: ourMission?.subheading }} />
+                            )}
+                            {ourMission?.heading && (
+                                <h3 className="text-2xl" dangerouslySetInnerHTML={{ __html: ourMission?.heading }} />
+                            )}
+                        </div>
                     </div>
                 </div>
             </section>
 
-            {/* Content Section with Table of Contents */}
-            <section className="py-16 lg:py-36">
-                <div className="container">
-                    <div className="grid grid-cols-1 md:grid-cols-[210px_auto] gap-16 md:gap-20 lg:gap-40 relative">
-                        <aside className="relative">
-                            {headings.length > 0 && (
-                                <div className="sticky top-20">
-                                    <TableOfContents headings={headings} />
+            {/* Why We Exist Section */}
+            {whyWeExist && (
+                <section className="py-12 lg:py-36">
+                    <div className="container">
+                        <div className="flex justify-between">
+                            {whyWeExist.heading && (
+                                <h2 className="font-heading text-80px uppercase leading-[0.94] mb-8" dangerouslySetInnerHTML={{ __html: whyWeExist?.heading }} />
+                            )}
+                            {whyWeExist.content && (
+                                <div className="max-w-[640px] w-full">
+                                    <CaseStudyRichText content={whyWeExist.content} />
                                 </div>
                             )}
-                        </aside>
-                        <article className="max-w-768px">
-                            {/* Content */}
-                            {aboutUsContent && aboutUsContent.length > 0 && (
-                                <div className="space-y-12 md:space-y-20">
-                                    {aboutUsContent.map((section: any) => {
-                                        if (section._type === 'caseStudyBuilder' && section.components) {
-                                            return (
-                                                <div key={section._key} className="space-y-8 md:space-y-20">
-                                                    {section.components.map((component: any) => {
-                                                        if (component._type === 'caseStudyRichText') {
-                                                            return (
-                                                                <CaseStudyRichText
-                                                                    key={component._key}
-                                                                    content={component.content}
-                                                                />
-                                                            );
-                                                        }
-                                                        if (component._type === 'caseStudyImage') {
-                                                            return (
-                                                                <CaseStudyImage
-                                                                    key={component._key}
-                                                                    type={component.type}
-                                                                    image={component.image}
-                                                                    video={component.video}
-                                                                    videoPoster={component.videoPoster}
-                                                                    videoOptions={component.videoOptions}
-                                                                />
-                                                            );
-                                                        }
-                                                        return null;
-                                                    })}
-                                                </div>
-                                            );
-                                        }
-                                        return null;
-                                    })}
-                                </div>
-                            )}
-                        </article>
+                        </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            )}
+
+            {/* Our Journey Section */}
+            {ourJourney && (
+                <section className="py-12 lg:py-36">
+                    <div className="container">
+                        <div className="bg-white text-black grid grid-cols-1 md:grid-cols-2">
+                            <div className="px-6 md:px-10 py-10 md:py-16 flex flex-col gap-y-12 md:gap-y-20">
+                                {ourJourney.heading && (
+                                    <h2 className="font-heading text-80px uppercase leading-[0.94]" dangerouslySetInnerHTML={{ __html: ourJourney?.heading }} />
+                                )}
+                                {ourJourney.content && (
+                                    <CaseStudyRichText content={ourJourney.content} />
+                                )}
+                            </div>
+                            {ourJourney.image && (
+                                <div className="">
+                                    <SanityImage
+                                        image={ourJourney.image}
+                                        className="w-full h-full object-cover"
+                                    />
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </section>
+            )}
+
+            {/* Our Values Section */}
+            {ourValues && (
+                <section className="py-12 lg:py-36">
+                    <div className="container">
+                        <div className="flex flex-col gap-y-12 md:gap-y-20">
+                            {ourValues.heading && (
+                                <h2 className="font-heading text-80px uppercase leading-[0.94] text-center" dangerouslySetInnerHTML={{ __html: ourValues?.heading }} />
+                            )}
+                            {ourValues.values && ourValues.values.length > 0 && (
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+                                    {ourValues.values.map((value, index) => (
+                                        <div key={index} className="flex flex-col gap-y-16 gap-y-4 p-8 border border-white/10">
+                                            {value.icon && (
+                                                <div className="w-16 h-16 relative aspect-square flex items-center justify-center bg-[#242020] rounded-lg">
+                                                    <div className="flex items-center justify-center flex-none">
+                                                        <SanityImage
+                                                            image={value.icon}
+                                                            className="w-full h-full object-contain"
+                                                        />
+                                                    </div>
+                                                </div>
+                                            )}
+                                            <div className="flex flex-col gap-y-4 mt-auto">
+                                                {value.heading && (
+                                                    <h3 className="text-2xl md:text-3xl font-heading uppercase">{value.heading}</h3>
+                                                )}
+                                                {value.description && (
+                                                    <p className="text-lg opacity-85">{value.description}</p>
+                                                )}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </section>
+            )}
 
             {/* Meet The Team Section */}
             {meetTheTeam && (
-                <section className="py-20 bg-dark-grey text-white overflow-hidden">
+                <section className="py-12 md:py-20 bg-dark-grey text-white overflow-hidden">
                     <div className="container">
                         <div className="flex flex-col gap-y-12 md:gap-y-20">
                             {meetTheTeam.heading && (
@@ -265,30 +374,32 @@ export default function AboutLandingPage({ data, globalCTA, globalOptions }: Abo
                             {meetTheTeam.teamMembers && meetTheTeam.teamMembers.length > 0 && (
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 gap-10">
                                     {meetTheTeam.teamMembers.map((member) => (
-                                        <div key={member._id} className="flex flex-col">
+                                        <div key={member._id} className="flex flex-col gap-y-6">
                                             {member.headshot && (
-                                                <div className="relative aspect-369/553 mb-6 overflow-hidden">
+                                                <div className="relative aspect-369/553 overflow-hidden">
                                                     <SanityImage
                                                         image={member.headshot}
                                                         className="w-full h-full object-cover"
                                                     />
                                                 </div>
                                             )}
-                                            {member.name && (
-                                                <h3 className="text-2xl md:text-3xl font-heading uppercase mb-2">
-                                                    {member.name}
-                                                </h3>
-                                            )}
-                                            {member.role && (
-                                                <p className="text-lg opacity-70 mb-4">
-                                                    {member.role}
-                                                </p>
-                                            )}
-                                            {member.content && (
-                                                <div className="prose prose-lg max-w-none text-white">
-                                                    <CaseStudyRichText content={member.content} />
-                                                </div>
-                                            )}
+                                            <div className="flex flex-col">
+                                                {member.name && (
+                                                    <h3 className="text-2xl md:text-3xl font-heading uppercase">
+                                                        {member.name}
+                                                    </h3>
+                                                )}
+                                                {member.role && (
+                                                    <p className="text-lg opacity-70">
+                                                        {member.role}
+                                                    </p>
+                                                )}
+                                                {member.content && (
+                                                    <div className="prose prose-lg max-w-none text-white">
+                                                        <CaseStudyRichText content={member.content} />
+                                                    </div>
+                                                )}
+                                            </div>
                                         </div>
                                     ))}
                                 </div>

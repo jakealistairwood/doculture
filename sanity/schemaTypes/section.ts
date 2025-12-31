@@ -16,6 +16,7 @@ export const section = defineType({
             of: [
                 { type: 'masthead' },
                 { type: 'homeMasthead' },
+                { type: 'aboutMasthead' },
                 { type: 'textCard' },
                 { type: 'asset' },
                 { type: 'twoColTextAsset' },

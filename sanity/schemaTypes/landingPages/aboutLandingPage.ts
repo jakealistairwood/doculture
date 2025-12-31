@@ -11,6 +11,11 @@ export const aboutLandingPage = defineType({
             type: 'object',
             fields: [
                 defineField({
+                    name: 'subheading',
+                    title: 'Subheading',
+                    type: 'string'
+                }),
+                defineField({
                     name: 'heading',
                     title: 'Heading',
                     type: 'string'
@@ -21,15 +26,214 @@ export const aboutLandingPage = defineType({
                     type: 'text'
                 }),
                 defineField({
-                    name: 'asset',
-                    title: 'Asset',
-                    type: 'asset',
+                    name: 'links',
+                    type: 'linksWrapper'
                 }),
                 defineField({
-                    name: 'mastheadMaxWidth',
-                    title: 'Masthead Max Width',
-                    type: 'number',
-                    description: 'Please enter a value here to set the max width of the masthead container (px)'
+                    name: 'leftTopImage',
+                    title: 'Left Top Image',
+                    type: 'image',
+                    options: {
+                        hotspot: true
+                    },
+                    fields: [
+                        {
+                            name: 'altText',
+                            title: 'Alt Text',
+                            type: 'string',
+                            description: 'Please add a brief description of the image. Important for SEO purposes and accessibility'
+                        }
+                    ]
+                }),
+                defineField({
+                    name: 'leftBottomImage',
+                    title: 'Left Bottom Image',
+                    type: 'image',
+                    options: {
+                        hotspot: true
+                    },
+                    fields: [
+                        {
+                            name: 'altText',
+                            title: 'Alt Text',
+                            type: 'string',
+                            description: 'Please add a brief description of the image. Important for SEO purposes and accessibility'
+                        }
+                    ]
+                }),
+                defineField({
+                    name: 'rightTopImage',
+                    title: 'Right Top Image',
+                    type: 'image',
+                    options: {
+                        hotspot: true
+                    },
+                    fields: [
+                        {
+                            name: 'altText',
+                            title: 'Alt Text',
+                            type: 'string',
+                            description: 'Please add a brief description of the image. Important for SEO purposes and accessibility'
+                        }
+                    ]
+                }),
+                defineField({
+                    name: 'rightBottomImage',
+                    title: 'Right Bottom Image',
+                    type: 'image',
+                    options: {
+                        hotspot: true
+                    },
+                    fields: [
+                        {
+                            name: 'altText',
+                            title: 'Alt Text',
+                            type: 'string',
+                            description: 'Please add a brief description of the image. Important for SEO purposes and accessibility'
+                        }
+                    ]
+                }),
+            ]
+        }),
+        defineField({
+            name: 'ourMission',
+            title: 'Our Mission',
+            type: 'object',
+            fields: [
+                defineField({
+                    name: 'subheading',
+                    title: 'Subheading',
+                    type: 'string'
+                }),
+                defineField({
+                    name: 'heading',
+                    title: 'Heading',
+                    type: 'string'
+                }),
+                defineField({
+                    name: 'images',
+                    title: 'Images',
+                    type: 'array',
+                    of: [
+                        {
+                            name: 'image',
+                            title: 'Image',
+                            type: 'image',
+                            options: {
+                                hotspot: true
+                            },
+                            fields: [
+                                {
+                                    name: 'altText',
+                                    title: 'Alt Text',
+                                    type: 'string',
+                                    description: 'Please add a brief description of the image. Important for SEO purposes and accessibility'
+                                }
+                            ]
+                        }
+                    ]
+                })
+            ]
+        }),
+        defineField({
+            name: 'whyWeExist',
+            title: 'Why We Exist',
+            type: 'object',
+            fields: [
+                defineField({
+                    name: 'heading',
+                    title: 'Heading',
+                    type: 'string'
+                }),
+                defineField({
+                    name: 'content',
+                    title: 'Content',
+                    type: 'blockContent'
+                }),
+            ]
+        }),
+        defineField({
+            name: 'ourJourney',
+            title: 'Our Journey',
+            type: 'object',
+            fields: [
+                defineField({
+                    name: 'heading',
+                    title: 'Heading',
+                    type: 'string'
+                }),
+                defineField({
+                    name: 'content',
+                    title: 'Content',
+                    type: 'blockContent'
+                }),
+                defineField({
+                    name: 'image',
+                    title: 'Image',
+                    type: 'image',
+                    options: {
+                        hotspot: true
+                    },
+                    fields: [
+                        {
+                            name: 'altText',
+                            title: 'Alt Text',
+                            type: 'string',
+                            description: 'Please add a brief description of the image. Important for SEO purposes and accessibility'
+                        }
+                    ]
+                })
+            ]
+        }),
+        defineField({
+            name: 'ourValues',
+            title: 'Our Values',
+            type: 'object',
+            fields: [
+                defineField({
+                    name: 'heading',
+                    title: 'Heading',
+                    type: 'string'
+                }),
+                defineField({
+                    name: 'values',
+                    title: 'Values',
+                    type: 'array',
+                    of: [
+                        defineField({
+                            name: 'value',
+                            title: 'Value',
+                            type: 'object',
+                            fields: [
+                                defineField({
+                                    name: 'icon',
+                                    title: 'Icon',
+                                    type: 'image',
+                                    options: {
+                                        hotspot: true
+                                    },
+                                    fields: [
+                                        {
+                                            name: 'altText',
+                                            title: 'Alt Text',
+                                            type: 'string',
+                                            description: 'Please add a brief description of the image. Important for SEO purposes and accessibility'
+                                        }
+                                    ]
+                                }),
+                                defineField({
+                                    name: 'heading',
+                                    title: 'Heading',
+                                    type: 'string'
+                                }),
+                                defineField({
+                                    name: 'description',
+                                    title: 'Description',
+                                    type: 'text'
+                                })
+                            ]
+                        })
+                    ]
                 })
             ]
         }),

@@ -88,7 +88,7 @@ export default function OurWorks({ projects }: OurWorkProps) {
     if (!projects || projects.length === 0) {
         return (
             <main className="min-h-screen bg-off-black text-white">
-                <section className="pt-40 pb-36">
+                <section className="pt-24 md:pt-40 pb-36">
                     <div className="container">
                         <div className="text-center">
                             <h1 className="text-120px uppercase leading-[0.94] mb-8">
@@ -106,7 +106,7 @@ export default function OurWorks({ projects }: OurWorkProps) {
 
     return (
         <main className="min-h-screen bg-off-black text-white">
-            <section className="pt-40 pb-36">
+            <section className="py-24 md:pt-40 md:pb-36">
                 <div className="container">
                     <div className="flex flex-col gap-y-16">
                         <div className="flex flex-col gap-y-8">

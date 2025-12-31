@@ -404,8 +404,14 @@ export const landingPageQuery = groq`
     },
     aboutLandingPage{
       masthead{
+        subheading,
         heading,
         description,
+        links,
+        leftTopImage,
+        leftBottomImage,
+        rightTopImage,
+        rightBottomImage,
         asset{
           id,
           type,
@@ -422,6 +428,10 @@ export const landingPageQuery = groq`
         },
         mastheadMaxWidth
       },
+      ourMission,
+      whyWeExist,
+      ourJourney,
+      ourValues,
       aboutUsContent[]{
         _key,
         _type,

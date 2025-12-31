@@ -78,7 +78,7 @@ export function HomeMasthead({ data }: HomeMastheadProps) {
 
     return (
         <div data-component="home-masthead" className="h-screen">
-            <div className="bg-black text-white h-full relative overflow-hidden flex flex-col items-center justify-center p-6 sm:p-10">
+            <div className="bg-off-black text-white h-full relative overflow-hidden flex flex-col items-center justify-center p-6 sm:p-10">
                 <div className="container">
                     <div className="flex flex-col gap-y-16 gap-x-24 relative z-[2] py-24 sm:py-16 sm:px-16">
                         <FrameCorner className="absolute aspect-square w-[40px] sm:w-[64px] top-0 left-0" />

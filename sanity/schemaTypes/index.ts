@@ -9,6 +9,7 @@ import { sectionOptions } from "./sectionOptions";
 import { project } from "./project";
 import { masthead } from "./masthead";
 import { homeMasthead } from "./homeMasthead";
+import { aboutMasthead } from "./aboutMasthead";
 import { textCard } from "./textCard";
 import { textCardOptions } from "./textCardOptions";
 import { linksWrapper } from "./linksWrapper";
@@ -47,6 +48,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
         categoryType,
         masthead,
         homeMasthead,
+        aboutMasthead,
         textCard,
         textCardOptions,
         linksWrapper,

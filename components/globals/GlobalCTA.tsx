@@ -35,7 +35,7 @@ export default function GlobalCTA({ data }: GlobalCTAProps) {
     const { image, heading, description, link } = data;
 
     return (
-        <section className="bg-off-black text-white">
+        <section className="bg-off-black text-white md:pt-20">
             {image && (
                 <div className="flex flex-col">
                     <div className="relative aspect-[1/1] md:aspect-[1420/678] max-w-[1420px] w-full mx-auto flex items-end justify-end">
@@ -73,7 +73,7 @@ export default function GlobalCTA({ data }: GlobalCTAProps) {
                             )}
                         </div>
                     </div>
-                    <div className="bg-white text-off-black flex relative z-[2] flex-col sm:flex-row sm:items-center sm:justify-between gap-y-8 p-10 lg:hidden">
+                    <div className="bg-white text-off-black flex relative z-[2] flex-col sm:flex-row sm:items-center sm:justify-between gap-y-8 px-6 py-10 md:p-10 lg:hidden">
                         <div className="flex flex-col">
                             {heading && (
                                 <h2

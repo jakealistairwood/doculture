@@ -34,20 +34,24 @@ const HeaderMarquee = ({ data, bgColor }: HeaderMarqueeProps) => {
     ]);
 
     return (
-        <div
-            data-component="header-marquee"
-            ref={containerRef}
-            className="py-8"
-        >
-            <Marquee
-                play={isInView}
-                // gradient
-                // gradientColor={gradientColor}
-                speed={50}
+        <>
+            <div
+                data-component="header-marquee"
+                ref={containerRef}
+                className=""
+                aria-hidden
             >
-                {marqueeItems}
-            </Marquee>
-        </div>
+                <Marquee
+                    play={isInView}
+                    // gradient
+                    // gradientColor={gradientColor}
+                    speed={50}
+                >
+                    {marqueeItems}
+                </Marquee>
+            </div>
+            <h2 className="sr-only">{marqueeItems[0]}</h2>
+        </>
     );
 };
 

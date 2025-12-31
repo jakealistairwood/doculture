@@ -75,7 +75,7 @@ export default function CaseStudyLayout({ project }: CaseStudyLayoutProps) {
 
     return (
         <main className="min-h-screen bg-off-black text-white">
-            <section className="pt-40">
+            <section className="pt-24 md:pt-40">
                 <div className="container">
                     <div className="flex flex-col gap-y-12 items-center text-center">
                         <div className="flex flex-col items-center text-center gap-y-8">
