@@ -43,7 +43,7 @@ export default function OurMission({ ourMission }: OurMissionProps) {
                             <h2 className="!font-mono uppercase opacity-75" dangerouslySetInnerHTML={{ __html: ourMission?.subheading }} />
                         )}
                         {ourMission?.heading && (
-                            <h3 className="text-2xl" dangerouslySetInnerHTML={{ __html: ourMission?.heading }} />
+                            <h3 className="text-lg md:text-2xl" dangerouslySetInnerHTML={{ __html: ourMission?.heading }} />
                         )}
                     </div>
                     {ourMission?.images && ourMission?.images.length > 0 && (

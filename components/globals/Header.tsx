@@ -125,22 +125,22 @@ const Header = () => {
                                 </Link>
                                 <ul className="hidden lg:flex items-center gap-x-8 font-medium opacity-80">
                                     <li>
-                                        <Link className="link-group" href="/">
+                                        <Link className="link-group nav-link" href="/">
                                             <span data-underline-link>Home</span>
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link className="link-group" href="/about">
+                                        <Link className="link-group nav-link" href="/about">
                                             <span data-underline-link>About</span>
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link className="link-group" href="/services">
+                                        <Link className="link-group nav-link" href="/services">
                                             <span data-underline-link>Services</span>
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link className="link-group" href="/our-work">
+                                        <Link className="link-group nav-link" href="/our-work">
                                             <span data-underline-link>Work</span>
                                         </Link>
                                     </li>
@@ -187,27 +187,30 @@ const Header = () => {
                                     {isMobileMenuOpen ? "Close" : "Menu"}
                                 </span>
                                 <div className="flex flex-col gap-y-1.5 w-[20px] justify-center" aria-hidden>
-                                    <div 
-                                        className={clsx(
-                                            "h-[1.5px] w-full transition-all duration-300 origin-center",
-                                            isScrolled || isMobileMenuOpen ? "bg-off-black" : "bg-white",
-                                            isMobileMenuOpen && "rotate-45 translate-y-[3px]"
-                                        )} 
-                                    />
-                                    <div 
-                                        className={clsx(
-                                            "h-[1.5px] w-full transition-all duration-300",
-                                            isScrolled || isMobileMenuOpen ? "bg-off-black" : "bg-white",
-                                            isMobileMenuOpen && "opacity-0"
-                                        )} 
-                                    />
-                                    <div 
-                                        className={clsx(
-                                            "h-[1.5px] w-full transition-all duration-300 origin-center",
-                                            isScrolled || isMobileMenuOpen ? "bg-off-black" : "bg-white",
-                                            isMobileMenuOpen && "-rotate-45 -translate-y-[3px]"
-                                        )} 
-                                    />
+                                    {isMobileMenuOpen ? (
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#000000" viewBox="0 0 256 256"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path></svg>
+                                    ) : (
+                                        <>
+                                            <div 
+                                                className={clsx(
+                                                    "h-[1.5px] w-full transition-all duration-300 origin-center",
+                                                    isScrolled || isMobileMenuOpen ? "bg-off-black" : "bg-white",
+                                                )} 
+                                            />
+                                            <div 
+                                                className={clsx(
+                                                    "h-[1.5px] w-full transition-all duration-300",
+                                                    isScrolled || isMobileMenuOpen ? "bg-off-black" : "bg-white",
+                                                )} 
+                                            />
+                                            <div 
+                                                className={clsx(
+                                                    "h-[1.5px] w-full transition-all duration-300 origin-center",
+                                                    isScrolled || isMobileMenuOpen ? "bg-off-black" : "bg-white",
+                                                )} 
+                                            />
+                                        </>
+                                    )}
                                 </div>
                             </button>
                         </nav>

@@ -104,6 +104,11 @@ a {
   display: flex;
 }
 
+.nav-link {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+}
+
 [data-underline-link] {
   text-decoration: none;
   position: relative;

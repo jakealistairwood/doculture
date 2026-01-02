@@ -102,9 +102,9 @@ const components = {
                     href={href}
                     target={target}
                     rel={rel}
-                    className="text-blue-600 dark:text-blue-400 hover:underline"
+                    className="link-group text-inherit hover:text-inherit/80 transition-colors"
                 >
-                    {children}
+                    <span data-underline-link="alt">{children}</span>
                 </a>
             );
         },

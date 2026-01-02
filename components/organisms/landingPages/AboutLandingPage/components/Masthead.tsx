@@ -153,7 +153,7 @@ export default function Masthead({ masthead }: MastheadProps) {
                     <div className="container relative h-full">
                         {/* Four absolutely positioned images */}
                         {masthead?.leftTopImage && (
-                            <div ref={leftTopImageRef} className="absolute top-40 xl:top-30 left-0 aspect-[285/186] w-full max-w-[40vw] xl:max-w-[286px] overflow-hidden">
+                            <div ref={leftTopImageRef} className="absolute top-40 xl:top-30 left-0 aspect-[285/186] w-full max-w-[40vw] xl:max-w-[350px] overflow-hidden">
                                 <SanityImage
                                     image={masthead.leftTopImage}
                                     className="w-full h-full object-cover"
@@ -171,7 +171,7 @@ export default function Masthead({ masthead }: MastheadProps) {
                             </div>
                         )}
                         {masthead?.rightTopImage && (
-                            <div ref={rightTopImageRef} className="absolute top-20 xl:top-30 right-0 aspect-[285/186] max-w-[40vw] xl:max-w-[285px] w-full overflow-hidden">
+                            <div ref={rightTopImageRef} className="absolute top-20 xl:top-30 right-0 aspect-[285/186] max-w-[40vw] xl:max-w-[350px] w-full overflow-hidden">
                                 <SanityImage
                                     image={masthead.rightTopImage}
                                     className="w-full h-full object-cover"

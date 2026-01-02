@@ -171,22 +171,33 @@ const SelectedWorks = ({ data }: SelectedWorksProps) => {
                                             </h2>
                                         )}
                                         {project.categories && project.categories.length > 0 && (
-                                            <ul className="selected-works-slide-text flex flex-wrap gap-4 relative z-[3]">
-                                                {project.categories.map((category, categoryIndex) => {
-                                                    // Categories are dereferenced by the query, so they have title directly
-                                                    const categoryTitle = (category as any).title;
-                                                    if (!categoryTitle) return null;
-                                                    
-                                                    return (
-                                                        <li
-                                                            key={categoryIndex}
-                                                            className="md:py-1 md:px-2 md:border md:border-white/[25%] text-xs uppercase font-medium rounded-sm opacity-75 md:opacity-100"
-                                                        >
-                                                            {categoryTitle}
-                                                        </li>
-                                                    );
-                                                })}
-                                            </ul>
+                                            <div className="selected-works-slide-text relative z-[3]">
+                                                <span className="text-xs uppercase font-medium opacity-75 md:hidden">
+                                                    {project.categories
+                                                        .map((category) => {
+                                                            const categoryTitle = (category as any).title;
+                                                            return categoryTitle;
+                                                        })
+                                                        .filter(Boolean)
+                                                        .join(", ")}
+                                                </span>
+                                                <ul className="hidden md:flex flex-wrap gap-4">
+                                                    {project.categories.map((category, categoryIndex) => {
+                                                        // Categories are dereferenced by the query, so they have title directly
+                                                        const categoryTitle = (category as any).title;
+                                                        if (!categoryTitle) return null;
+                                                        
+                                                        return (
+                                                            <li
+                                                                key={categoryIndex}
+                                                                className="py-1 px-2 border border-white/[25%] text-xs uppercase font-medium rounded-sm"
+                                                            >
+                                                                {categoryTitle}
+                                                            </li>
+                                                        );
+                                                    })}
+                                                </ul>
+                                            </div>
                                         )}
                                     </div>
                                     {/* {project.excerpt && (

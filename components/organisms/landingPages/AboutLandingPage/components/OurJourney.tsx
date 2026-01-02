@@ -20,10 +20,10 @@ export default function OurJourney({ ourJourney }: OurJourneyProps) {
     if (!ourJourney) return null;
 
     return (
-        <section className="py-12 lg:py-36" id="our-journey">
+        <section className="pb-12 md:pb-40" id="our-journey">
             <div className="container">
-                <div className="bg-white text-black grid grid-cols-1 md:grid-cols-2">
-                    <div className="px-6 md:px-20 py-10 md:py-16 flex flex-col gap-y-12 md:gap-y-20">
+                <div className="bg-white text-black grid grid-cols-1 lg:grid-cols-2">
+                    <div className="px-6 py-10 md:py-16 md:px-12 xl:px-16 flex flex-col gap-y-12 lg:gap-y-20">
                         {ourJourney.heading && (
                             <h2 className="font-heading text-80px uppercase leading-[0.94]" dangerouslySetInnerHTML={{ __html: ourJourney?.heading }} />
                         )}

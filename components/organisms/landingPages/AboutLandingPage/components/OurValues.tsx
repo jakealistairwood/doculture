@@ -80,7 +80,7 @@ export default function OurValues({ ourValues }: OurValuesProps) {
     };
 
     return (
-        <section className="py-12 lg:py-36">
+        <section className="pb-12 md:pb-40">
             <div className="container">
                 <div className="flex flex-col gap-y-12 md:gap-y-20">
                     {ourValues.heading && (
@@ -89,7 +89,7 @@ export default function OurValues({ ourValues }: OurValuesProps) {
                     {ourValues.values && ourValues.values.length > 0 && (
                         <motion.div 
                             ref={containerRef}
-                            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12"
+                            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10"
                             variants={containerVariant}
                             initial="initial"
                             animate={isInView ? "animate" : "initial"}

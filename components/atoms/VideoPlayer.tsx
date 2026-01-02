@@ -130,10 +130,10 @@ const VideoPlayer = (props: VideoPlayerProps) => {
                         className="w-full h-full object-cover absolute inset-0 z-[2] scale-100 group-hover:scale-[1.02] duration-400 ease transition-transform will-change-transform"
                     />
                     {props?.options?.title && props?.options?.showTitleOnPoster && (
-                        <div className="relative flex flex-col-reverse sm:flex-row items-center justify-center sm:justify-between h-full sm:h-fit w-full pt-8 px-8 pb-8 sm:pt-0 mt-auto">
+                        <div className="relative flex flex-col-reverse items-center justify-center h-full w-full pt-8 px-8 pb-8 sm:pt-0 mt-auto gap-y-4">
                             <div className="absolute bg-gradient-to-t from-black/80 via-black/40 to-transparent z-[2] w-full h-full inset-0" />
                             <div className="z-[2] relative text-left">
-                                <h3 className="text-white text-[2rem] md:text-[3.5rem] font-heading uppercase">
+                                <h3 className="text-white text-[1.5rem] sm:text-[2rem] md:text-[3.5rem] font-heading uppercase">
                                     {props.options.title}
                                 </h3>
                             </div>
