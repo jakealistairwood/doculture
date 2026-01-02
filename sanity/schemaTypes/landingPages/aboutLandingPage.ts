@@ -168,6 +168,10 @@ export const aboutLandingPage = defineType({
                     type: 'blockContent'
                 }),
                 defineField({
+                    name: 'links',
+                    type: 'linksWrapper'
+                }),
+                defineField({
                     name: 'image',
                     title: 'Image',
                     type: 'image',
@@ -236,12 +240,6 @@ export const aboutLandingPage = defineType({
                     ]
                 })
             ]
-        }),
-        defineField({
-            name: 'aboutUsContent',
-            title: 'About Us Content',
-            type: 'array',
-            of: [{ type: 'caseStudyBuilder' }]
         }),
         defineField({
             name: 'meetTheTeam',

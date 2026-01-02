@@ -36,7 +36,7 @@ const LinksWrapper = ({ links = [] }: LinksWrapperProps) => {
                 const buttonSize = link.buttonSize || "default";
                 const buttonStyle = link.buttonStyle || "primary";
 
-                const textLinkStyles = "link-group text-white hover:text-white/80 transition-colors";
+                const textLinkStyles = "link-group text-inherit hover:text-inherit/80 transition-colors";
 
                 if (isButton) {
                     return (

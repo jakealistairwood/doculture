@@ -316,3 +316,8 @@ header .btn-animate-chars:hover .btn-animate-chars__bg {
 .marquee-logo--contact img {
   width: 100%;
 }
+
+#our-journey .prose > *,
+#why-we-exist .prose > * {
+  padding-inline: 0 !important;
+}
