@@ -198,7 +198,7 @@ export default function AboutLandingPage({ data, globalCTA, globalOptions }: Abo
                 {/* Masthead Section */}
             <section className="relative min-h-screen flex items-center justify-center">
                 <div className="container">
-                    <div className="flex flex-col gap-y-12 items-center text-center relative">
+                    <div className="flex flex-col gap-y-12 items-center text-center relative z-[2]">
                         <div className="flex flex-col gap-y-4 md:gap-y-8 items-center text-center max-w-[722px] w-full mx-auto relative z-[2]" style={{
                             maxWidth: `${masthead?.mastheadMaxWidth}px`
                         }}>
@@ -220,47 +220,52 @@ export default function AboutLandingPage({ data, globalCTA, globalOptions }: Abo
                             )}
                         </div>
                     </div>
-                    {/* Four absolutely positioned images */}
-                    {masthead?.leftTopImage && (
-                        <div className="absolute top-0 left-0 aspect-[285/186] max-w-[286px] overflow-hidden">
-                            <SanityImage
-                                image={masthead.leftTopImage}
-                                className="w-full h-full object-cover"
-                                priority
-                            />
+                    <div className="absolute inset-0 h-full w-full z-[1]">
+                        <div className="container relative h-full">
+                            {/* Four absolutely positioned images */}
+                            {masthead?.leftTopImage && (
+                                <div className="absolute top-30 left-0 aspect-[285/186] max-w-[286px] overflow-hidden">
+                                    <SanityImage
+                                        image={masthead.leftTopImage}
+                                        className="w-full h-full object-cover"
+                                        priority
+                                    />
+                                </div>
+                            )}
+                            {masthead?.leftBottomImage && (
+                                <div className="absolute bottom-0 left-40 aspect-[219/290] max-w-[219px] overflow-hidden">
+                                    <SanityImage
+                                        image={masthead.leftBottomImage}
+                                        className="w-full h-full object-cover"
+                                        priority
+                                    />
+                                </div>
+                            )}
+                            {masthead?.rightTopImage && (
+                                <div className="absolute top-30 right-0 aspect-[285/186] max-w-[285px] overflow-hidden">
+                                    <SanityImage
+                                        image={masthead.rightTopImage}
+                                        className="w-full h-full object-cover"
+                                        priority
+                                    />
+                                </div>
+                            )}
+                            {masthead?.rightBottomImage && (
+                                <div className="absolute bottom-0 right-40 aspect-[233/309] max-w-[233px] overflow-hidden">
+                                    <SanityImage
+                                        image={masthead.rightBottomImage}
+                                        className="w-full h-full object-cover"
+                                        priority
+                                    />
+                                </div>
+                            )}
+
                         </div>
-                    )}
-                    {masthead?.leftBottomImage && (
-                        <div className="absolute bottom-0 left-0 aspect-[219/290] max-w-[219px] overflow-hidden">
-                            <SanityImage
-                                image={masthead.leftBottomImage}
-                                className="w-full h-full object-cover"
-                                priority
-                            />
-                        </div>
-                    )}
-                    {masthead?.rightTopImage && (
-                        <div className="absolute top-0 right-0 aspect-[285/186] max-w-[285px] overflow-hidden">
-                            <SanityImage
-                                image={masthead.rightTopImage}
-                                className="w-full h-full object-cover"
-                                priority
-                            />
-                        </div>
-                    )}
-                    {masthead?.rightBottomImage && (
-                        <div className="absolute bottom-0 right-0 aspect-[233/309] max-w-[233px] overflow-hidden">
-                            <SanityImage
-                                image={masthead.rightBottomImage}
-                                className="w-full h-full object-cover"
-                                priority
-                            />
-                        </div>
-                    )}
+                    </div>
                 </div>
             </section>
 
-            <section className="bg-off-black text-white">
+            <section className="bg-off-black text-white py-40">
                 <div className="container">
                     <div className="flex flex-col gap-y-12 md:gap-y-20">
                         <div className="flex flex-col gap-y-6 max-w-[786px] mx-auto items-center text-center">
@@ -271,6 +276,15 @@ export default function AboutLandingPage({ data, globalCTA, globalOptions }: Abo
                                 <h3 className="text-2xl" dangerouslySetInnerHTML={{ __html: ourMission?.heading }} />
                             )}
                         </div>
+                        {ourMission?.images && ourMission?.images.length > 0 && (
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                                {ourMission?.images?.map((image, i) => (
+                                    <div className="">
+                                        <SanityImage image={image} className="w-full h-full object-cover" />
+                                    </div>
+                                ))}
+                            </div>
+                        )}
                     </div>
                 </div>
             </section>

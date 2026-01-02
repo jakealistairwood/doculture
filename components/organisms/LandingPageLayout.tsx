@@ -1,7 +1,7 @@
 "use client";
 
 import ContactLandingPage from "@/components/organisms/landingPages/ContactLandingPage";
-import AboutLandingPage from "@/components/organisms/landingPages/AboutLandingPage";
+import AboutLandingPage from "@/components/organisms/landingPages/AboutLandingPage/AboutLandingPage";
 
 interface LandingPageData {
     _id: string;
