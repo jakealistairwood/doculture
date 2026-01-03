@@ -28,43 +28,120 @@ interface HomeMastheadProps {
     data: HomeMastheadType;
 }
 
+// Helper function to extract plain text from HTML string
+const stripHtml = (html: string): string => {
+    if (typeof window === 'undefined') {
+        // Server-side: simple regex approach
+        return html.replace(/<[^>]*>/g, '').trim();
+    }
+    // Client-side: use DOM parser for better accuracy
+    const tmp = document.createElement('div');
+    tmp.innerHTML = html;
+    return tmp.textContent || tmp.innerText || '';
+};
+
 export function HomeMasthead({ data }: HomeMastheadProps) {
-    const headingRef = useRef<HTMLHeadingElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const headingRef = useRef<HTMLSpanElement>(null);
+    const contentRef = useRef<HTMLParagraphElement>(null);
+    const linksRef = useRef<HTMLDivElement>(null);
     const splitInstanceRef = useRef<any>(null);
 
     useGSAP(() => {
-        if (!headingRef.current || !data.heading) return;
+        if (!containerRef.current) return;
 
-        // Use official GSAP SplitText if available, otherwise use custom implementation
-        if (SplitText) {
-            // Official GSAP SplitText plugin
-            splitInstanceRef.current = SplitText.create(headingRef.current, {
-                type: "lines",
-                linesClass: "lines-js"
-            });
+        // Collect all text element refs that exist
+        const textRefs = [
+            headingRef.current,
+            contentRef.current,
+            linksRef.current,
+        ].filter(Boolean) as HTMLElement[];
 
-            // Animate lines sliding up
-            gsap.from(splitInstanceRef.current.lines, {
-                duration: 0.8,
+        // Set initial states for content and links
+        if (contentRef.current) {
+            gsap.set(contentRef.current, {
                 opacity: 0,
-                yPercent: 200,
-                stagger: 0.1,
-                ease: "expo.out",
+                y: 30,
             });
-        } else {
-            // Fallback: Use custom SplitTextInstance for line splitting
-            splitInstanceRef.current = SplitTextInstance.create(headingRef.current, {
-                type: "lines",
-                linesClass: "lines-js"
-            });
+        }
 
-            // Animate lines sliding up
-            gsap.from(splitInstanceRef.current.lines, {
-                duration: 0.8,
-                yPercent: 110,
-                stagger: 0.1,
-                ease: "expo.out",
+        if (linksRef.current) {
+            gsap.set(linksRef.current, {
+                opacity: 0,
+                y: 30,
             });
+        }
+
+        // Create timeline
+        const tl = gsap.timeline();
+
+        // Animate heading with SplitText if available
+        if (headingRef.current && data.heading) {
+            // Use official GSAP SplitText if available, otherwise use custom implementation
+            if (SplitText) {
+                // Official GSAP SplitText plugin
+                splitInstanceRef.current = SplitText.create(headingRef.current, {
+                    type: "lines",
+                    linesClass: "lines-js"
+                });
+
+                // Add aria-hidden to all split lines for accessibility
+                if (splitInstanceRef.current.lines) {
+                    splitInstanceRef.current.lines.forEach((line: HTMLElement) => {
+                        line.setAttribute('aria-hidden', 'true');
+                    });
+                }
+
+                // Animate lines sliding up
+                tl.from(splitInstanceRef.current.lines, {
+                    duration: 0.8,
+                    opacity: 0,
+                    yPercent: 200,
+                    stagger: 0.1,
+                    ease: "expo.out",
+                });
+            } else {
+                // Fallback: Use custom SplitTextInstance for line splitting
+                splitInstanceRef.current = SplitTextInstance.create(headingRef.current, {
+                    type: "lines",
+                    linesClass: "lines-js"
+                });
+
+                // Add aria-hidden to all split lines for accessibility
+                if (splitInstanceRef.current.lines) {
+                    splitInstanceRef.current.lines.forEach((line: HTMLElement) => {
+                        line.setAttribute('aria-hidden', 'true');
+                    });
+                }
+
+                // Animate lines sliding up
+                tl.from(splitInstanceRef.current.lines, {
+                    duration: 0.8,
+                    yPercent: 110,
+                    stagger: 0.1,
+                    ease: "expo.out",
+                });
+            }
+        }
+
+        // Animate content and links with stagger after heading
+        const contentAndLinksRefs = [
+            contentRef.current,
+            linksRef.current,
+        ].filter(Boolean) as HTMLElement[];
+
+        if (contentAndLinksRefs.length > 0) {
+            tl.to(
+                contentAndLinksRefs,
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.6,
+                    stagger: 0.15,
+                    ease: "expo.out",
+                },
+                "-=0.3" // Start slightly before heading animation completes
+            );
         }
 
         // Cleanup function
@@ -74,10 +151,10 @@ export function HomeMasthead({ data }: HomeMastheadProps) {
                 splitInstanceRef.current = null;
             }
         };
-    }, { dependencies: [data.heading], scope: headingRef });
+    }, { dependencies: [data.heading, data.content, data.links], scope: containerRef });
 
     return (
-        <div data-component="home-masthead" className="h-screen">
+        <div data-component="home-masthead" className="h-screen" ref={containerRef}>
             <div className="bg-off-black text-white h-full relative overflow-hidden flex flex-col items-center justify-center p-6 sm:p-10">
                 <div className="container">
                     <div className="flex flex-col gap-y-16 gap-x-24 relative z-[2] py-24 sm:py-16 sm:px-16">
@@ -88,21 +165,28 @@ export function HomeMasthead({ data }: HomeMastheadProps) {
                         <div className="flex flex-col items-center text-center gap-y-8">
                             {data.heading && (
                                 <h1 
-                                    ref={headingRef}
                                     data-split="heading"
                                     className="text-120px leading-none uppercase max-w-[700px] overflow-hidden"
                                 >
-                                    {data.heading}
+                                    <span
+                                        ref={headingRef}
+                                        aria-hidden="true"
+                                        dangerouslySetInnerHTML={{ __html: data.heading }}
+                                    />
+                                    <span className="sr-only">{stripHtml(data.heading)}</span>
                                 </h1>
                             )}
                             {data.content && (
                                 <p
+                                    ref={contentRef}
                                     className="font-serif font-light text-2xl sm:text-4xl"
                                     dangerouslySetInnerHTML={{ __html: data?.content }}
                                 />
                             )}
                             {data.links && data.links.length > 0 && (
-                                <LinksWrapper links={data.links} />
+                                <div ref={linksRef}>
+                                    <LinksWrapper links={data.links} />
+                                </div>
                             )}
                         </div>
                     </div>

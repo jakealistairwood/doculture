@@ -55,7 +55,7 @@ const LogoMarquee = ({ data, speed = 50, bgColor, disableInvertedLogoBg = false,
         const image = (
             <SanityImage
                 image={logo}
-                className="h-12 sm:h-14 md:max-h-[30px] w-auto min-w-[80px] sm:min-w-[unset] object-contain"
+                className="h-8 sm:h-14 md:max-h-[30px] w-auto object-contain"
             />
         );
 
