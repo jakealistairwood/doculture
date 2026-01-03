@@ -98,7 +98,7 @@ const LogoMarquee = ({ data, speed = 50, bgColor, disableInvertedLogoBg = false,
     );
 
     const labelContent = data?.label ? (
-        <p className={`text-xl ${data?.labelPlacement === "stacked" ? "text-center font-sans opacity-75 text-base" : "font-serif"} whitespace-nowrap`}>
+        <p className={`text-xl ${data?.labelPlacement === "stacked" ? "text-center font-mono opacity-60 !text-base uppercase" : "font-serif"} whitespace-nowrap`}>
             {data.label}
         </p>
     ) : null;

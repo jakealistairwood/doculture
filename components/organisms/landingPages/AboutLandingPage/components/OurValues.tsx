@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { useInView, motion } from "framer-motion";
+import { useInView, motion, Variants } from "framer-motion";
 import SanityImage from "@/components/atoms/SanityImage";
 
 interface OurValuesProps {
@@ -24,7 +24,7 @@ export default function OurValues({ ourValues }: OurValuesProps) {
 
     if (!ourValues) return null;
 
-    const containerVariant = {
+    const containerVariant: Variants = {
         initial: {},
         animate: {
             transition: {
@@ -33,7 +33,7 @@ export default function OurValues({ ourValues }: OurValuesProps) {
         }
     };
 
-    const valueCardVariant = {
+    const valueCardVariant: Variants = {
         initial: {
             opacity: 0,
             y: 40
@@ -49,7 +49,7 @@ export default function OurValues({ ourValues }: OurValuesProps) {
         }
     };
 
-    const iconVariant = {
+    const iconVariant: Variants = {
         initial: {
             opacity: 0,
             scale: 0.8
@@ -64,7 +64,7 @@ export default function OurValues({ ourValues }: OurValuesProps) {
         }
     };
 
-    const textVariant = {
+    const textVariant: Variants = {
         initial: {
             opacity: 0,
             y: 20

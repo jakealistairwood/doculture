@@ -81,10 +81,10 @@ export function HomeMasthead({ data }: HomeMastheadProps) {
             <div className="bg-off-black text-white h-full relative overflow-hidden flex flex-col items-center justify-center p-6 sm:p-10">
                 <div className="container">
                     <div className="flex flex-col gap-y-16 gap-x-24 relative z-[2] py-24 sm:py-16 sm:px-16">
-                        <FrameCorner className="absolute aspect-square w-[40px] sm:w-[64px] top-0 left-0" />
-                        <FrameCorner className="absolute aspect-square w-[40px] sm:w-[64px] top-0 right-0 rotate-90" />
-                        <FrameCorner className="absolute aspect-square w-[40px] sm:w-[64px] bottom-0 right-0 rotate-180" />
-                        <FrameCorner className="absolute aspect-square w-[40px] sm:w-[64px] bottom-0 left-0 rotate-270" />
+                        <FrameCorner className="absolute aspect-square w-[40px] sm:w-[64px] top-0 left-0 opacity-50" />
+                        <FrameCorner className="absolute aspect-square w-[40px] sm:w-[64px] top-0 right-0 rotate-90 opacity-50" />
+                        <FrameCorner className="absolute aspect-square w-[40px] sm:w-[64px] bottom-0 right-0 rotate-180 opacity-50" />
+                        <FrameCorner className="absolute aspect-square w-[40px] sm:w-[64px] bottom-0 left-0 rotate-270 opacity-50" />
                         <div className="flex flex-col items-center text-center gap-y-8">
                             {data.heading && (
                                 <h1 
