@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import { useState, FormEvent } from 'react';
 import Link from 'next/link';
@@ -92,7 +92,8 @@ export default function ContactForm() {
       return;
     }
 
-    formData.append("access_key", "29900239-9f1f-48de-861d-1d75a3ea255c");
+    // formData.append("access_key", "29900239-9f1f-48de-861d-1d75a3ea255c");
+    formData.append("access_key", "8dbc213e-e741-4b2d-86cb-fe9ac33c8371");
 
     const response = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
