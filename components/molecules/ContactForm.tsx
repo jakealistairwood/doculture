@@ -92,7 +92,7 @@ export default function ContactForm() {
       return;
     }
 
-    formData.append("access_key", process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "");
+    formData.append("access_key", "29900239-9f1f-48de-861d-1d75a3ea255c");
 
     const response = await fetch("https://api.web3forms.com/submit", {
       method: "POST",

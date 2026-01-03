@@ -28,8 +28,6 @@ type LogoItem =
 const LogoMarquee = ({ data, speed = 50, bgColor, disableInvertedLogoBg = false, isOnContactPage = false, invertLogos = false }: LogoMarqueeProps) => {
     const containerRef = useRef<HTMLDivElement | null>(null);
     const isInView = useInView(containerRef, { amount: 0.2, once: false });
-
-    console.log(`invert logos: ${invertLogos}`);
     
     const disableLogoInvert = disableInvertedLogoBg || !invertLogos;
 
