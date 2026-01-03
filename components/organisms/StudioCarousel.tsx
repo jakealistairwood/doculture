@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import { createPortal } from "react-dom";
 import SanityImage from "../atoms/SanityImage";
 import { Studio } from "@/sanity/types";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -22,11 +23,41 @@ interface StudioCarouselProps {
 const StudioCarousel = ({ data }: StudioCarouselProps) => {
     const { studios = [] } = data || {};
     const [activeIndex, setActiveIndex] = useState(0);
+    const [selectedStudio, setSelectedStudio] = useState<Studio | null>(null);
+    const [mounted, setMounted] = useState(false);
     const swiperRef = useRef<SwiperType | null>(null);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    useEffect(() => {
+        if (!selectedStudio) return;
+
+        const handleEscape = (e: KeyboardEvent) => {
+            if (e.key === "Escape") {
+                setSelectedStudio(null);
+            }
+        };
+
+        document.addEventListener("keydown", handleEscape);
+        document.body.style.overflow = "hidden";
+
+        return () => {
+            document.removeEventListener("keydown", handleEscape);
+            document.body.style.overflow = "unset";
+        };
+    }, [selectedStudio]);
 
     if (!studios || studios.length === 0) {
         return null;
     }
+
+    const handleStudioClick = (studio: Studio) => {
+        if (studio.description) {
+            setSelectedStudio(studio);
+        }
+    };
 
     const handlePrevious = () => {
         swiperRef.current?.slidePrev();
@@ -80,7 +111,10 @@ const StudioCarousel = ({ data }: StudioCarouselProps) => {
             >
                 {studios.map((studio, index) => (
                     <SwiperSlide key={studio._id || index} className="w-full h-full flex flex-col !items-start">
-                        <div className="flex flex-col aspect-video w-full mx-auto relative rounded-lg overflow-hidden">
+                        <div 
+                            className={`flex flex-col aspect-video w-full mx-auto relative rounded-lg overflow-hidden ${studio.description ? 'cursor-pointer' : ''}`}
+                            onClick={() => handleStudioClick(studio)}
+                        >
                             {studio.coverImage && (
                                 <div className="w-full h-full absolute inset-0">
                                     <SanityImage
@@ -98,11 +132,6 @@ const StudioCarousel = ({ data }: StudioCarouselProps) => {
                                     <h2 className="studio-slide-text text-4xl md:text-5xl font-heading uppercase mb-4 relative z-[3]">
                                         {studio.title}
                                     </h2>
-                                )}
-                                {studio.description && (
-                                    <p className="studio-slide-text text-lg md:text-xl mb-6 max-w-2xl relative z-[3]">
-                                        {studio.description}
-                                    </p>
                                 )}
                                 {studio.features && studio.features.length > 0 && (
                                     <ul className="studio-slide-text flex flex-wrap gap-4 relative z-[3]">
@@ -247,6 +276,83 @@ const StudioCarousel = ({ data }: StudioCarouselProps) => {
                     transition-delay: 0.3s;
                 }
             `}</style>
+
+            {/* Studio Modal */}
+            {mounted && selectedStudio && createPortal(
+                <div
+                    className="fixed inset-0 h-screen w-screen bg-black/80 flex items-center justify-center z-[9999] p-4"
+                    onClick={(e) => {
+                        if (e.target === e.currentTarget) {
+                            setSelectedStudio(null);
+                        }
+                    }}
+                >
+                    <div className="bg-white text-black rounded-lg overflow-hidden max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">
+                        {/* Close Button */}
+                        <button
+                            onClick={() => setSelectedStudio(null)}
+                            className="absolute top-4 right-4 z-10 p-2 bg-white/90 hover:bg-accent-orange hover:text-off-black transition-colors rounded-full"
+                            aria-label="Close modal"
+                        >
+                            <svg
+                                className="w-6 h-6"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M6 18L18 6M6 6l12 12"
+                                />
+                            </svg>
+                        </button>
+
+                        {/* Cover Image */}
+                        {selectedStudio.coverImage && (
+                            <div className="w-full h-64 md:h-96 relative">
+                                <SanityImage
+                                    image={selectedStudio.coverImage}
+                                    className="w-full h-full object-cover"
+                                />
+                            </div>
+                        )}
+
+                        {/* Content */}
+                        <div className="p-8 md:p-12">
+                            {selectedStudio.title && (
+                                <h2 className="text-4xl md:text-5xl font-heading uppercase mb-6">
+                                    {selectedStudio.title}
+                                </h2>
+                            )}
+                            
+                            {selectedStudio.description && (
+                                <p className="text-lg md:text-xl mb-8 leading-relaxed whitespace-pre-line">
+                                    {selectedStudio.description}
+                                </p>
+                            )}
+
+                            {selectedStudio.features && selectedStudio.features.length > 0 && (
+                                <div className="mt-8">
+                                    <h3 className="text-2xl font-heading uppercase mb-4">Features</h3>
+                                    <ul className="flex flex-wrap gap-4">
+                                        {selectedStudio.features.map((feature, featureIndex) => (
+                                            <li
+                                                key={featureIndex}
+                                                className="px-4 py-2 border border-current rounded-md text-sm uppercase"
+                                            >
+                                                {feature}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>,
+                document.body
+            )}
         </div>
     );
 };

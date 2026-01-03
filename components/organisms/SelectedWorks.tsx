@@ -23,6 +23,7 @@ const SelectedWorks = ({ data }: SelectedWorksProps) => {
     const [activeIndex, setActiveIndex] = useState(0);
     const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
     const [selectedVideoPoster, setSelectedVideoPoster] = useState<any>(null);
+    const [selectedVideoType, setSelectedVideoType] = useState<'normal' | 'short' | undefined>(undefined);
     const swiperRef = useRef<SwiperType | null>(null);
 
     // caseStudies are dereferenced in the query (see queries.ts), so they come as Project objects
@@ -52,16 +53,18 @@ const SelectedWorks = ({ data }: SelectedWorksProps) => {
         swiperRef.current?.slideNext();
     };
 
-    const handleWatchVideo = (video: string | undefined, poster: any) => {
+    const handleWatchVideo = (video: string | undefined, poster: any, videoType?: 'normal' | 'short') => {
         if (video) {
             setSelectedVideo(video);
             setSelectedVideoPoster(poster);
+            setSelectedVideoType(videoType);
         }
     };
 
     const handleCloseVideo = () => {
         setSelectedVideo(null);
         setSelectedVideoPoster(null);
+        setSelectedVideoType(undefined);
     };
 
     return (
@@ -145,7 +148,7 @@ const SelectedWorks = ({ data }: SelectedWorksProps) => {
                                 <div className="selected-works-slide-text flex flex-wrap gap-4 relative z-[3]">
                                     {project.video && (
                                         <button
-                                            onClick={() => handleWatchVideo(project.video, project.coverImage)}
+                                            onClick={() => handleWatchVideo(project.video, project.coverImage, project.videoType)}
                                             className="px-4 py-2 text-sm inline-flex items-center justify-center font-medium transition-colors rounded-[3px] bg-white text-black hover:bg-white/90"
                                         >
                                             Watch video
@@ -209,7 +212,7 @@ const SelectedWorks = ({ data }: SelectedWorksProps) => {
                                 <div className="selected-works-slide-text flex flex-wrap gap-4 relative z-[3]">
                                     {project.video && (
                                         <button
-                                            onClick={() => handleWatchVideo(project.video, project.coverImage)}
+                                            onClick={() => handleWatchVideo(project.video, project.coverImage, project.videoType)}
                                             className="px-4 py-2 text-sm inline-flex items-center justify-center font-medium transition-colors rounded-[3px] bg-white text-black hover:bg-white/90"
                                         >
                                             Watch video
@@ -287,6 +290,7 @@ const SelectedWorks = ({ data }: SelectedWorksProps) => {
                 <VideoPlayer
                     video={selectedVideo}
                     poster={selectedVideoPoster}
+                    videoType={selectedVideoType}
                     isOpen={!!selectedVideo}
                     onClose={handleCloseVideo}
                     showPosterButton={false}

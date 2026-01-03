@@ -34,6 +34,7 @@ interface CaseStudyImageProps {
     };
     videoOptions?: {
         title?: string;
+        type?: 'normal' | 'short';
     };
 }
 

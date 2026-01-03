@@ -109,6 +109,7 @@ export default function CaseStudyLayout({ project }: CaseStudyLayoutProps) {
                                 <VideoPlayer
                                     video={project.video}
                                     poster={project.coverImage}
+                                    videoType={project.videoType}
                                     buttonClassName="relative flex items-center justify-center rounded-lg overflow-hidden w-full h-full cursor-pointer group"
                                 />
                             </div>

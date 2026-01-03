@@ -207,6 +207,7 @@ export const pageQuery = groq`
                 slug,
                 excerpt,
                 video,
+                videoType,
                 coverImage,
                 categories[]->{
                     _id,
@@ -293,6 +294,7 @@ export const projectQuery = groq`
     },
     coverImage,
     video,
+    videoType,
     content[]{
       _key,
       _type,

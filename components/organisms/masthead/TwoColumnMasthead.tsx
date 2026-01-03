@@ -82,7 +82,7 @@ export function TwoColumnMasthead({ data }: TwoColumnMastheadProps) {
 
     return (
         <section ref={containerRef} data-component="two-col-masthead" className="">
-            <div className="bg-off-black text-white h-full relative overflow-hidden flex flex-col items-center justify-center py-20">
+            <div className="bg-off-black text-white h-full relative overflow-hidden flex flex-col items-center justify-center pb-0 pt-20 md:pb-20">
                 <div className="container">
                     <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 md:gap-12 lg:gap-24 items-center relative z-[2]">
                         {/* Text Column */}

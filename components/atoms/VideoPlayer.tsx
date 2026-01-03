@@ -12,7 +12,9 @@ interface VideoPlayerProps {
     options?: {
         title?: string;
         showTitleOnPoster?: boolean;
+        type?: 'normal' | 'short';
     };
+    videoType?: 'normal' | 'short';
     buttonClassName?: string;
     isOpen?: boolean;
     onClose?: () => void;
@@ -28,6 +30,12 @@ const VideoPlayer = (props: VideoPlayerProps) => {
     const isControlled = controlledIsOpen !== undefined;
     const playVideo = isControlled ? controlledIsOpen : internalPlayVideo;
     const setPlayVideo = isControlled ? (onClose || (() => {})) : setInternalPlayVideo;
+    
+    // Determine video type: prefer videoType prop, then options.type, default to 'normal'
+    const videoType = props.videoType || props.options?.type || 'normal';
+
+    const isShort = videoType === 'short';
+    const aspectRatio = isShort ? 'aspect-[9/16] max-w-[350px]' : 'aspect-[16/9] max-w-[1100px]';
 
     useEffect(() => {
         setMounted(true);
@@ -69,7 +77,7 @@ const VideoPlayer = (props: VideoPlayerProps) => {
                     }
                 }}
             >
-                <div className="aspect-[16/9] max-w-[1100px] w-full mx-auto bg-black rounded-lg overflow-hidden">
+                <div className={`${aspectRatio} w-full mx-auto bg-black rounded-lg overflow-hidden`}>
                     <button
                         onClick={() => {
                             if (isControlled && onClose) {

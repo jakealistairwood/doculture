@@ -67,6 +67,19 @@ export const project = defineType({
             description: 'Video URL to display in the hero section (replaces cover image when provided). The cover image will be used as the video poster.'
         }),
         defineField({
+            name: 'videoType',
+            title: 'Video Type',
+            type: 'string',
+            options: {
+                list: [
+                    { value: 'normal', title: 'Normal' },
+                    { value: 'short', title: 'Short' }
+                ],
+                layout: 'radio'
+            },
+            initialValue: 'normal'
+        }),
+        defineField({
             name: 'content',
             title: 'Case Study Content',
             type: 'array',

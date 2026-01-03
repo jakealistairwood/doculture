@@ -69,6 +69,19 @@ export const asset = defineType({
             type: 'object',
             fields: [
                 defineField({
+                    name: 'type',
+                    title: 'Type',
+                    type: 'string',
+                    options: {
+                        list: [
+                            { value: 'normal', title: 'Normal' },
+                            { value: 'short', title: 'Short' },
+                        ],
+                        layout: 'radio'
+                    },
+                    initialValue: 'normal'
+                }),
+                defineField({
                     name: 'title',
                     title: 'Title',
                     type: 'string'
