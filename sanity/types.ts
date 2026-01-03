@@ -754,6 +754,7 @@ export type Project = {
     _type: "image";
   };
   video?: string;
+  videoType?: "normal" | "short";
   content?: Array<{
     _key: string;
   } & CaseStudyBuilder>;
