@@ -27,7 +27,7 @@ export default function MeetTheTeam({ meetTheTeam }: MeetTheTeamProps) {
     if (!meetTheTeam) return null;
 
     return (
-        <section className="py-12 md:py-20 bg-dark-grey text-white overflow-hidden">
+        <section className="py-12 md:py-20 bg-dark-grey text-white overflow-hidden" id="meet-the-team">
             <div className="container">
                 <div className="flex flex-col gap-y-12 md:gap-y-20">
                     {meetTheTeam.heading && (
@@ -76,4 +76,5 @@ export default function MeetTheTeam({ meetTheTeam }: MeetTheTeamProps) {
         </section>
     );
 }
+
 

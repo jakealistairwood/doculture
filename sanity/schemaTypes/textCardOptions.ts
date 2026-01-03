@@ -59,6 +59,7 @@ export const textCardOptions = defineType({
                 list: [
                     { value: '24px', title: '24px' },
                     { value: '40px', title: '40px' },
+                    { value: '64px', title: '64px' },
                     { value: '80px', title: '80px' },
                     { value: '100px', title: '100px' },
                     { value: '120px', title: '120px' }

@@ -10,24 +10,28 @@ interface SectionProps {
 const spacingMap = {
   marginTop: {
     none: "mt-0",
+    xs: "mt-6",
     sm: "mt-10",
     md: "mt-20",
     lg: "mt-36",
   },
   marginBottom: {
     none: "mb-0",
+    xs: "mb-6",
     sm: "mb-10",
     md: "mb-20",
     lg: "mb-36",
   },
   paddingTop: {
     none: "pt-0",
+    xs: "pt-6",
     sm: "pt-12",
     md: "pt-12 md:pt-20",
     lg: "pt-12 md:pt-36",
   },
   paddingBottom: {
     none: "pb-0",
+    xs: "pb-6",
     sm: "pb-12",
     md: "pb-12 md:pb-20",
     lg: "pb-12 md:pb-36",

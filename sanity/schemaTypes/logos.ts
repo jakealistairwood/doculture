@@ -51,6 +51,12 @@ export const logos = defineType({
             },
             validation: Rule => Rule.required()
         }),
+        defineField({
+            name: 'invertLogos',
+            title: 'Invert Logos',
+            type: 'boolean',
+            initialValue: false
+        })
     ],
     preview: {
         select: {

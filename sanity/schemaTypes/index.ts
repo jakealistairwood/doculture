@@ -9,7 +9,7 @@ import { sectionOptions } from "./sectionOptions";
 import { project } from "./project";
 import { masthead } from "./masthead";
 import { homeMasthead } from "./homeMasthead";
-import { aboutMasthead } from "./aboutMasthead";
+import { twoColMasthead } from "./twoColMasthead";
 import { textCard } from "./textCard";
 import { textCardOptions } from "./textCardOptions";
 import { linksWrapper } from "./linksWrapper";
@@ -36,6 +36,7 @@ import { imageGrid } from "./imageGrid";
 import { globalOptions } from "./globalOptions";
 import { aboutLandingPage } from "./landingPages/aboutLandingPage";
 import { teamMember } from "./teamMember";
+import { twoColTextList } from "./twoColTextList";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
     types: [
@@ -48,7 +49,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
         categoryType,
         masthead,
         homeMasthead,
-        aboutMasthead,
+        twoColMasthead,
         textCard,
         textCardOptions,
         linksWrapper,
@@ -74,6 +75,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
         imageGrid,
         globalOptions,
         aboutLandingPage,
-        teamMember
+        teamMember,
+        twoColTextList
     ],
 };

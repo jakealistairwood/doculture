@@ -2,10 +2,12 @@ import dynamic from 'next/dynamic';
 
 import { HomeMasthead } from '@/components/organisms/masthead/HomeMasthead';
 import { Masthead } from '@/components/organisms/masthead/Masthead';
+import { TwoColumnMasthead } from '@/components/organisms/masthead/TwoColumnMasthead';
 
 const TextCard = dynamic(() => import('@/components/organisms/TextCard'));
 const Asset = dynamic(() => import('@/components/molecules/Asset'));
 const TwoColTextAsset = dynamic(() => import('@/components/organisms/TwoColTextAsset'));
+const TwoColTextList = dynamic(() => import('@/components/organisms/TwoColTextList'));
 const LogoMarquee = dynamic(() => import('@/components/molecules/LogoMarquee'));
 const LinkCards = dynamic(() => import('@/components/molecules/LinkCards'));
 const HeaderMarquee = dynamic(() => import('@/components/molecules/HeaderMarquee'));
@@ -18,9 +20,11 @@ const SelectedWorks = dynamic(() => import('@/components/organisms/SelectedWorks
 import { 
   Masthead as MastheadType, 
   HomeMasthead as HomeMastheadType, 
+  TwoColMasthead as TwoColMastheadType,
   TextCard as TextCardType, 
   Asset as AssetType,
   TwoColTextAsset as TwoColTextAssetType,
+  TwoColTextList as TwoColTextListType,
   Logos as LogosType, 
   LinkCards as LinkCardsType, 
   FeatureCards as FeatureCardsType,
@@ -54,12 +58,16 @@ export function ComponentRenderer({ component, bgColor, isContainedSection = fal
         return <Masthead data={component as MastheadType} />;
     case 'homeMasthead':
       return <HomeMasthead data={component as HomeMastheadType} />;
+    case 'twoColMasthead':
+      return <TwoColumnMasthead data={component as TwoColMastheadType} />;
     case 'textCard':
       return <TextCard data={component as TextCardType} bgColor={bgColor} isContainedSection={isContainedSection} containedBgColor={containedBgColor} />;
     case 'asset':
       return <Asset data={component as AssetType} bgColor={bgColor} />;
     case 'twoColTextAsset':
       return <TwoColTextAsset data={component as TwoColTextAssetType} bgColor={bgColor} isContainedSection={isContainedSection} containedBgColor={containedBgColor} />;
+    case 'twoColTextList':
+      return <TwoColTextList data={component as TwoColTextListType} bgColor={bgColor} isContainedSection={isContainedSection} containedBgColor={containedBgColor} />;
     case 'logos':
         return <LogoMarquee data={component as LogosType} bgColor={bgColor} />
     case 'linkCards':

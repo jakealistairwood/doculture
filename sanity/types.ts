@@ -13,6 +13,14 @@
  */
 
 // Source: schema.json
+export type TwoColTextList = {
+  _type: "twoColTextList";
+  textCard?: TextCard;
+  listItems?: Array<string>;
+  alignTextVertically?: boolean;
+  bgColor?: "none" | "black" | "white" | "lightGrey" | "darkGrey" | "offBlack";
+};
+
 export type TeamMember = {
   _id: string;
   _type: "teamMember";
@@ -145,9 +153,68 @@ export type AboutLandingPage = {
       _type: "image";
     };
   };
-  aboutUsContent?: Array<{
-    _key: string;
-  } & CaseStudyBuilder>;
+  ourMission?: {
+    subheading?: string;
+    heading?: string;
+    images?: Array<{
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      altText?: string;
+      _type: "image";
+      _key: string;
+    }>;
+  };
+  whyWeExist?: {
+    heading?: string;
+    content?: BlockContent;
+  };
+  ourJourney?: {
+    heading?: string;
+    content?: BlockContent;
+    links?: LinksWrapper;
+    image?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      altText?: string;
+      _type: "image";
+    };
+  };
+  ourValues?: {
+    heading?: string;
+    values?: Array<{
+      icon?: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        altText?: string;
+        _type: "image";
+      };
+      heading?: string;
+      description?: string;
+      _type: "value";
+      _key: string;
+    }>;
+  };
   meetTheTeam?: {
     heading?: string;
     teamMembers?: Array<{
@@ -453,6 +520,7 @@ export type Logos = {
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "reusableBlock";
   };
+  invertLogos?: boolean;
 };
 
 export type TwoColTextAsset = {
@@ -551,52 +619,13 @@ export type TextCard = {
   textCardOptions?: TextCardOptions;
 };
 
-export type AboutMasthead = {
-  _type: "aboutMasthead";
+export type TwoColMasthead = {
+  _type: "twoColMasthead";
   subheading?: string;
   heading?: string;
   content?: string;
   links?: LinksWrapper;
-  leftTopImage?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    altText?: string;
-    _type: "image";
-  };
-  leftBottomImage?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    altText?: string;
-    _type: "image";
-  };
-  rightTopImage?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    altText?: string;
-    _type: "image";
-  };
-  rightBottomImage?: {
+  image?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -737,10 +766,10 @@ export type SectionOptions = {
   removeContainer?: boolean;
   isContainedSection?: boolean;
   containedBgColor?: "none" | "black" | "white" | "lightGrey" | "darkGrey" | "offBlack";
-  paddingTop?: "none" | "sm" | "md" | "lg";
-  paddingBottom?: "none" | "sm" | "md" | "lg";
-  marginTop?: "none" | "sm" | "md" | "lg";
-  marginBottom?: "none" | "sm" | "md" | "lg";
+  paddingTop?: "none" | "xs" | "sm" | "md" | "lg";
+  paddingBottom?: "none" | "xs" | "sm" | "md" | "lg";
+  marginTop?: "none" | "xs" | "sm" | "md" | "lg";
+  marginBottom?: "none" | "xs" | "sm" | "md" | "lg";
   componentSpacing?: "default" | "sm" | "md" | "lg";
   overflow?: "hidden" | "visible";
   addBottomDivider?: boolean;
@@ -755,7 +784,7 @@ export type Section = {
     _key: string;
   } & HomeMasthead | {
     _key: string;
-  } & AboutMasthead | {
+  } & TwoColMasthead | {
     _key: string;
   } & TextCard | {
     _key: string;
@@ -777,7 +806,9 @@ export type Section = {
     _key: string;
   } & TimedAccordionSlider | {
     _key: string;
-  } & ImageGrid>;
+  } & ImageGrid | {
+    _key: string;
+  } & TwoColTextList>;
   sectionOptions?: SectionOptions;
 };
 
@@ -891,5 +922,5 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = TeamMember | BlockContent | SanityImageCrop | SanityImageHotspot | AboutLandingPage | GlobalOptions | ImageGrid | TimedAccordionSlider | ContactLandingPage | LandingPage | Seo | LinksWrapper | Slug | GlobalCTA | CaseStudyImage | CaseStudyRichText | CaseStudyBuilder | StudioCarousel | Studio | FeatureCards | SelectedWorks | HeaderMarquee | LinkCards | Logos | TwoColTextAsset | Asset | LogoMarquee | Link | TextCardOptions | TextCard | AboutMasthead | HomeMasthead | ReusableBlock | Masthead | Category | Project | SectionOptions | Section | Page | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = TwoColTextList | TeamMember | BlockContent | SanityImageCrop | SanityImageHotspot | AboutLandingPage | GlobalOptions | ImageGrid | TimedAccordionSlider | ContactLandingPage | LandingPage | Seo | LinksWrapper | Slug | GlobalCTA | CaseStudyImage | CaseStudyRichText | CaseStudyBuilder | StudioCarousel | Studio | FeatureCards | SelectedWorks | HeaderMarquee | LinkCards | Logos | TwoColTextAsset | Asset | LogoMarquee | Link | TextCardOptions | TextCard | TwoColMasthead | HomeMasthead | ReusableBlock | Masthead | Category | Project | SectionOptions | Section | Page | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 export declare const internalGroqTypeReferenceTo: unique symbol;

@@ -51,6 +51,7 @@ interface TextCardProps {
 const headingFontSizeMap: Record<string, string> = {
   "24px": "text-24px",
   "40px": "text-40px",
+  "64px": "text-64px !leading-[0.98]",
   "80px": "text-80px !leading-[1.1]",
   "100px": "text-100px",
   "120px": "text-120px"
@@ -67,6 +68,18 @@ const subheadingBgColorMap: Record<string, string> = {
 const listTypeMap: Record<string, string> = {
   bullet: 'prose-bullet',
   tick: 'prose-tick'
+};
+
+// Helper function to extract plain text from HTML string
+const stripHtml = (html: string): string => {
+    if (typeof window === 'undefined') {
+        // Server-side: simple regex approach
+        return html.replace(/<[^>]*>/g, '').trim();
+    }
+    // Client-side: use DOM parser for better accuracy
+    const tmp = document.createElement('div');
+    tmp.innerHTML = html;
+    return tmp.textContent || tmp.innerText || '';
 };
 
 const TextCard = ({ data, bgColor, isContainedSection, containedBgColor }: TextCardProps) => {
@@ -265,13 +278,20 @@ const TextCard = ({ data, bgColor, isContainedSection, containedBgColor }: TextC
             {data.heading && React.createElement(
                 HeadingTag,
                 {
-                    ref: headingRef,
-                    className: `font-heading font-medium uppercase -tracking-[0.01em] ${headingFontSizeClass} overflow-hidden`,
-                    dangerouslySetInnerHTML: { __html: data.heading },
+                    className: `font-heading font-medium uppercase -tracking-[0.01em] ${headingFontSizeClass}`,
                     style: {
                         maxWidth: `${headingMaxWidth}px`
                     }
-                }
+                },
+                <>
+                    <span
+                        ref={headingRef}
+                        className="overflow-hidden"
+                        dangerouslySetInnerHTML={ { __html: data.heading } }
+                        aria-hidden="true"
+                    />
+                    <span className="sr-only">{stripHtml(data.heading)}</span>
+                </>
             )}
           </div>
             {data.content && (

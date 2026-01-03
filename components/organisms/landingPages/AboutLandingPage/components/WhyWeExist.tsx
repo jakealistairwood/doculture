@@ -30,3 +30,4 @@ export default function WhyWeExist({ whyWeExist }: WhyWeExistProps) {
     );
 }
 
+

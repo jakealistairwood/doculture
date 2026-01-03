@@ -50,3 +50,4 @@ export default function OurJourney({ ourJourney }: OurJourneyProps) {
     );
 }
 
+

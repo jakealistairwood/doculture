@@ -64,6 +64,7 @@ export const sectionOptions = defineType({
             options: {
                 list: [
                     { value: 'none', title: 'None' },
+                    { value: 'xs', title: 'Extra Small' },
                     { value: 'sm', title: 'Small' },
                     { value: 'md', title: 'Medium' },
                     { value: 'lg', title: 'Large' }
@@ -79,6 +80,7 @@ export const sectionOptions = defineType({
             options: {
                 list: [
                     { value: 'none', title: 'None' },
+                    { value: 'xs', title: 'Extra Small' },
                     { value: 'sm', title: 'Small' },
                     { value: 'md', title: 'Medium' },
                     { value: 'lg', title: 'Large' }
@@ -94,6 +96,7 @@ export const sectionOptions = defineType({
             options: {
                 list: [
                     { value: 'none', title: 'None' },
+                    { value: 'xs', title: 'Extra Small' },
                     { value: 'sm', title: 'Small' },
                     { value: 'md', title: 'Medium' },
                     { value: 'lg', title: 'Large' }
@@ -109,6 +112,7 @@ export const sectionOptions = defineType({
             options: {
                 list: [
                     { value: 'none', title: 'None' },
+                    { value: 'xs', title: 'Extra Small' },
                     { value: 'sm', title: 'Small' },
                     { value: 'md', title: 'Medium' },
                     { value: 'lg', title: 'Large' }

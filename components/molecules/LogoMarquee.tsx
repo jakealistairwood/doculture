@@ -13,6 +13,7 @@ interface LogoMarqueeProps {
     bgColor?: string;
     disableInvertedLogoBg?: boolean;
     isOnContactPage?: boolean;
+    invertLogos?: boolean;
 }
 
 type DereferencedLogos = Omit<Logos, 'logoMarqueeBlock'> & {
@@ -24,24 +25,33 @@ type LogoItem =
         ? Item
         : never;
 
-const LogoMarquee = ({ data, speed = 50, bgColor, disableInvertedLogoBg = false, isOnContactPage = false }: LogoMarqueeProps) => {
+const LogoMarquee = ({ data, speed = 50, bgColor, disableInvertedLogoBg = false, isOnContactPage = false, invertLogos = false }: LogoMarqueeProps) => {
     const containerRef = useRef<HTMLDivElement | null>(null);
     const isInView = useInView(containerRef, { amount: 0.2, once: false });
+
+    console.log(`invert logos: ${invertLogos}`);
+    
+    const disableLogoInvert = disableInvertedLogoBg || !invertLogos;
 
     // Cast to handle dereferenced structure from query
     const dereferencedData = data as DereferencedLogos | undefined;
     const logoMarquee = dereferencedData?.logoMarqueeBlock?.logoMarquee;
 
-    const logos = useMemo<LogoItem[]>(() => {
+    const baseLogos = useMemo<LogoItem[]>(() => {
         const resolved = logoMarquee?.logos ?? [];
         return Array.isArray(resolved) ? (resolved as LogoItem[]) : [];
     }, [logoMarquee?.logos]);
 
-    if (!logos.length) {
+    // Duplicate logos twice (3x total) for marquee to ensure they always fill the space
+    const marqueeLogos = useMemo<LogoItem[]>(() => {
+        return [...baseLogos, ...baseLogos, ...baseLogos];
+    }, [baseLogos]);
+
+    if (!baseLogos.length) {
         return null;
     }
 
-    const renderLogo = (logo: LogoItem, wrapperClass = "inline-flex") => {
+    const renderLogo = (logo: LogoItem, wrapperClass = "inline-flex", index?: number) => {
         const image = (
             <SanityImage
                 image={logo}
@@ -49,14 +59,17 @@ const LogoMarquee = ({ data, speed = 50, bgColor, disableInvertedLogoBg = false,
             />
         );
 
+        // Create unique key by combining original _key with index to avoid duplicate key warnings
+        const uniqueKey = index !== undefined ? `${logo._key}-dup-${index}` : logo._key;
+
         if (logo.link) {
             return (
                 <a
-                    key={logo._key}
+                    key={uniqueKey}
                     href={logo.link}
                     target="_blank"
                     rel="noreferrer"
-                    className={`${wrapperClass} items-center ${disableInvertedLogoBg ? "" : "invert"}`}
+                    className={`${wrapperClass} items-center ${disableLogoInvert ? "" : "invert"}`}
                     aria-label={logo.alt || "External link"}
                 >
                     {image}
@@ -65,7 +78,7 @@ const LogoMarquee = ({ data, speed = 50, bgColor, disableInvertedLogoBg = false,
         }
 
         return (
-            <div key={logo._key} className={`${wrapperClass} items-center`}>
+            <div key={uniqueKey} className={`${wrapperClass} items-center`}>
                 {image}
             </div>
         );
@@ -80,12 +93,12 @@ const LogoMarquee = ({ data, speed = 50, bgColor, disableInvertedLogoBg = false,
             gradientColor={gradientColor}
             speed={speed}
         >
-            {logos.map((logo) => renderLogo(logo, `marquee-logo ${isOnContactPage ? "marquee-logo--contact mx-8 md:mx-10" : "mx-12"} flex ${disableInvertedLogoBg ? "" : "invert"}`))}
+            {marqueeLogos.map((logo, index) => renderLogo(logo, `marquee-logo ${isOnContactPage ? "marquee-logo--contact mx-8 md:mx-10" : "mx-12"} flex ${disableLogoInvert ? "" : "invert"}`, index))}
         </Marquee>
     );
 
     const labelContent = data?.label ? (
-        <p className="text-xl font-serif whitespace-nowrap">
+        <p className={`text-xl ${data?.labelPlacement === "stacked" ? "text-center font-sans opacity-75 text-base" : "font-serif"} whitespace-nowrap`}>
             {data.label}
         </p>
     ) : null;
@@ -99,7 +112,7 @@ const LogoMarquee = ({ data, speed = 50, bgColor, disableInvertedLogoBg = false,
             >
                 {labelContent}
                 <div className="flex flex-col lg:flex-row text-center lg:text-left items-center justify-center gap-8 py-8 lg:py-0">
-                    {logos.map((logo) =>
+                    {baseLogos.map((logo) =>
                         renderLogo(
                             logo,
                             "inline-flex max-w-[160px] justify-center"
@@ -127,9 +140,11 @@ const LogoMarquee = ({ data, speed = 50, bgColor, disableInvertedLogoBg = false,
         <div
             data-component="logo-marquee"
             ref={containerRef}
-            className="space-y-6 py-8"
+            className="space-y-8 py-8"
         >
-            {labelContent}
+            <div className="container text-center">
+                <span className="font-sans">{labelContent}</span>
+            </div>
             {marqueeContent}
         </div>
     );

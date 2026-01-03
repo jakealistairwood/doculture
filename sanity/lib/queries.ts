@@ -74,6 +74,25 @@ export const pageQuery = groq`
             }
           }
         },
+        _type == "twoColMasthead" => {
+          type,
+          subheading,
+          heading,
+          content,
+          image{
+            ...,
+            asset,
+            altText
+          },
+          links[]{
+            _key,
+            type,
+            buttonSize,
+            buttonStyle,
+            url,
+            label
+          },
+        },
         _type == "textCard" => {
             _key,
             _type,
@@ -118,6 +137,22 @@ export const pageQuery = groq`
                 videoOptions
             }
         },
+        _type == "twoColTextList" => {
+            _key,
+            _type,
+            alignTextVertically,
+            bgColor,
+            listItems,
+            textCard{
+                _key,
+                _type,
+                subheading,
+                heading,
+                content,
+                links,
+                textCardOptions
+            }
+        },
         _type == "logos" => {
             _key,
             _type,
@@ -144,7 +179,8 @@ export const pageQuery = groq`
                         // }
                     }
                 }
-            }
+            },
+            invertLogos
         },
         _type == "linkCards" => {
             _key,

@@ -16,7 +16,7 @@ export const section = defineType({
             of: [
                 { type: 'masthead' },
                 { type: 'homeMasthead' },
-                { type: 'aboutMasthead' },
+                { type: 'twoColMasthead' },
                 { type: 'textCard' },
                 { type: 'asset' },
                 { type: 'twoColTextAsset' },
@@ -27,7 +27,8 @@ export const section = defineType({
                 { type: 'featureCards' },
                 { type: 'studioCarousel' },
                 { type: 'timedAccordionSlider' },
-                { type: 'imageGrid' }
+                { type: 'imageGrid' },
+                { type: 'twoColTextList' }
             ]
         }),
         defineField({

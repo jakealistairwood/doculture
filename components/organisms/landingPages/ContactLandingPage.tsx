@@ -124,7 +124,7 @@ export default function ContactLandingPage({
                                 <div>
                                     <LogoMarquee
                                         data={logoMarqueeData}
-                                        bgColor="off-black"
+                                        bgColor="offBlack"
                                         disableInvertedLogoBg
                                         isOnContactPage
                                     />

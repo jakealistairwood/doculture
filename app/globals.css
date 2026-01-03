@@ -81,6 +81,10 @@ a {
   font-size: clamp(2.5rem, 1.7857rem + 3.5714vw, 5rem);
 }
 
+.text-64px {
+  font-size: clamp(2.25rem, 1.75rem + 2.5vw, 4rem);
+}
+
 .text-40px {
   /* font-size: clamp(1.5rem, 1.964vw + 0.607rem, 2.375rem); */
   font-size: clamp(2rem, 1.8571rem + 0.7143vw, 2.5rem);
@@ -107,6 +111,7 @@ a {
 .nav-link {
   font-size: 0.875rem;
   text-transform: uppercase;
+  @apply font-mono;
 }
 
 [data-underline-link] {
@@ -172,6 +177,19 @@ a {
 .word-js {
   display: inline-block;
   will-change: transform;
+}
+
+/* Screen reader only utility class */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
 
 /* Animated Button with Character Stagger */
