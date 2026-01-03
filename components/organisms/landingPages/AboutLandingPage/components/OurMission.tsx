@@ -35,7 +35,7 @@ export default function OurMission({ ourMission }: OurMissionProps) {
     };
 
     return (
-        <section className="bg-off-black text-white py-12 md:py-40">
+        <section className="bg-off-black text-white py-12 md:py-40" id="our-mission">
             <div className="container">
                 <div className="flex flex-col gap-y-12 md:gap-y-20">
                     <div className="flex flex-col gap-y-6 max-w-[786px] mx-auto items-center text-center">
