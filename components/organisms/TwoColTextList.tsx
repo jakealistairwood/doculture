@@ -1,9 +1,7 @@
 "use client";
 
-import { useRef } from "react";
 import { TwoColTextList as TwoColTextListType } from "@/sanity/types";
 import TextCard from "@/components/organisms/TextCard";
-import { useInView, motion } from "framer-motion";
 import clsx from "clsx";
 
 const bgColorMap = {
@@ -34,12 +32,6 @@ const TwoColTextList = ({
         alignTextVertically = false,
         bgColor: componentBgColor,
     } = data || {};
-    const listRef = useRef<HTMLDivElement>(null);
-
-    const isInView = useInView(listRef, {
-        amount: 0.3,
-        once: true,
-    });
 
     if (!textCard && (!listItems || listItems.length === 0)) {
         return null;
@@ -47,9 +39,7 @@ const TwoColTextList = ({
 
     const effectiveBgColor = componentBgColor || bgColor;
 
-    const sectionBg = bgColorMap[effectiveBgColor] || "bg-off-black text-white";
-
-    console.log(sectionBg);
+    const sectionBg = bgColorMap[effectiveBgColor as keyof typeof bgColorMap] || "bg-off-black text-white";
 
     return (
         <div
