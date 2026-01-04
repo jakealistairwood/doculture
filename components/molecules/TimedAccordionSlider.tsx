@@ -35,11 +35,36 @@ export default function TimedAccordionSlider({ data, bgColor }: TimedAccordionSl
     const { items = [] } = data;
     const [activeIndex, setActiveIndex] = useState(0);
     const [isPaused, setIsPaused] = useState(false);
+    const [isInView, setIsInView] = useState(false);
     const intervalRef = useRef<NodeJS.Timeout | null>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
 
-    // Auto-advance functionality
+    // Intersection Observer to detect when component is in view
     useEffect(() => {
-        if (items.length === 0 || isPaused) {
+        const element = containerRef.current;
+        if (!element) return;
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    setIsInView(entry.isIntersecting);
+                });
+            },
+            {
+                threshold: 0.1, // Trigger when 10% of the component is visible
+            }
+        );
+
+        observer.observe(element);
+
+        return () => {
+            observer.unobserve(element);
+        };
+    }, []);
+
+    // Auto-advance functionality - only when in view and not paused
+    useEffect(() => {
+        if (items.length === 0 || isPaused || !isInView) {
             if (intervalRef.current) {
                 clearInterval(intervalRef.current);
             }
@@ -55,7 +80,7 @@ export default function TimedAccordionSlider({ data, bgColor }: TimedAccordionSl
                 clearInterval(intervalRef.current);
             }
         };
-    }, [items.length, isPaused]);
+    }, [items.length, isPaused, isInView]);
 
     const handleItemClick = (index: number) => {
         setActiveIndex(index);
@@ -65,6 +90,10 @@ export default function TimedAccordionSlider({ data, bgColor }: TimedAccordionSl
         setTimeout(() => {
             setIsPaused(false);
         }, AUTO_ADVANCE_INTERVAL * 2);
+    };
+
+    const togglePause = () => {
+        setIsPaused((prev) => !prev);
     };
 
     const activeItem = items[activeIndex];
@@ -114,7 +143,7 @@ export default function TimedAccordionSlider({ data, bgColor }: TimedAccordionSl
     } as PortableTextComponents;
 
     return (
-        <div className="w-full" data-component="timed-accordion-slider">
+        <div ref={containerRef} className="w-full relative" data-component="timed-accordion-slider">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20">
                 {/* Accordion Items - Left Side */}
                 <div className="flex flex-col self-center">
@@ -200,7 +229,7 @@ export default function TimedAccordionSlider({ data, bgColor }: TimedAccordionSl
                 </div>
 
                 {/* Image - Right Side */}
-                <div className="hidden lg:block relative aspect-[685/780] lg:sticky lg:top-20">
+                <div className="hidden lg:block relative lg:sticky lg:top-20">
                     <AnimatePresence mode="wait">
                         {activeImage && (
                             <motion.div
@@ -227,6 +256,42 @@ export default function TimedAccordionSlider({ data, bgColor }: TimedAccordionSl
                     )}
                 </div>
             </div>
+            
+            {/* Pause/Play Button */}
+            <button
+                onClick={togglePause}
+                className="hidden absolute bottom-4 right-4 z-10 w-12 h-12 lg:flex items-center justify-center bg-black/60 hover:bg-black/80 backdrop-blur-sm rounded-full transition-all duration-200 text-white"
+                aria-label={isPaused ? "Play" : "Pause"}
+            >
+                {isPaused ? (
+                    <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="ml-0.5"
+                    >
+                        <path
+                            d="M4 2L14 8L4 14V2Z"
+                            fill="currentColor"
+                        />
+                    </svg>
+                ) : (
+                    <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M4 2H6V14H4V2ZM10 2H12V14H10V2Z"
+                            fill="currentColor"
+                        />
+                    </svg>
+                )}
+            </button>
         </div>
     );
 }

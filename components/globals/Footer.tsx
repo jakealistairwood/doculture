@@ -61,7 +61,7 @@ const Footer = ({ globalOptions }: FooterProps) => {
                             )}
                         </div>
                         {(instagramUrl || linkedinUrl) && (
-                            <div className="flex items-center gap-x-2 mt-auto pt-16">
+                            <div className="hidden sm:flex items-center gap-x-2 mt-auto pt-16">
                                 {instagramUrl && (
                                     <SocialIcon type="instagram" url={instagramUrl} />
                                 )}
@@ -71,7 +71,7 @@ const Footer = ({ globalOptions }: FooterProps) => {
                             </div>
                         )}
                     </div>
-                    <div className="flex flex-wrap gap-y-10 gap-x-20 xl:gap-x-40 pr-10 xl:pr-20">
+                    <div className="flex flex-wrap gap-y-10 gap-x-20 xl:gap-x-40 md:pr-10 xl:pr-20">
                         <nav className="flex flex-col gap-y-8">
                             <p className="font-semibold">Site</p>
                             <ul className="flex flex-col gap-y-6">
@@ -124,6 +124,16 @@ const Footer = ({ globalOptions }: FooterProps) => {
                             </nav>
                         )}
                     </div>
+                    {(instagramUrl || linkedinUrl) && (
+                        <div className="flex sm:hidden items-center gap-x-2 mt-auto">
+                            {instagramUrl && (
+                                <SocialIcon type="instagram" url={instagramUrl} />
+                            )}
+                            {linkedinUrl && (
+                                <SocialIcon type="linkedin" url={linkedinUrl} />
+                            )}
+                        </div>
+                    )}
                 </div>
             </div>
         </footer>

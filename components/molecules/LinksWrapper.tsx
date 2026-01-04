@@ -58,7 +58,7 @@ const LinksWrapper = ({ links = [] }: LinksWrapperProps) => {
                             onClick={(e) => handleHashClick(e, url)}
                             className={textLinkStyles}
                         >
-                            {link.label}
+                            <span data-underline-link="alt">{link.label}</span>
                         </a>
                     );
                 }

@@ -66,9 +66,14 @@ const TwoColTextList = ({
                 </div>
             )}
             {listItems && (
-                <ul className="flex flex-col gap-y-2 list-disc pl-10 lg:pl-0">
+                <ul className="group flex flex-col gap-y-2 list-disc pl-10 lg:pl-0">
                     {listItems?.map((item, i) => (
-                        <li key={`list-item-${i}`} className="font-heading text-40px uppercase">{item}</li>
+                        <li 
+                            key={`list-item-${i}`} 
+                            className="font-heading text-40px uppercase transition-all duration-200 cursor-pointer group-hover:opacity-10 hover:text-accent-orange hover:opacity-100"
+                        >
+                            {item}
+                        </li>
                     ))}
                 </ul>
             )}
