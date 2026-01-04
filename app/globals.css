@@ -341,6 +341,7 @@ header .btn-animate-chars:hover .btn-animate-chars__bg {
 }
 
 #our-journey .prose > *,
-#why-we-exist .prose > * {
+#why-we-exist .prose > *,
+.team-member-card .prose > * {
   padding-inline: 0 !important;
 }

@@ -154,11 +154,6 @@ const StudioCarousel = ({ data }: StudioCarouselProps) => {
                                     {studio.title}
                                 </h2>
                             )}
-                            {studio.description && (
-                                <p className="studio-slide-text text-lg md:text-xl mb-6 max-w-2xl relative z-[3]">
-                                    {studio.description}
-                                </p>
-                            )}
                             {studio.features && studio.features.length > 0 && (
                                 <ul className="studio-slide-text flex flex-wrap gap-4 relative z-[3]">
                                     {studio.features.map((feature, featureIndex) => (
