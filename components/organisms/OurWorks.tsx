@@ -250,7 +250,7 @@ const ProjectPreviewCard = ({ project, slug, index }: ProjectPreviewCardProps) =
                         href={`/our-work/${slug}`}
                         className="accessible-link"
                     >
-                        <h2 className="font-heading uppercase text-40px max-w-[350px] !leading-[0.94]">
+                        <h2 className="font-heading uppercase text-40px max-w-[450px] !leading-[0.94]">
                             {project.formattedTitle ? (
                                 <span dangerouslySetInnerHTML={{ __html: project.formattedTitle }} />
                             ) : (
