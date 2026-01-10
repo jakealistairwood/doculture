@@ -8,19 +8,22 @@ interface SanityImageProps {
     image: any;
     priority?: boolean;
     style?: React.CSSProperties;
+    alt?: string;
 }
 
 const SanityImage = (props: SanityImageProps) => {
-    const { image: source, priority, className, style } = props || {};
+    const { image: source, priority, className, style, alt } = props || {};
     // Handle both referenced and dereferenced assets
     const hasAsset = source?.asset?._ref || source?.asset?._id;
+    // Use provided alt prop, or fallback to source.alt or source.altText
+    const altText = alt || stegaClean(source?.alt) || stegaClean(source?.altText) || "";
     const image = hasAsset ? (
         <Image 
             style={style}
             className={className}
             width={getImageDimensions(source).width}
             height={getImageDimensions(source).height}
-            alt={stegaClean(source?.alt) || ""}
+            alt={altText}
             src={urlForImage(source)?.url() as string}
             preload={priority}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 200vw"
