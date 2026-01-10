@@ -156,6 +156,7 @@ export function HomeMasthead({ data }: HomeMastheadProps) {
     return (
         <div data-component="home-masthead" className="h-screen" ref={containerRef}>
             <div className="bg-off-black text-white h-full relative overflow-hidden flex flex-col items-center justify-center p-6 sm:p-10">
+                <div className="absolute inset-0 z-[1] bg-black/30" />
                 <div className="container">
                     <div className="flex flex-col gap-y-16 gap-x-24 relative z-[2] py-24 sm:py-16 sm:px-16">
                         <FrameCorner className="absolute aspect-square w-[40px] sm:w-[64px] top-0 left-0 opacity-50" />
@@ -192,7 +193,7 @@ export function HomeMasthead({ data }: HomeMastheadProps) {
                     </div>
                 </div>
                 {data.image && (
-                    <div className="absolute inset-0 h-full w-full overflow-hidden">
+                    <div className="absolute inset-0 h-full w-full overflow-hidden pointer-events-none">
                         <SanityImage
                             image={data.image}
                             priority

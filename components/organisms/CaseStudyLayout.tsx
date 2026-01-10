@@ -4,6 +4,8 @@ import { Project } from "@/sanity/types";
 import { useEffect, useMemo, useState } from "react";
 import CaseStudyRichText from "@/components/molecules/CaseStudyRichText";
 import CaseStudyImage from "@/components/molecules/CaseStudyImage";
+import CaseStudyImageGrid from "@/components/molecules/CaseStudyImageGrid";
+import CaseStudyImageGallery from "@/components/molecules/CaseStudyImageGallery";
 import SanityImage from "@/components/atoms/SanityImage";
 import VideoPlayer from "@/components/atoms/VideoPlayer";
 import TableOfContents from "@/components/molecules/TableOfContents";
@@ -135,7 +137,7 @@ export default function CaseStudyLayout({ project }: CaseStudyLayoutProps) {
                                 </div>
                             )}
                         </aside>
-                        <article className="max-w-768px">
+                        <article className="max-w-768px overflow-hidden">
                             {/* {project.date && (
                                 <p className="text-sm opacity-60 mb-20">
                                     {new Date(project.date).toLocaleDateString('en-US', {
@@ -170,6 +172,23 @@ export default function CaseStudyLayout({ project }: CaseStudyLayoutProps) {
                                                                     video={component.video}
                                                                     videoPoster={component.videoPoster}
                                                                     videoOptions={component.videoOptions}
+                                                                />
+                                                            );
+                                                        }
+                                                        if (component._type === 'caseStudyImageGrid') {
+                                                            return (
+                                                                <CaseStudyImageGrid
+                                                                    key={component._key}
+                                                                    columns={component.columns}
+                                                                    images={component.images}
+                                                                />
+                                                            );
+                                                        }
+                                                        if (component._type === 'caseStudyImageGallery') {
+                                                            return (
+                                                                <CaseStudyImageGallery
+                                                                    key={component._key}
+                                                                    images={component.images}
                                                                 />
                                                             );
                                                         }

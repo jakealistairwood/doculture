@@ -18,6 +18,19 @@ export const project = defineType({
             },
         }),
         defineField({
+            name: 'formattedTitle',
+            title: 'Formatted Title',
+            type: 'string',
+            description: 'If you want a specific part of the title to break onto a new line use this field and add "<br>" before the word you want to create a new line.'
+        }),
+        defineField({
+            name: 'sortOrder',
+            title: 'Sort Order',
+            type: 'number',
+            description: 'This determines the order in which the project will appear within the list of works directory. If left empty, will be added to the end.',
+            validation: (Rule) => Rule.min(1).error('Sort order must be at least 1')
+        }),
+        defineField({
             name: 'logo',
             type: 'image',
             title: 'Logo'

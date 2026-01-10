@@ -28,6 +28,8 @@ import { studioCarousel } from "./studioCarousel";
 import { caseStudyBuilder } from "./caseStudyBuilder";
 import { caseStudyRichText } from "./caseStudyRichText";
 import { caseStudyImage } from "./caseStudyImage";
+import { caseStudyImageGrid } from "./caseStudyImageGrid";
+import { caseStudyImageGallery } from "./caseStudyImageGallery";
 import { globalCTA } from "./reusableBlocks/globalCTA";
 import { landingPage } from "./landingPage";
 import { contactLandingPage } from "./landingPages/contactLandingPage";
@@ -68,6 +70,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
         caseStudyBuilder,
         caseStudyRichText,
         caseStudyImage,
+        caseStudyImageGrid,
+        caseStudyImageGallery,
         globalCTA,
         landingPage,
         contactLandingPage,

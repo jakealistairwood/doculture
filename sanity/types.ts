@@ -372,6 +372,43 @@ export type GlobalCTA = {
   };
 };
 
+export type CaseStudyImageGallery = {
+  _type: "caseStudyImageGallery";
+  images?: Array<{
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    altText?: string;
+    _type: "image";
+    _key: string;
+  }>;
+};
+
+export type CaseStudyImageGrid = {
+  _type: "caseStudyImageGrid";
+  columns?: "2" | "3" | "4";
+  images?: Array<{
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    altText?: string;
+    _type: "image";
+    _key: string;
+  }>;
+};
+
 export type CaseStudyImage = {
   _type: "caseStudyImage";
   type?: "image" | "video";
@@ -419,7 +456,11 @@ export type CaseStudyBuilder = {
     _key: string;
   } & CaseStudyRichText | {
     _key: string;
-  } & CaseStudyImage>;
+  } & CaseStudyImage | {
+    _key: string;
+  } & CaseStudyImageGrid | {
+    _key: string;
+  } & CaseStudyImageGallery>;
 };
 
 export type StudioCarousel = {
@@ -563,6 +604,7 @@ export type Asset = {
     _type: "image";
   };
   videoOptions?: {
+    type?: "normal" | "short";
     title?: string;
     showTitleOnPoster?: boolean;
   };
@@ -603,7 +645,7 @@ export type TextCardOptions = {
   centerAlignOnMobile?: boolean;
   subheadingTag?: "h1" | "h2" | "h3" | "h4" | "h5";
   headingTag?: "h1" | "h2" | "h3" | "h4" | "h5";
-  headingFontSize?: "24px" | "40px" | "80px" | "100px" | "120px";
+  headingFontSize?: "24px" | "40px" | "64px" | "80px" | "100px" | "120px";
   headingMaxWidth?: number;
   contentFontSize?: "default" | "md" | "lg";
   contentMaxWidth?: number;
@@ -719,6 +761,8 @@ export type Project = {
   _rev: string;
   title?: string;
   slug?: Slug;
+  formattedTitle?: string;
+  sortOrder?: number;
   logo?: {
     asset?: {
       _ref: string;
@@ -923,5 +967,5 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = TwoColTextList | TeamMember | BlockContent | SanityImageCrop | SanityImageHotspot | AboutLandingPage | GlobalOptions | ImageGrid | TimedAccordionSlider | ContactLandingPage | LandingPage | Seo | LinksWrapper | Slug | GlobalCTA | CaseStudyImage | CaseStudyRichText | CaseStudyBuilder | StudioCarousel | Studio | FeatureCards | SelectedWorks | HeaderMarquee | LinkCards | Logos | TwoColTextAsset | Asset | LogoMarquee | Link | TextCardOptions | TextCard | TwoColMasthead | HomeMasthead | ReusableBlock | Masthead | Category | Project | SectionOptions | Section | Page | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = TwoColTextList | TeamMember | BlockContent | SanityImageCrop | SanityImageHotspot | AboutLandingPage | GlobalOptions | ImageGrid | TimedAccordionSlider | ContactLandingPage | LandingPage | Seo | LinksWrapper | Slug | GlobalCTA | CaseStudyImageGallery | CaseStudyImageGrid | CaseStudyImage | CaseStudyRichText | CaseStudyBuilder | StudioCarousel | Studio | FeatureCards | SelectedWorks | HeaderMarquee | LinkCards | Logos | TwoColTextAsset | Asset | LogoMarquee | Link | TextCardOptions | TextCard | TwoColMasthead | HomeMasthead | ReusableBlock | Masthead | Category | Project | SectionOptions | Section | Page | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 export declare const internalGroqTypeReferenceTo: unique symbol;

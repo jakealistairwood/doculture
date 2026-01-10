@@ -71,17 +71,42 @@ export default function OurWorks({ projects }: OurWorkProps) {
         return Array.from(categoryMap.values());
     }, [projects]);
 
-    // Filter projects based on selected category
+    // Filter and sort projects based on selected category and sortOrder
     const filteredProjects = useMemo(() => {
-        if (!selectedCategory) {
-            return projects;
+        let filtered = projects;
+        
+        // Filter by category if one is selected
+        if (selectedCategory) {
+            filtered = projects.filter((project) => {
+                if (!project.categories || project.categories.length === 0) {
+                    return false;
+                }
+                return project.categories.some((category: any) => category?._id === selectedCategory);
+            });
         }
         
-        return projects.filter((project) => {
-            if (!project.categories || project.categories.length === 0) {
-                return false;
+        // Sort by sortOrder (ascending), with projects without sortOrder at the end
+        return [...filtered].sort((a, b) => {
+            const aSortOrder = a.sortOrder;
+            const bSortOrder = b.sortOrder;
+            
+            // If both have sortOrder, sort by it (ascending)
+            if (aSortOrder != null && bSortOrder != null) {
+                return aSortOrder - bSortOrder;
             }
-            return project.categories.some((category: any) => category?._id === selectedCategory);
+            
+            // If only a has sortOrder, it comes first
+            if (aSortOrder != null && bSortOrder == null) {
+                return -1;
+            }
+            
+            // If only b has sortOrder, it comes first
+            if (aSortOrder == null && bSortOrder != null) {
+                return 1;
+            }
+            
+            // If neither has sortOrder, maintain original order (already sorted by date from query)
+            return 0;
         });
     }, [projects, selectedCategory]);
 
@@ -114,7 +139,7 @@ export default function OurWorks({ projects }: OurWorkProps) {
                                 <h1
                                     className="text-120px uppercase leading-[0.94]"
                                     dangerouslySetInnerHTML={{
-                                        __html: "Our Works",
+                                        __html: "Our Work",
                                     }}
                                 />
                             </div>
@@ -156,7 +181,7 @@ export default function OurWorks({ projects }: OurWorkProps) {
                                 </p>
                             </div>
                         ) : (
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-10">
                                 {filteredProjects.map((project, i) => {
                                     const slug = project.slug?.current;
                                     if (!slug) return null;
@@ -190,9 +215,9 @@ const ProjectPreviewCard = ({ project, slug, index }: ProjectPreviewCardProps) =
         once: true,
     });
     return (
-        <motion.div
+        <motion.article
             key={project._id}
-            className="relative flex flex-col gap-y-11 group"
+            className="relative flex flex-col gap-y-8 group"
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
             variants={fadeInProject}
@@ -220,13 +245,17 @@ const ProjectPreviewCard = ({ project, slug, index }: ProjectPreviewCardProps) =
                 </div>
             )}
             <div className="flex flex-col gap-y-6 mt-auto">
-                {project?.title && (
+                {(project?.formattedTitle || project?.title) && (
                     <Link
                         href={`/our-work/${slug}`}
                         className="accessible-link"
                     >
                         <h2 className="font-heading uppercase text-40px max-w-[350px] !leading-[0.94]">
-                            {project.title}
+                            {project.formattedTitle ? (
+                                <span dangerouslySetInnerHTML={{ __html: project.formattedTitle }} />
+                            ) : (
+                                project.title
+                            )}
                         </h2>
                     </Link>
                 )}
@@ -249,6 +278,6 @@ const ProjectPreviewCard = ({ project, slug, index }: ProjectPreviewCardProps) =
                         </div>
                     )}
             </div>
-        </motion.div>
+        </motion.article>
     )
 }

@@ -204,6 +204,7 @@ export const pageQuery = groq`
             caseStudies[]->{
                 _id,
                 title,
+                formattedTitle,
                 slug,
                 excerpt,
                 video,
@@ -335,6 +336,21 @@ export const projectQuery = groq`
             asset
           },
           videoOptions
+        },
+        _type == "caseStudyImageGrid" => {
+          columns,
+          images[]{
+            _key,
+            asset,
+            altText
+          }
+        },
+        _type == "caseStudyImageGallery" => {
+          images[]{
+            _key,
+            asset,
+            altText
+          }
         }
       }
     }
@@ -342,11 +358,13 @@ export const projectQuery = groq`
 `;
 
 export const allProjectsQuery = groq`
-  *[_type == "project"] | order(date desc, _createdAt desc){
+  *[_type == "project"] | order(coalesce(sortOrder, 999999) asc, date desc, _createdAt desc){
     _id,
     _type,
     title,
+    formattedTitle,
     slug,
+    sortOrder,
     excerpt,
     date,
     categories[]->{

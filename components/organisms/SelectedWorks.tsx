@@ -115,9 +115,13 @@ const SelectedWorks = ({ data }: SelectedWorksProps) => {
                                 }} />
                                 <div className="flex flex-col relative z-[2]">
                                     <div className="flex flex-col max-w-[420px]">
-                                        {project.title && (
+                                        {(project.formattedTitle || project.title) && (
                                             <h2 className="selected-works-slide-text text-3xl xl:text-5xl font-heading !leading-[0.94] uppercase mb-4 relative z-[3]">
-                                                {project.title}
+                                                {project.formattedTitle ? (
+                                                    <span dangerouslySetInnerHTML={{ __html: project.formattedTitle }} />
+                                                ) : (
+                                                    project.title
+                                                )}
                                             </h2>
                                         )}
                                         {project.categories && project.categories.length > 0 && (
@@ -168,9 +172,13 @@ const SelectedWorks = ({ data }: SelectedWorksProps) => {
                         <div className="flex items-end justify-between relative pt-8 mt-auto flex-wrap gap-y-6 lg:hidden">
                                 <div className="flex flex-col relative z-[2]">
                                     <div className="flex flex-col max-w-[420px]">
-                                        {project.title && (
+                                        {(project.formattedTitle || project.title) && (
                                             <h2 className="selected-works-slide-text text-3xl xl:text-5xl font-heading !leading-[0.94] uppercase mb-4 relative z-[3]">
-                                                {project.title}
+                                                {project.formattedTitle ? (
+                                                    <span dangerouslySetInnerHTML={{ __html: project.formattedTitle }} />
+                                                ) : (
+                                                    project.title
+                                                )}
                                             </h2>
                                         )}
                                         {project.categories && project.categories.length > 0 && (

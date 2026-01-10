@@ -47,7 +47,7 @@ export const caseStudyImage = defineType({
             name: 'videoPoster',
             title: 'Video Poster',
             type: 'image',
-            description: 'Allows you to add a poster/placeholder image for the video',
+            description: 'Poster/placeholder image for the video (required for videos)',
             options: {
                 hotspot: true
             },
@@ -58,7 +58,16 @@ export const caseStudyImage = defineType({
                     title: 'Alternative Text',
                 }
             ],
-            hidden: ({parent}) => parent?.type !== "video"
+            hidden: ({parent}) => parent?.type !== "video",
+            validation: (Rule) => 
+                Rule.custom((value, context) => {
+                    const parent = context.parent as any;
+                    // Check if this is a video type and poster is missing
+                    if (parent?.type === "video" && !value) {
+                        return "Video poster is required when video type is selected";
+                    }
+                    return true;
+                })
         }),
         defineField({
             name: 'videoOptions',

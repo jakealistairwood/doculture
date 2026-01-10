@@ -18,6 +18,8 @@ export const caseStudyBuilder = defineType({
             of: [
                 { type: 'caseStudyRichText' },
                 { type: 'caseStudyImage' },
+                { type: 'caseStudyImageGrid' },
+                { type: 'caseStudyImageGallery' },
             ]
         }),
     ]
