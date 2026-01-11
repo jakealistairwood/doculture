@@ -90,6 +90,9 @@ export default function CaseStudyLayout({ project }: CaseStudyLayoutProps) {
                                 {project?.title && (
                                     <h1 className="text-100px uppercase leading-[0.94]" dangerouslySetInnerHTML={{ __html: project?.title }} />
                                 )}
+                                {project?.excerpt && (
+                                    <p className="opacity-[0.8] max-w-[740px]" dangerouslySetInnerHTML={{ __html: project?.excerpt }} />
+                                )}
                                 {hasCategories && (
                                     <div className="flex items-center flex-wrap gap-3">
                                         {project?.categories?.map((category, i) => {
