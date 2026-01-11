@@ -30,6 +30,7 @@ export const pageQuery = groq`
         _type == "homeMasthead" => {
           heading,
           content,
+          backgroundVisualType,
           image,
           links,
           addLogoMarquee,

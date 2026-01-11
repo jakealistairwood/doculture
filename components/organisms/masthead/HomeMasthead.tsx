@@ -46,6 +46,13 @@ export function HomeMasthead({ data }: HomeMastheadProps) {
     const contentRef = useRef<HTMLParagraphElement>(null);
     const linksRef = useRef<HTMLDivElement>(null);
     const splitInstanceRef = useRef<any>(null);
+    const videoRef = useRef<HTMLVideoElement>(null);
+    
+    // Hardcoded video URL
+    const videoUrl = "/videos/2026_DO_CULTURE.mp4";
+    
+    // Type-safe access to optional fields
+    const backgroundVisualType = (data as any).backgroundVisualType;
 
     useGSAP(() => {
         if (!containerRef.current) return;
@@ -192,7 +199,21 @@ export function HomeMasthead({ data }: HomeMastheadProps) {
                         </div>
                     </div>
                 </div>
-                {data.image && (
+                {backgroundVisualType === 'video' && (
+                    <div className="absolute inset-0 h-full w-full overflow-hidden pointer-events-none">
+                        <video
+                            ref={videoRef}
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            className="object-cover h-full w-full"
+                        >
+                            <source src={videoUrl} type="video/mp4" />
+                        </video>
+                    </div>
+                )}
+                {backgroundVisualType !== 'video' && data.image && (
                     <div className="absolute inset-0 h-full w-full overflow-hidden pointer-events-none">
                         <SanityImage
                             image={data.image}

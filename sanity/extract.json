@@ -2314,6 +2314,10 @@
               {
                 "type": "string",
                 "value": "3"
+              },
+              {
+                "type": "string",
+                "value": "4"
               }
             ]
           },
@@ -3779,6 +3783,83 @@
     }
   },
   {
+    "name": "reusableBlock",
+    "type": "document",
+    "attributes": {
+      "_id": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "_type": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string",
+          "value": "reusableBlock"
+        }
+      },
+      "_createdAt": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "_updatedAt": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "_rev": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        }
+      },
+      "title": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "type": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "union",
+          "of": [
+            {
+              "type": "string",
+              "value": "logoMarquee"
+            },
+            {
+              "type": "string",
+              "value": "globalCTA"
+            }
+          ]
+        },
+        "optional": true
+      },
+      "logoMarquee": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "logoMarquee"
+        },
+        "optional": true
+      },
+      "globalCTA": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "globalCTA"
+        },
+        "optional": true
+      }
+    }
+  },
+  {
     "name": "link",
     "type": "type",
     "value": {
@@ -4250,6 +4331,23 @@
           },
           "optional": true
         },
+        "backgroundVisualType": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "image"
+              },
+              {
+                "type": "string",
+                "value": "video"
+              }
+            ]
+          },
+          "optional": true
+        },
         "image": {
           "type": "objectAttribute",
           "value": {
@@ -4325,121 +4423,7 @@
             }
           },
           "optional": true
-        },
-        "addLogoMarquee": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "boolean"
-          },
-          "optional": true
-        },
-        "logoMarquee": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "object",
-            "attributes": {
-              "_ref": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "string"
-                }
-              },
-              "_type": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "string",
-                  "value": "reference"
-                }
-              },
-              "_weak": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "boolean"
-                },
-                "optional": true
-              }
-            },
-            "dereferencesTo": "reusableBlock"
-          },
-          "optional": true
         }
-      }
-    }
-  },
-  {
-    "name": "reusableBlock",
-    "type": "document",
-    "attributes": {
-      "_id": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "_type": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string",
-          "value": "reusableBlock"
-        }
-      },
-      "_createdAt": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "_updatedAt": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "_rev": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "title": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "type": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "union",
-          "of": [
-            {
-              "type": "string",
-              "value": "logoMarquee"
-            },
-            {
-              "type": "string",
-              "value": "globalCTA"
-            }
-          ]
-        },
-        "optional": true
-      },
-      "logoMarquee": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "logoMarquee"
-        },
-        "optional": true
-      },
-      "globalCTA": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "globalCTA"
-        },
-        "optional": true
       }
     }
   },

@@ -20,6 +20,19 @@ export const homeMasthead = defineType({
             type: 'linksWrapper'
         }),
         defineField({
+            name: 'backgroundVisualType',
+            title: 'Background Visual Type',
+            type: 'string',
+            options: {
+                list: [
+                    { value: 'image', title: 'Image' },
+                    { value: 'video', title: 'Video' },
+                ],
+                layout: 'radio'
+            },
+            initialValue: 'image'
+        }),
+        defineField({
             name: 'image',
             title: 'Image',
             type: 'image',
@@ -33,29 +46,9 @@ export const homeMasthead = defineType({
                     type: 'string',
                     description: 'Please add a brief description of the image. Important for SEO purposes and accessibility'
                 }
-            ]
+            ],
+            hidden: ({parent}) => parent?.backgroundVisualType !== "image"
         }),
-        defineField({
-            name: 'addLogoMarquee',
-            title: 'Add Logo Marquee',
-            type: 'boolean',
-            initialValue: false
-        }),
-        defineField({
-            name: 'logoMarquee',
-            title: 'Logo Marquee',
-            type: 'reference',
-            to: [{ type: 'reusableBlock' }],
-            description: 'Select a logo marquee to display',
-            hidden: ({ parent }) => !parent?.addLogoMarquee,
-            validation: Rule => Rule.custom((value, context) => {
-                const parent = context.parent as { addLogoMarquee?: boolean };
-                if (parent?.addLogoMarquee && !value) {
-                    return 'Logo marquee is required when enabled';
-                }
-                return true;
-            })
-        })
     ],
     preview: {
         select: {

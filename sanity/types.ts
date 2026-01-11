@@ -630,6 +630,18 @@ export type LogoMarquee = {
   }>;
 };
 
+export type ReusableBlock = {
+  _id: string;
+  _type: "reusableBlock";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  type?: "logoMarquee" | "globalCTA";
+  logoMarquee?: LogoMarquee;
+  globalCTA?: GlobalCTA;
+};
+
 export type Link = {
   _type: "link";
   type?: "button" | "textLink";
@@ -687,6 +699,7 @@ export type HomeMasthead = {
   heading?: string;
   content?: string;
   links?: LinksWrapper;
+  backgroundVisualType?: "image" | "video";
   image?: {
     asset?: {
       _ref: string;
@@ -700,25 +713,6 @@ export type HomeMasthead = {
     altText?: string;
     _type: "image";
   };
-  addLogoMarquee?: boolean;
-  logoMarquee?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "reusableBlock";
-  };
-};
-
-export type ReusableBlock = {
-  _id: string;
-  _type: "reusableBlock";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  type?: "logoMarquee" | "globalCTA";
-  logoMarquee?: LogoMarquee;
-  globalCTA?: GlobalCTA;
 };
 
 export type Masthead = {
@@ -967,5 +961,5 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = TwoColTextList | TeamMember | BlockContent | SanityImageCrop | SanityImageHotspot | AboutLandingPage | GlobalOptions | ImageGrid | TimedAccordionSlider | ContactLandingPage | LandingPage | Seo | LinksWrapper | Slug | GlobalCTA | CaseStudyImageGallery | CaseStudyImageGrid | CaseStudyImage | CaseStudyRichText | CaseStudyBuilder | StudioCarousel | Studio | FeatureCards | SelectedWorks | HeaderMarquee | LinkCards | Logos | TwoColTextAsset | Asset | LogoMarquee | Link | TextCardOptions | TextCard | TwoColMasthead | HomeMasthead | ReusableBlock | Masthead | Category | Project | SectionOptions | Section | Page | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = TwoColTextList | TeamMember | BlockContent | SanityImageCrop | SanityImageHotspot | AboutLandingPage | GlobalOptions | ImageGrid | TimedAccordionSlider | ContactLandingPage | LandingPage | Seo | LinksWrapper | Slug | GlobalCTA | CaseStudyImageGallery | CaseStudyImageGrid | CaseStudyImage | CaseStudyRichText | CaseStudyBuilder | StudioCarousel | Studio | FeatureCards | SelectedWorks | HeaderMarquee | LinkCards | Logos | TwoColTextAsset | Asset | LogoMarquee | ReusableBlock | Link | TextCardOptions | TextCard | TwoColMasthead | HomeMasthead | Masthead | Category | Project | SectionOptions | Section | Page | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 export declare const internalGroqTypeReferenceTo: unique symbol;
