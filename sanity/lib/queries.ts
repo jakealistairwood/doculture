@@ -340,6 +340,7 @@ export const projectQuery = groq`
         },
         _type == "caseStudyImageGrid" => {
           columns,
+          aspectRatio,
           images[]{
             _key,
             asset,

@@ -393,6 +393,7 @@ export type CaseStudyImageGallery = {
 export type CaseStudyImageGrid = {
   _type: "caseStudyImageGrid";
   columns?: "2" | "3" | "4";
+  aspectRatio?: "16/9" | "1/1" | "4/5" | "9/16";
   images?: Array<{
     asset?: {
       _ref: string;

@@ -6,6 +6,7 @@ import { useInView, motion } from "framer-motion";
 
 interface CaseStudyImageGridProps {
     columns?: "2" | "3" | "4";
+    aspectRatio: "16/9" | "4/5" | "1/1" | "9/16";
     images?: Array<{
         _key?: string;
         asset?: {
@@ -22,7 +23,7 @@ interface CaseStudyImageGridProps {
     }>;
 }
 
-export default function CaseStudyImageGrid({ columns = "2", images = [] }: CaseStudyImageGridProps) {
+export default function CaseStudyImageGrid({ columns = "2", aspectRatio = "4/5", images = [] }: CaseStudyImageGridProps) {
     const containerRef = useRef<HTMLDivElement>(null);
     const isInView = useInView(containerRef, { amount: 0.1, once: true });
 
@@ -35,6 +36,15 @@ export default function CaseStudyImageGrid({ columns = "2", images = [] }: CaseS
         "3": "grid-cols-1 sm:grid-cols-3",
         "4": "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4",
     };
+
+    const aspectRatioMap = {
+        "4/5": "aspect-[4/5]",
+        "16/9": "aspect-[16/9]",
+        "9/16": "aspect-[9/16]",
+        "1/1": "aspect-square"
+    };
+
+    const aspectRatioClass = aspectRatioMap[aspectRatio] || aspectRatioMap["4/5"];
 
     const gridCols = gridColsMap[columns] || gridColsMap["2"];
 
@@ -64,7 +74,7 @@ export default function CaseStudyImageGrid({ columns = "2", images = [] }: CaseS
                 return (
                     <motion.div
                         key={imageItem._key || index}
-                        className="relative overflow-hidden aspect-square"
+                        className={`relative overflow-hidden ${aspectRatioClass}`}
                         variants={imageAnimationVariant}
                         initial="initial"
                         animate={isInView ? "animate" : "initial"}

@@ -22,6 +22,22 @@ export const caseStudyImageGrid = defineType({
             initialValue: '2'
         }),
         defineField({
+            name: 'aspectRatio',
+            title: 'Aspect Ratio',
+            type: 'string',
+            description: "Decide the aspect ratio for the images in the grid",
+            options: {
+                list: [
+                    { value: '16/9', title: '16/9' },
+                    { value: '1/1', title: '1/1' },
+                    { value: '4/5', title: '4/5' },
+                    { value: '9/16', title: '9/16' },
+                ],
+                layout: 'radio'
+            },
+            initialValue: '4/5'
+        }),
+        defineField({
             name: 'images',
             type: 'array',
             title: 'Images',
