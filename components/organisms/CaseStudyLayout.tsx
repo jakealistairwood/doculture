@@ -184,6 +184,7 @@ export default function CaseStudyLayout({ project }: CaseStudyLayoutProps) {
                                                                     key={component._key}
                                                                     columns={component.columns}
                                                                     images={component.images}
+                                                                    aspectRatio={component.aspectRatio}
                                                                 />
                                                             );
                                                         }
