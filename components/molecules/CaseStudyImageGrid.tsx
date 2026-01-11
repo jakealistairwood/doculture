@@ -5,7 +5,7 @@ import SanityImage from "@/components/atoms/SanityImage";
 import { useInView, motion } from "framer-motion";
 
 interface CaseStudyImageGridProps {
-    columns?: "2" | "3";
+    columns?: "2" | "3" | "4";
     images?: Array<{
         _key?: string;
         asset?: {
@@ -30,9 +30,13 @@ export default function CaseStudyImageGrid({ columns = "2", images = [] }: CaseS
         return null;
     }
 
-    const gridCols = columns === "3" 
-        ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3" 
-        : "grid-cols-1 sm:grid-cols-2";
+    const gridColsMap = {
+        "2": "grid-cols-1 sm:grid-cols-2",
+        "3": "grid-cols-1 sm:grid-cols-3",
+        "4": "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4",
+    };
+
+    const gridCols = gridColsMap[columns] || gridColsMap["2"];
 
     const imageAnimationVariant = {
         initial: {
@@ -72,7 +76,7 @@ export default function CaseStudyImageGrid({ columns = "2", images = [] }: CaseS
                     >
                         <SanityImage
                             image={imageItem}
-                            className="w-full h-full object-cover rounded-lg"
+                            className="w-full h-full object-cover"
                             alt={imageItem.altText || ""}
                         />
                     </motion.div>

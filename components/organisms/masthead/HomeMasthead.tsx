@@ -167,7 +167,7 @@ export function HomeMasthead({ data }: HomeMastheadProps) {
                             {data.heading && (
                                 <h1 
                                     data-split="heading"
-                                    className="text-120px leading-none uppercase max-w-[700px] overflow-hidden"
+                                    className="text-120px leading-none uppercase max-w-[800px] overflow-hidden relative"
                                 >
                                     <span
                                         ref={headingRef}
