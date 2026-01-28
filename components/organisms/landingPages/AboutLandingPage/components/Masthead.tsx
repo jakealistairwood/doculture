@@ -135,7 +135,7 @@ export default function Masthead({ masthead }: MastheadProps) {
                             )}
                         </div>
                         {masthead?.heading && (
-                            <h1 ref={headingRef} className="text-80px uppercase leading-[0.94]" dangerouslySetInnerHTML={{ __html: masthead.heading }} />
+                            <h2 ref={headingRef} className="text-80px uppercase leading-[0.94]" dangerouslySetInnerHTML={{ __html: masthead.heading }} />
                         )}
                         {masthead?.description && (
                             <p ref={descriptionRef} className="font-serif font-light text-2xl md:text-4xl">
