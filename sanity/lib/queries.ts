@@ -369,6 +369,7 @@ export const allProjectsQuery = groq`
     sortOrder,
     excerpt,
     date,
+    _updatedAt,
     categories[]->{
       _id,
       title,
@@ -549,6 +550,20 @@ export const landingPageQuery = groq`
 export const landingPageSlugsQuery = groq`
   *[_type == "landingPage"]{
     "slug": slug.current
+  }
+`;
+
+export const allPagesQuery = groq`
+  *[_type == "page" && defined(slug.current)]{
+    slug,
+    _updatedAt
+  }
+`;
+
+export const allLandingPagesQuery = groq`
+  *[_type == "landingPage" && defined(slug.current)]{
+    "slug": slug.current,
+    _updatedAt
   }
 `;
 
